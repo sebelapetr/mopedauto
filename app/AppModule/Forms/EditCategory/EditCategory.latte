@@ -1,0 +1,17 @@
+<form n:name="editCategoryForm" class="form" style="width: 100%">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Název</label>
+        <input n:name="name" class="form-control" id="exampleFormControlInput1" placeholder="Název" required>
+    </div>
+    <div class="form-group">
+        <label n:name="description">Popis: </label>
+        <textarea class="form-control" n:name="description" placeholder="Popis kategorie..."></textarea>
+    </div>
+    <div class="form-group">
+        <label n:name="visible">Viditelná: </label>
+        <select class="form-control" n:name="visible"></select>
+    </div>
+    <div class="form-group">
+        <input class="form-control btn btn-primary" n:name="submit" value="Upravit kategorii">
+    </div>
+</form>

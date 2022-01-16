@@ -1,0 +1,31 @@
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">{if $item}{_app.branches.edit, [name => $item->name]}{else}{_app.branches.add}{/if}</h1>
+    </div>
+    <div class="col-sm-6">
+        <a n:href="default" class="btn btn-success btn-sm float-right">Zpět na přehled</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-7 m-auto">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                {if $item}
+                    <h6 class="m-0 font-weight-bold text-dark">{_app.branches.edit, [name=>$item->name]}</h6>
+                {else}
+                    <h6 class="m-0 font-weight-bold text-dark">{_app.branches.add}</h6>
+                {/if}
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {control partnerBranchForm}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

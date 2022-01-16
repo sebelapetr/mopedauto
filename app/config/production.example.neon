@@ -1,0 +1,15 @@
+# Author: Petr Šebela
+# Date: 21. 9. 2020
+# Time: 22:10
+
+parameters:
+    baseUrl: 'http://localhost.loc'
+
+dbal:
+	connectionTz: auto-offset
+	simpleStorageTz: "Europe/Prague"
+	driver: mysqli
+	host: localhost
+	database: radan
+	username: root
+	password:

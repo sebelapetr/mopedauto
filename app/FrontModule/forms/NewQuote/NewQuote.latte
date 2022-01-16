@@ -1,0 +1,26 @@
+<h3>Kontaktní formulář</h3>
+<form  n:name="newQuoteForm" id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+    <div class="form-group col-md-6">
+        <label for="inputEmail4" style="font-weight:300">Jméno *</label>
+        <input n:name="name" class="form-control" id="inputEmail4" required="required" placeholder="Jakub">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputEmail4" style="font-weight:300">Příjmení</label>
+        <input n:name="surname" class="form-control" id="inputEmail4" required="required" placeholder="Novák">
+    </div>
+    <div class="form-group col-md-12">
+        <label for="inputEmail4" style="font-weight:300">Email *</label>
+        <input n:name="email" class="form-control" id="inputEmail4" required="required" placeholder="jakub.novak@email.cz">
+    </div>
+    <div class="form-group col-md-12">
+        <label for="inputEmail4" style="font-weight:300">Telefon</label>
+        <input n:name="phone" class="form-control" id="inputEmail4" placeholder="605200686">
+    </div>
+    <div class="form-group col-md-12">
+        <label for="inputEmail4" style="font-weight:300">Vaše zpráva</label>
+        <textarea n:name="message" name="message" id="message" class="form-control" rows="8" placeholder="Dobrý den,..."></textarea>
+    </div>
+    <div class="form-group col-md-12">
+        <input n:name="submit" type="submit" name="submit" class="btn btn-primary" value="Odeslat" style="width:150px;padding:10px;margin-top:5px;color:black;background:#f3f3f3;border:1px solid #e003">
+    </div>
+</form>

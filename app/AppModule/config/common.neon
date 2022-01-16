@@ -1,0 +1,42 @@
+# Author: Petr Šebela
+# Date: 21. 9. 2020
+# Time: 22:37
+
+services:
+
+    #COMPONENTS
+    - App\AppModule\Components\IMenuComponentFactory
+
+    #DATAGRIDS
+    - App\AppModule\Components\VehiclesDatagridFactory
+    - App\AppModule\Components\PartnersDatagridFactory
+    - App\AppModule\Components\CitiesDatagridFactory
+    - App\AppModule\Components\ZipsDatagridFactory
+    - App\AppModule\Components\OrdersDatagridFactory
+    - App\AppModule\Components\PartnerBranchesDatagridFactory
+    - App\AppModule\Components\DeliveryTypesDatagridFactory
+    - App\AppModule\Components\BranchOrdersDatagridFactory
+    - App\AppModule\Components\PartnerOrdersDatagridFactory
+    - App\AppModule\Components\DocumentsDatagridFactory
+    - App\AppModule\Components\PaymentTypesDatagridFactory
+
+    #FORMS
+    - App\AppModule\Forms\IVehicleFormFactory
+    - App\AppModule\Forms\ICityFormFactory
+    - App\AppModule\Forms\IZipFormFactory
+    - App\AppModule\Forms\IPartnerBranchFormFactory
+    - App\AppModule\Forms\IPartnerFormFactory
+    - App\AppModule\Forms\IDeliveryTypeFormFactory
+    - App\AppModule\Forms\IDocumentFormFactory
+    - App\AppModule\Forms\IPaymentTypeFormFactory
+    - App\AppModule\Forms\ILoginFormFactory
+    - App\AppModule\Forms\IRegisterFormFactory
+    - App\AppModule\Forms\IEditParentCategoryFormFactory
+    - App\AppModule\Forms\IAddCategoryFormFactory
+    - App\AppModule\Forms\ICategoryListFormFactory
+    - App\AppModule\Forms\IQuotesFormFactory
+    - App\AppModule\Forms\IOrdersFormFactory
+    - App\AppModule\Forms\IEditProductFormFactory
+    - App\AppModule\Forms\IProductsListFormFactory
+    - App\AppModule\Forms\IAddProductFormFactory
+    - App\AppModule\Forms\IEditCategoryFormFactory

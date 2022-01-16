@@ -1,0 +1,80 @@
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">{_app.branches.detail, ['name' => $item->name]}</h1>
+    </div>
+    <div class="col-sm-6">
+        <a n:href="default" class="btn btn-success btn-sm float-right">{_app.branches.branchesList}</a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="m-0 font-weight-bold text-dark">{_app.branches.basicInformations}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <a n:href="edit, $item->id" class="btn btn-sm btn-success float-right">Upravit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <tr>
+                            <th>Název:</th>
+                            <td>{$item->name}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{$item->email}</td>
+                        </tr>
+                        <tr>
+                            <th>Telefon:</th>
+                            <td>{$item->phoneNumber}</td>
+                        </tr>
+                        <tr>
+                            <th>Partner:</th>
+                            <td>
+                                <a n:href="Partners:detail, $item->partner->id" target="_blank">{$item->partner->name}</a>
+                                <a n:href="Partners:detail, $item->partner->id" target="_blank" class="btn btn-success btn-sm">detail</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Adresa:</th>
+                            <td>{$item->street} {$item->addressNumber}, {$item->city->name}</td>
+                        </tr>
+                        <tr>
+                            <th>Uživatel:</th>
+                            <td>
+                                <a n:href="Users:detail, $item->branchUser->id" target="_blank">{$item->branchUser->name}</a>
+                                <a n:href="Users:detail, $item->branchUser->id" target="_blank" class="btn btn-success btn-sm">detail</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-12">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">{_app.branches.allOrders}</h6>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    {control branchOrdersDatagrid}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

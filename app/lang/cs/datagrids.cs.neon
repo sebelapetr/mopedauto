@@ -1,0 +1,9 @@
+# Author: Petr Šebela
+# Date: 22. 9. 2020
+# Time: 23:19
+
+onlineWorkers:
+    name: 'Jméno'
+    surname: 'Příjmení'
+    timeAtWork: 'Čas v práci'
+    status: 'Stav'

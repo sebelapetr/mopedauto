@@ -1,0 +1,90 @@
+# Author: Petr Šebela
+# Date: 22. 9. 2020
+# Time: 00:39
+
+title: 'Interní systém Soused.Online'
+
+dashboard:
+    title: 'Dashboard'
+    statistics:
+        turnoverToday: 'Dnešní obrat'
+        ordersCountToday: 'Dnešní počet objednávek'
+        productsCountToday: 'Dnešní počet produktů'
+    workersOnline:
+        title: 'Aktuálně pracují'
+    workersOnWay:
+        title: 'Aktuálně na cestě'
+
+cms:
+    title: 'Správa obsahu webu'
+
+couriers:
+    title: 'Kurýři'
+
+documents:
+    title: 'Dokumenty'
+    documentsList: 'Seznam dokumentů'
+    add: 'Přidat dokument'
+
+operators:
+    title: 'Operátoři'
+
+partners:
+    title: 'Partneři'
+    partnersList: 'Seznam partnerů'
+    add: 'Přidat partnera'
+    edit: 'Upravit partnera %name%'
+    detail: 'Detail partnera %name%'
+    basicInformations: 'Obecné informace'
+
+branches:
+    title: 'Pobočky'
+    branchesList: 'Seznam poboček'
+    add: 'Přidat pobočku'
+    edit: 'Upravit pobočku %name%'
+    detail: 'Detail pobočky %name%'
+    basicInformations: 'Obecné informace'
+    allOrders: 'Všechny objednávky'
+
+orders:
+    title: 'Objednávky'
+    ordersList: 'Seznam objednávek'
+
+support:
+    title: 'Podpora'
+
+vehicles:
+    title: 'Vozidla'
+    vehiclesList: 'Seznam vozidel'
+    add: 'Přidat vozidlo'
+    edit: 'Upravit vozidlo %name%'
+
+systemSettings:
+    title: 'Systémové nastavení'
+
+users:
+    title: 'Uživatelé'
+
+cities:
+    title: 'Města'
+    citiesList: 'Seznam měst'
+    add: 'Přidat město'
+    edit: 'Upravit město %name%'
+
+zips:
+    title: 'PSČ'
+    zipsList: 'Seznam PSČ'
+    add: 'Přidat PSČ'
+    edit: 'Upravit PSČ %name%'
+
+deliveryTypes:
+    title: 'Způsoby doručení'
+    add: 'Přidat způsob doručení'
+    deliveryTypesList: 'Seznam způsobů doručení'
+    edit: 'Upravit způsob doručení %name%'
+
+paymentTypes:
+    title: 'Možnosti platby'
+    add: 'Přidat možnost platby'
+    paymentTypesList: 'Seznam možností plateb'
+    edit: 'Upravit možnost platby %name%'

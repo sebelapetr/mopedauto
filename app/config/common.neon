@@ -1,0 +1,68 @@
+# Author: Petr Šebela
+# Date: 21. 9. 2020
+# Time: 22:10
+
+parameters:
+
+extensions:
+    dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
+    orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+    migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+    console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+    translation: Contributte\Translation\DI\TranslationExtension
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+services:
+	router: App\Router\RouterFactory::createRouter
+	- App\Model\UserRegistrationService
+	- App\Model\Security\Authenticator
+	- App\Model\EditParentCategoryService
+	- App\Model\CategoryService
+	- App\Model\ProductService
+	- App\Model\ShippingAndPaymentService
+	- App\Model\OrderService
+	- App\CronModule\Model\FeederService
+	- App\Model\QuoteService
+	- App\Model\AddProductService
+	- App\Model\NewsletterService
+	- App\Model\FindService
+	- App\Model\InvoiceService
+	
+orm:
+    model: App\Model\Orm
+
+migrations:
+	dir: %appDir%/../migrations
+	driver: mysql
+	dbal: nextras
+
+translation:
+    locales:
+        whitelist: [cs]
+        default: cs
+        fallback: [cs]
+    dirs:
+        - %appDir%/lang
+    debugger: true
+
+console:
+	url: %baseUrl%
+
+includes:
+    - ../AppModule/config/common.neon
+    - ../FrontModule/config/common.neon
+    - ../ApiModule/config/common.neon

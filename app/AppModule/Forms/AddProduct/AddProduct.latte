@@ -1,0 +1,69 @@
+<form n:name="addProductForm" class="form" style="width: 100%">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Název</label>
+        <input n:name="name" class="form-control" id="exampleFormControlInput1" placeholder="Název" required>
+    </div>
+    <div class="form-group">
+        <label n:name="normPrice">Doporučená cena: </label>
+        <input class="form-control" n:name="normPrice" placeholder="Doporučená cena (kč)">
+    </div>
+    <div class="form-group">
+        <label n:name="price">Cena: </label>
+        <input class="form-control" n:name="price" placeholder="Cena (kč)">
+    </div>
+    <div class="form-group">
+        <label n:name="manufacturer">Výrobce: </label>
+        <input class="form-control" n:name="manufacturer" placeholder="Výrobce">
+    </div>
+    <div class="form-group">
+        <label n:name="deliveryTime">Doba doručení: </label>
+        <input class="form-control" n:name="deliveryTime" placeholder="Doba doručení (dní)">
+    </div>
+    <div class="form-group">
+        <label n:name="weight">Váha: </label>
+        <input class="form-control" n:name="weight" placeholder="Váha (kg)">
+    </div>
+    <div class="form-group">
+        <label n:name="dumbellsWeight">Maximální zátěž závaží: </label>
+        <input class="form-control" n:name="dumbellsWeight" placeholder="Maximální zátěž závaží (kg)">
+    </div>
+    <div class="form-group">
+        <label n:name="length">Délka: </label>
+        <input class="form-control" n:name="length" placeholder="Délka (cm)">
+    </div>
+    <div class="form-group">
+        <label n:name="width">Šířka: </label>
+        <input class="form-control" n:name="width" placeholder="Šířka (cm)">
+    </div>
+    <div class="form-group">
+        <label n:name="height">Výška: </label>
+        <input class="form-control" n:name="height" placeholder="Výška (cm)">
+    </div>
+    <div class="form-group">
+        <label n:name="image">Obrázek: </label>
+        <input class="form-control" n:name="image" placeholder="Název produktu">
+    </div>
+    <div class="form-group">
+        <label n:name="description">Popis: </label>
+        <textarea class="form-control" n:name="description" placeholder="Popis produktu..."></textarea>
+    </div>
+    <div class="form-group">
+        <label n:name="new">Nový: </label>
+            <select class="form-control" n:name="new"></select>
+    </div>
+    <div class="form-group">
+        <label n:name="repaired">Repasovaný: </label>
+        <select class="form-control" n:name="repaired"></select>
+    </div>
+    <div class="form-group">
+        <label n:name="visible">Viditelný: </label>
+        <select class="form-control" n:name="visible"></select>
+    </div>
+    <div class="form-group">
+        <label n:name="category">Kategorie: </label>
+        <select class="form-control" n:name="category"></select>
+    </div>
+    <div class="form-group">
+    <input class="form-control btn btn-primary" n:name="submit" value="Přidat produkt">
+    </div>
+</form>

@@ -1,0 +1,79 @@
+vehicle:
+    spz: 'SPZ'
+    type: 'Typ vozidla'
+    vehicleBrand: 'Značka'
+    vehicleModel: 'Model'
+    vehicleColor: 'Barva'
+    startKm: 'Počáteční nájezd'
+    endKm: 'Aktuální nájezd'
+    createdAt: 'Vloženo do systému'
+    vehicleType:
+        CAR: 'Auto'
+        SCOOTER: 'Skůtr'
+
+partner:
+    name: 'Jméno'
+    partnerFrom: 'Partner od'
+    email: 'E-mail'
+    phoneNumber: 'Telefon'
+    ico: 'IČ'
+    dic: 'DIČ'
+    adminUser: 'Uživatel'
+    createdAt: 'Vytvořen'
+
+order:
+    createdAt: 'Vytvořeno'
+    eanCode: 'EAN kód'
+    deliveryDate: 'Doručení'
+    contactName: 'Jméno'
+    contactSurname: 'Příjmení'
+    addressNumber: 'Číslo popisné'
+    street: 'Ulice'
+    city: 'Město'
+    phoneNumber: 'Telefon'
+    email: 'Email'
+    ic: 'IČ'
+    dic: 'DIČ'
+    mailInvoicing: 'Fakturační email'
+    nameInvoicing: 'Fakturační jméno'
+    surnameInvoicing: 'Fakturační příjmení'
+    streetInvoicing: 'Fakturační ulice'
+    invoicingCity: 'Fakuturační město'
+    remark: 'Příznak'
+    orderSource: 'Zdroj objednávky'
+    partnerBranch: 'Pobočka'
+    zip: 'PSČ'
+    invoicingZip: 'Fakturační PSČ'
+    address: 'Adresa doručení'
+
+partnerBranch:
+    name: 'Název'
+    email: 'Email'
+    phoneNumber: 'Telefon'
+    createdAt: 'Vytvořena'
+    partner: 'Partner'
+    branchUser: 'Uživatel'
+    city: 'Město'
+    zip: 'PSČ'
+    street: 'Ulice'
+    addressNumber: 'Číslo popisné'
+
+city:
+    name: 'Název'
+
+zip:
+    zip: 'PSČ'
+    city: 'Město'
+
+deliveryType:
+    description: 'Popis'
+    type: 'Typ'
+
+document:
+    createdAt: 'Datum vytvoření'
+    file: 'Soubor'
+    partner: 'Partner'
+    
+paymentType:
+    description: 'Popis'
+    type: 'Typ'

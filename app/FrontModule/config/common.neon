@@ -1,0 +1,7 @@
+services:
+    - App\FrontModule\Forms\IAddProductFormFactory
+    - App\FrontModule\Forms\IFindFormFactory
+    - App\FrontModule\Forms\INewQuoteFormFactory
+    - App\FrontModule\Forms\INewsletterFormFactory
+    - App\FrontModule\Forms\IPersonalDataFormFactory
+    - App\FrontModule\Forms\IShippingAndPaymentFormFactory

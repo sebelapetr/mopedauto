@@ -36,9 +36,10 @@
                         </div>
                     </div>
                     <div class="col-9">
-                        <div class="pull-left upper-right clearfix">
+                        <div class="upper-right clearfix">
+                            <!--                                pull-left-->
                             <!--Info Box-->
-                            <div class="upper-column info-box" style="padding-right: 50px; margin-bottom: 0">
+                            <div class="upper-column info-box" style="padding-right: 50px;">
 
                                 <ul>
                                     <img src="{$basePath}/module/front/images/aixam_logo.png" width="100%" style="max-width: 75px; margin-right: 35px;">
@@ -47,32 +48,33 @@
                                 </ul>
 
                             </div>
+                            <div class="pc17_res">
+                                <!--Info Box-->
+                                <div class="upper-column info-box">
+                                    <div class="icon-box"><span class="flaticon-home"></span></div>
+                                    <ul>
+                                        <li><strong>Moped Auto s.r.o.</strong></li>
+                                        <li>Cejl 76, 602 00 Brno</li>
+                                    </ul>
 
-                            <!--Info Box-->
-                            <div class="upper-column info-box">
-                                <div class="icon-box"><span class="flaticon-home"></span></div>
-                                <ul>
-                                    <li><strong>Moped Auto s.r.o.</strong></li>
-                                    <li>Cejl 76, 602 00 Brno</li>
-                                </ul>
+                                </div>
+                                <!--Info Box-->
+                                <div class="upper-column info-box">
+                                    <div class="icon-box"><span class="flaticon-mail-1"></span></div>
+                                    <ul>
+                                        <li><strong>Napište nám</strong></li>
+                                        <li><a href="#">info@mopedauto.cz</a></li>
+                                    </ul>
+                                </div>
 
-                            </div>
-                            <!--Info Box-->
-                            <div class="upper-column info-box">
-                                <div class="icon-box"><span class="flaticon-mail-1"></span></div>
-                                <ul>
-                                    <li><strong>Napište nám</strong></li>
-                                    <li><a href="#">info@mopedauto.cz</a></li>
-                                </ul>
-                            </div>
-
-                            <!--Info Box-->
-                            <div class="upper-column info-box">
-                                <div class="icon-box"><span class="flaticon-clock"></span></div>
-                                <ul>
-                                    <li><strong>Otevírací doba</strong></li>
-                                    <li>Po-Pá: 9:00 - 17:00</li>
-                                </ul>
+                                <!--Info Box-->
+                                <div class="upper-column info-box">
+                                    <div class="icon-box"><span class="flaticon-clock"></span></div>
+                                    <ul>
+                                        <li><strong>Otevírací doba</strong></li>
+                                        <li>Po-Pá: 9:00 - 17:00</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,13 +108,18 @@
                             <li><a n:href="Pages:service">SERVIS</a></li>
                             <li><a n:href="Pages:about">O MOPEDAUTECH</a></li>
                             <li><a n:href="Pages:contact">KONTAKT</a></li>
+                            <li><a n:href="Cart:default">
+                                    <span class="has-badge" data-count="5">
+                                      <i style="" class="flaticon-shopping-bag-1 shop_cart"></i>
+                                    </span>
+                                </a></li>
                         </ul>
                     </div>
                 </nav>
                 <!-- Main Menu End-->
 
                 <!--Search Box-->
-                <div class="search-box-outer">
+                <div class="search-box-outer" style="display: none">
                     <!--Search Box-->
                     <div class="dropdown dropdown-outer">
                         <button class="search-box-btn dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-search"></span></button>
@@ -141,7 +148,7 @@
         <div class="auto-container clearfix">
             <!--Logo-->
             <div class="logo pull-left">
-                <a href="#" class="img-responsive"><img src="{$basePath}/module/front/images/logo_small.jpg" alt="" title=""></a>
+                <a href="#" class="img-responsive"><img src="images/logo_small.jpg" alt="" title=""></a>
             </div>
 
             <!--Right Col-->
@@ -165,6 +172,12 @@
                             <li><a n:href="Pages:service">Servis</a></li>
                             <li><a n:href="Pages:about">O Mopedautech</a></li>
                             <li><a n:href="Pages:contact">Kontakt</a></li>
+                            <li><a n:href="Cart:default">
+                                    <span class="has-badge" data-count="5">
+                                      <i style="" class="flaticon-shopping-bag-1 shop_cart_dark"></i>
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </nav><!-- Main Menu End-->

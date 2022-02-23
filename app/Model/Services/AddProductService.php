@@ -2,30 +2,30 @@
 
 namespace App\Model;
 
-use Nette\Security\Passwords;
-use Tracy\Debugger;
+use App\Model\Orm;
+use App\Model\Session\CartSession;
 
 class AddProductService
 {
+    private Orm $orm;
 
-    /** @var Orm */
-    private $orm;
+    public CartSession $cartSession;
 
-    public function __construct(Orm $orm)
+    public function __construct(Orm $orm, CartSession $cartSession)
     {
         $this->orm = $orm;
+        $this->cartSession = $cartSession;
     }
 
-    public function addProduct($values, $productsSession)
+    public function addProduct($values)
     {
         $product = $this->orm->products->getById($values->id);
-        $id = $values->id;
-        //$array = ['id'=>$id, 'productName'=>$product->productName,'catalogPriceVat'=>$product->catalogPriceVat,'quantity'=>1, 'photo'=>$product->image];
-        $productsSession->$id = array();
-        $productsSession->$id['id'] = $id;
-        $productsSession->$id['productName'] = $product->productName;
-        $productsSession->$id['catalogPriceVat'] = $product->catalogPriceVat;
-        $productsSession->$id['quantity'] = $values->quantity;
-        $productsSession->$id['photo'] = $product->image;
+
+        $data["id"] = $product->id;
+        $data["productName"] = $product->productName;
+        $data["catalogPriceVat"] = $product->catalogPriceVat;
+        $data["quantity"] = $values->quantity;
+        $data["photo"] = $product->image;
+        $this->cartSession->addProduct($data);
     }
 }

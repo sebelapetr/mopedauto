@@ -3,45 +3,40 @@
 namespace App\FrontModule\Forms;
 
 use App\Model\AddProductService;
-use App\Model\QuoteService;
+use App\Model\Product;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
-use Nette\Security\AuthenticationException;
-use Tracy\Debugger;
 
 interface IAddProductFormFactory{
     /** @return AddProductForm */
-    function create($id);
+    function create(Product $product);
 }
 
-class AddProductForm extends Control{
+class AddProductForm extends Control
+{
+    public AddProductService $addProductService;
 
-    /** @var AddProductService */
-    public $addProductService;
+    private Product $product;
 
-    /** @var int  */
-    private $productId;
-
-    public function __construct(AddProductService $addProductService, $id)
+    public function __construct(AddProductService $addProductService, Product $product)
     {
         $this->addProductService = $addProductService;
-        $this->productId = $id;
+        $this->product = $product;
     }
 
-    protected function createComponentAddProductForm(){
+    protected function createComponentAddProductForm()
+    {
         $form = new Form();
-        $form->addHidden("id", $this->productId);
+        $form->addHidden("id", $this->product->id);
         $form->addInteger('quantity');
         $form->addSubmit("submit");
         $form->onSuccess[] = [$this, 'addProductFormSucceeded'];
         return $form;
     }
-    public function addProductFormSucceeded(Form $form, $values){
-
-        $this->addProductService->addProduct($values, $this->getPresenter()->getSession()->getSection('products'));
+    public function addProductFormSucceeded(Form $form, $values)
+    {
+        $this->addProductService->addProduct($values);
         $this->getPresenter()->flashMessage("Produkt byl přidán do košíku.");
-
-        //$this->getPresenter()->redirect("Homepage:default");
     }
     public function render(){
         $this->getTemplate()->setFile(__DIR__  .  "/../../forms/AddProduct/AddProduct.latte");

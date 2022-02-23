@@ -41,6 +41,7 @@ services:
 	- App\Model\NewsletterService
 	- App\Model\FindService
 	- App\Model\InvoiceService
+	- App\Model\Session\CartSession(@session::getSection('products'))
 	
 orm:
     model: App\Model\Orm

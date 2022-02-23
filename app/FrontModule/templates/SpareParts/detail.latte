@@ -1,3 +1,4 @@
+{varType App\Model\Product $product}
 {block content}
 
 <section class="detail">
@@ -16,40 +17,27 @@
                                 <div class="row clearfix">
                                     <div class="image-column col-lg-5 col-md-12 col-sm-12">
                                         <figure class="image-box">
-                                            <a href="images/resource/products/product-single.jpg" class="lightbox-image"
+                                            <a href="{$basePath}/images/products/{$product->image}" class="lightbox-image"
                                                title="Image Caption Here">
-                                                <img src="images/resource/products/product-single.jpg" alt="">
+                                                <img src="{$basePath}/images/products/{$product->image}" alt="">
                                             </a>
                                         </figure>
                                     </div>
                                     <div class="info-column col-lg-7 col-md-12 col-sm-12">
                                         <div class="inner-column">
                                             <div class="details-header">
-                                                <h4>AIXAM COUPÉ GTI SENSATION</h4>
+                                                <h4>{$product->productName|noescape}</h4>
                                                 <div class="item-price">
-                                                    <del>650 000 Kč</del>
-                                                    515 000 Kč
-                                                </div>
-                                                <div class="rating">
-                                                    <span class="fa fa-star"></span><span
-                                                            class="fa fa-star"></span><span
-                                                            class="fa fa-star"></span><span
-                                                            class="fa fa-star"></span><span
-                                                            class="fa fa-star"></span>
+                                                    {$product->catalogPriceVat} Kč
                                                 </div>
                                                 <span class="review"></span>
                                             </div>
-                                            <div class="text">Leverage agile frameworks to provide a robust synopsis for
-                                                high level over views. Iterative approaches to corporate strategy foster
-                                                collaborative thinking to further the overall value proposition.
-                                                Organically
-                                                grow the holistic world view of disruptive innovation via workplace
-                                                diversity and empowerment.
-                                            </div>
                                             <div class="clearfix">
-                                                <div class="item-quantity"><input class="quantity-spinner" type="number"
-                                                                                  value="2" name="quantity"></div>
-                                                <button type="button" class="theme-btn btn-style-two">DO KOŠÍKU</button>
+                                                {if !$productInCart}
+                                                    {control addProductForm}
+                                                {else}
+                                                    <a href="{link Cart:default}" class="theme-btn btn-style-two"><i class="fa fa-check"></i>Zboží čeká v košíku</a>
+                                                {/if}
                                             </div>
                                         </div>
                                     </div>
@@ -67,7 +55,6 @@
                                     <ul class="tab-btns tab-buttons clearfix">
                                         <li data-tab="#prod-description" class="tab-btn active-btn">Popis produktu</li>
                                         <li data-tab="#prod-tech" class="tab-btn">Technická specifikace</li>
-                                        <li data-tab="#prod-souvis" class="tab-btn">Související produkty</li>
                                     </ul>
 
                                     <!--Tabs Content-->
@@ -96,12 +83,6 @@
                                         <div class="tab" id="prod-tech">
                                             <div class="content">
                                                 Technická specifikace
-                                            </div>
-                                        </div>
-                                        <!--Tab-->
-                                        <div class="tab" id="prod-souvis">
-                                            <div class="content">
-                                                Související produkty
                                             </div>
                                         </div>
                                     </div>

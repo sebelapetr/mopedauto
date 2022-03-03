@@ -39,7 +39,7 @@ class ShippingAndPaymentForm extends Control{
         $paymentSection = $this->getPresenter()->getSession()->getSection('payment');
         $shippingSection->shipping = $values->shipping;
         $paymentSection->payment = $values->payment;
-        $this->getPresenter()->redirect('osobniUdaje');
+        $this->getPresenter()->redirect('step2');
 
         //$this->getPresenter()->redirect("Homepage:default");
     }

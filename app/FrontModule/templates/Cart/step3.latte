@@ -1,0 +1,131 @@
+{block robots}noindex, nofollow{/block}
+{if $order->typePayment == 2}
+    {var $state2 = 'Objednávka byla zaplacena čeká na potvrzení'}
+{else}
+    {var $state2 = 'Objednávka byla zaregistrována do systému a čeká na potvrzení'}
+{/if}
+{block title}Děkujeme za objednávku!{/block}
+{block content}
+{switch $order->state}
+    {case 0}
+    {var $state = 'Objednávka byla zaregistrována do systému a čeká na zaplacení'}
+    {case 1}
+    {var $state = $state2}
+    {case 2}
+    {var $state = 'Objednávka byla potvrzena a čeká na vybavení'}
+    {case 3}
+    {var $state = 'Objednávka byla vybavena a čeká na odeslání'}
+    {case 4}
+    {var $state = 'Objednávka byla odeslána a čeká na doručení'}
+    {case 5}
+    {var $state = 'Objednávka byla doručena'}
+    {case 6}
+    {var $state = 'Objednávka byla vrácena'}
+    {case 7}
+    {var $state = 'Objednávka byla reklamována'}
+{/switch}
+<div class="col-sm-12" style="background: #f9f9f9;margin: -30px 0 30px 0">
+    <h2 style="font-size:19px;font-weight: 300;margin: 10px 0">Stav objednávky: {$state}</h2>
+</div>
+<h1 style="margin:0px;font-size:28px;font-weight: 300;margin-bottom: 15px">Děkujeme za objednávku!</h1>
+<p style="margin-bottom: 50px">
+    Vaše objednávka byla úspěšně odeslána. Náš pracovník ji nyní zkontroluje a v případě nejasností Vás budeme kontaktovat. Níže zasíláme souhrn, který jsme zároveň odeslali na adresu petrsebel@seznam.cz.
+</p>
+<div class="col-sm-12" style="padding: 0 30px;margin-bottom: 50px">
+    <table class="table objednavka zbozi">
+        <caption>Objednávka<hr style="margin: 10px 0"></caption>
+        <thead>
+        <tr>
+            <th></th>
+            <th>Název</th>
+            <th>Cena za kus s DPH</th>
+            <th>Počet</th>
+            <th>Cena za produkt celkem s DPH </th>
+        </tr>
+        </thead>
+        {var $totalOrderPrice = 0}
+        {var $totalOrderPriceVat = 0}
+        <tbody>
+        {foreach $order->ordersItems as $items}
+            {var $totalPrice = $items->price*$items->quantity}
+            {var $totalPriceVat = $items->priceVat*$items->quantity}
+            {var $totalOrderPrice += $totalPrice}
+            {var $totalOrderPriceVat += $totalPriceVat}
+            <tr style="border-bottom: 2px solid #d6d6d6 !important">
+                <td>{ifset $items->product->image}<img src="{$basePath}/images/products/{$items->product->image}" alt="{$items->name|noescape}" height="100">{/ifset}</td>
+                <td>{$items->name|noescape}</td>
+                <td>{$items->priceVat} Kč</td>
+                <td>{$items->quantity} ks</td>
+                <td>{$totalPriceVat} Kč</td>
+            </tr>
+        {/foreach}
+        <tr style="border-top:2px solid #1d2124 !important;border-bottom: 2px solid #1d2124 !important">
+            <td colspan="3"></td>
+            <td style="font-size: 16px !important;"><b>Cena celkem s DPH</b></td>
+            <td style="font-size: 16px !important;"><b>{ceil($totalOrderPriceVat)} Kč</b></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-12" style="margin-bottom: 50px">
+    <div class="col-sm-4">
+        <table class="table table-striped objednavka"">
+        <caption>Informace o objednávce<hr style="margin: 10px 0"></caption>
+        <tr><td>Objednávka byla odeslána:</td> <td>{$order->createdAt|date:'%d.%m.%Y %H:%M:%S'}</td></tr>
+        <tr><td>Předpokládané datum dodání:</td> <td>do {$deliveryDate|date:'%d.%m.%Y'}</td></tr>
+        <tr><td>Stav objednávky:</td> <td>{$state}</td></tr>
+        </table>
+    </div>
+    <div class="col-sm-4">
+        <table class="table table-striped objednavka">
+            <caption>Odběratel<hr style="margin: 10px 0"></caption>
+            <tr>
+                <td>Jméno:</td>
+                <td>{$order->name} {$order->surname}</td>
+            </tr>
+            <tr>
+                <td>Adresa:</td>
+                <td>{$order->street}</td>
+            </tr>
+            <tr>
+                <td>Město:</td>
+                <td>{$order->city}</td>
+            </tr>
+            <tr>
+                <td>PSČ:</td>
+                <td>{$order->psc}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-sm-4">
+        <table class="table table-striped objednavka">
+            <caption>Kontaktní údaje<hr style="margin: 10px 0"></caption>
+            <tr>
+                <td>Telefon:</td>
+                <td>{$order->telephone}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{$order->email}</td>
+            </tr>
+            <tr>
+                <td>Poznámka:</td>
+                <td>{$order->note}</td>
+            </tr>
+        </table>
+    </div>
+    {if $order->company}
+        {$order->company}
+        {$order->ico}
+        {$order->dic}
+    {/if}
+    {if $order->deliveryName}
+        {$order->deliveryName}
+        {$order->deliverySurname}
+        {$order->deliveryCompany}
+        {$order->deliveryStreet}
+        {$order->deliveryCity}
+        {$order->deliveryPsc}
+    {/if}
+
+</div>

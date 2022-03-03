@@ -22,6 +22,7 @@ final class RouterFactory
         $router[] = $routerFront = new RouteList("Front");
         $routerFront[] = new Route('nabidka-mopedaut', 'Cars:default');
         $routerFront[] = new Route('nahradni-dily', 'SpareParts:default');
+        $routerFront[] = new Route('kosik/osobni-udaje', 'Cart:step1');
         $routerFront[] = new Route('<presenter>/<action>', 'Homepage:default');
 
 		return $router;

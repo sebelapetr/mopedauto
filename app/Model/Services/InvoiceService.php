@@ -47,6 +47,7 @@ class InvoiceService
 
         $url = 'https://www.fakturyweb.cz/api/nf?data=' . urlencode($data_json);
 
+
         $ch = new Curl();
         $ch->setOpt(CURLOPT_URL, $url);
         $ch->setOpt(CURLOPT_COOKIESESSION, true);

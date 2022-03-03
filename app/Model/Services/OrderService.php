@@ -28,6 +28,9 @@ class OrderService
 
     public function newOrder($values, $sessionProducts, $sessionShipping, $sessionPayment, $sessionOrder)
     {
+        if (!$sessionProducts) {
+           return;
+        }
         $order = new Order();
         $order->name = $values->name;
         $order->surname = $values->surname;
@@ -114,7 +117,7 @@ class OrderService
 
         $sessionOrder->order = $order->id;
 
-        $this->invoiceService->createInvoice($order);
+        //$this->invoiceService->createInvoice($order);
 
         $this->sendMails($order->id);
 
@@ -142,14 +145,14 @@ class OrderService
             $emailName = $greetingsName->vocativ;
         }
         */
-        $name = new Hi(new FileStorage(__DIR__ . '/../../AppModule/nameCache'));
-        $name->setType(Hi::TYPE_NAME);
-        $greetingsName = $name->to($orderEntity->name);
-        if ($greetingsName){
-            $emailName = $greetingsName->vocativ;
-        } else {
+        //$name = new Hi(new FileStorage(__DIR__ . '/../../AppModule/nameCache'));
+        //$name->setType(Hi::TYPE_NAME);
+       // $greetingsName = $name->to($orderEntity->name);
+       // if ($greetingsName){
+           // $emailName = $greetingsName->vocativ;
+        //} else {
             $emailName = false;
-        }
+        //}
         $hash = base64_encode($orderEntity->id).'8452';
         $order = [
             'id' => $orderEntity->id,

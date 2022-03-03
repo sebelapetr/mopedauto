@@ -3,22 +3,52 @@
 namespace App\FrontModule\Presenters;
 
 use App\FrontModule\Forms\IShippingAndPaymentFormFactory;
+use App\FrontModule\Forms\IPersonalDataFormFactory;
 use App\Model\Session\CartSession;
+use Nette\Utils\DateTime;
 use Tracy\Debugger;
 
 class CartPresenter extends BasePresenter
 {
-    /** @inject */
-    public CartSession $cartSession;
 
     /** @inject */
     public IShippingAndPaymentFormFactory $shippingAndPaymentFormFactory;
+
+    /** @inject */
+    public IPersonalDataFormFactory $personalDataFormFactory;
 
     public function renderStep1()
     {
         $this->getTemplate()->cartCheck = 1;
         $this->getTemplate()->productsInCart = $this->getProductsInCart();
         $this->getTemplate()->totalPrice = $this->getTotalPrice();
+    }
+
+    public function renderStep2()
+    {
+        $this->getTemplate()->cartCheck = 1;
+        $this->getTemplate()->productsInCart = $this->getProductsInCart();
+        $this->getTemplate()->totalPrice = $this->getTotalPrice();
+    }
+
+    public function renderStep3($id)
+    {
+        $id = str_replace('8452', '', $id);
+        $order = $this->orm->orders->getById(base64_decode($id));
+        $deliveryDate = DateTime::from($order->createdAt);
+        if ($deliveryDate->format("N") == 5) {
+            $days = 6;
+        } elseif ($deliveryDate->format("N") == 6) {
+            $days = 5;
+        } elseif ($deliveryDate->format("N") == 7) {
+            $days = 4;
+        }
+        else {
+            $days = 4;
+        }
+        $deliveryDate->modify('+'.$days.' days');
+        $this->getTemplate()->order = $order;
+        $this->getTemplate()->deliveryDate = $deliveryDate;
     }
 
     public function getProductsInCart(){
@@ -45,6 +75,11 @@ class CartPresenter extends BasePresenter
     public function createComponentShippingAndPaymentForm()
     {
         return $this->shippingAndPaymentFormFactory->create();
+    }
+
+    public function createComponentPersonalDataForm()
+    {
+        return $this->personalDataFormFactory->create();
     }
 
     public function handleRemoveProduct($id)

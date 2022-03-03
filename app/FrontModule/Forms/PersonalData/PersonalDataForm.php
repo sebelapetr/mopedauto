@@ -5,6 +5,7 @@ namespace App\FrontModule\Forms;
 use App\Model\Order;
 use App\Model\OrderService;
 use App\Model\QuoteService;
+use App\Model\Session\CartSession;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
@@ -22,9 +23,13 @@ class PersonalDataForm extends Control{
     /** @var OrderService */
     public $orderService;
 
-    public function __construct(OrderService $orderService)
+    /** @inject */
+    public CartSession $cartSession;
+
+    public function __construct(OrderService $orderService, CartSession $cartSession)
     {
         $this->orderService = $orderService;
+        $this->cartSession = $cartSession;
     }
 
     protected function createComponentPersonalDataForm(){
@@ -65,20 +70,17 @@ class PersonalDataForm extends Control{
         return $form;
     }
     public function personalDataFormSucceeded(Form $form, ArrayHash $values){
-        $sessionProducts = $this->getPresenter()->getSession('products');
+        $sessionProducts = $this->cartSession->getProducts();
         $sessionShipping = $this->getPresenter()->getSession('shipping');
         $sessionPayment = $this->getPresenter()->getSession('payment');
         $sessionOrder = $this->getPresenter()->getSession('order');
         $this->orderService->newOrder($values, $sessionProducts, $sessionShipping, $sessionPayment, $sessionOrder);
-        $productsSection = $this->getPresenter()->getSession()->getSection('products');
-        foreach ($productsSection as $product) {
-            unset($productsSection[$product['id']]);
-        }
+        $productsSection = $this->cartSession->reset();
         $shippingSection = $this->getPresenter()->getSession()->getSection('shipping');
         unset($shippingSection->shipping);
         $paymentSection = $this->getPresenter()->getSession()->getSection('payment');
         unset($paymentSection->payment);
-        $this->getPresenter()->redirect('dokoncenaObjednavka', base64_encode($sessionOrder->order).'8452');
+        $this->getPresenter()->redirect('step3', base64_encode($sessionOrder->order).'8452');
     }
     public function render(){
         $this->getTemplate()->setFile(__DIR__ . "/../../forms/PersonalData/PersonalData.latte");

@@ -34,7 +34,6 @@
                         <div class="row">
                             {if $productsInCart !== null && count($productsInCart) > 0}
                                 {foreach $productsInCart as $productInCart}
-                                    {dump $productInCart}
                                     {if $productInCart}
                                         <div class="col-sm-12" style="border:1px solid #0000001f;text-align: right">
                                             <a href="{link removeProduct! $productInCart['id']}" style="font-weight: 300;margin-top:10px;display:block;width:30px;text-align:center;float:right;padding: 3px 7px;color: black;"><i class="fas fa-times fa-xs"></i></a>

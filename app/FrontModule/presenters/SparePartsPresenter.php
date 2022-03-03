@@ -31,8 +31,6 @@ class SparePartsPresenter extends BasePresenter
     /** @inject */
     public IAddProductFormFactory $addProductFormFactory;
 
-    /** @inject */
-    public CartSession $cartSession;
 
     public function renderDefault($page=1)
     {
@@ -85,7 +83,10 @@ class SparePartsPresenter extends BasePresenter
     }
 
     public function productInCart($id){
-        return array_key_exists($id, $this->cartSession->getProducts());
+        if ($this->cartSession->getProducts()) {
+            return array_key_exists($id, $this->cartSession->getProducts());
+        }
+        return false;
     }
 
     function cesky_den($den) {

@@ -1,0 +1,34 @@
+{block content}
+<a n:href="Dashboard:default" class="btn btn-primary" style="margin-top: 15px"><i class="fas fa-chevron-left"></i> Zpět na přehled</a>
+<h2 style="margin-top: 30px">Správa produktů</h2>
+<hr>
+<div class="col-sm-12" style="margin-top: 30px">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Přidání</b> produktu</h5>
+                    <p class="card-text">Přidávání, upravování, mazání produktů a zařazování do kategorií.</p>
+                    <a n:href="Product:add" class="btn btn-primary">Přidat produkt</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Úprava</b> produktu</h5>
+                    {control productsListForm}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Seznam</b> produktů</h5>
+                    <p class="card-text">Přehled produktů.</p>
+                    <a n:href="Product:list" class="btn btn-primary">Zobrazit produkty</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

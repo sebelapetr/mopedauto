@@ -16,10 +16,13 @@ class Authenticator implements IAuthenticator
     /** @var Orm */
     private $orm;
 
+    private Passwords $passwords;
 
-    public function __construct(Orm $orm)
+
+    public function __construct(Orm $orm, Passwords $passwords)
     {
         $this->orm = $orm;
+        $this->passwords = $passwords;
     }
 
     /**
@@ -35,14 +38,14 @@ class Authenticator implements IAuthenticator
             throw new \LogicException("common.login.userNotFound");
         }
         # verify - depends on authentication type
-        if (!Passwords::verify($credentials[1], $user->password)) {
+        if (!$this->passwords->verify($credentials[1], $user->password)) {
             //$this->orm->loginfails->checkLoginFailsAndCreateNew($user); Nežádoucí efekt na frontendu
             throw new \LogicException('common.login.badPassword');
         }
 
         # login management - common (rehash password only if set)
-        if (Passwords::needsRehash($user->password)) {
-            $user->setPassword(Passwords::hash($credentials[1]));
+        if ($this->passwords->needsRehash($user->password)) {
+            $user->setPassword($this->passwords->hash($credentials[1]));
         }
 
         $this->orm->users->persistAndFlush($user);

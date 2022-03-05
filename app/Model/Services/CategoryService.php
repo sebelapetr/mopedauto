@@ -66,14 +66,6 @@ class CategoryService{
         $category->visible = $values->visible;
         $this->orm->persistAndFlush($category);
 
-        $parentCategory = new CategoryParent();
-        $parentCategory->category = $category;
-        $this->orm->persistAndFlush($parentCategory);
-
-        $parentCategory = $this->orm->categoryParents->getBy(["category"=>$category->id]);
-        $parentCategory->parent = $values->parent;
-        $this->orm->persistAndFlush($parentCategory);
-
         $this->orm->flush();
     }
 }

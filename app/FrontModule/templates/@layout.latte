@@ -20,5 +20,8 @@
 
     </div>
         {include './include/footer-scripts.latte'}
+        {ifset #scripts}
+            {include #scripts}
+        {/ifset}
     </body>
 </html>

@@ -16,12 +16,12 @@ final class RouterFactory
 	{
 		$router = new RouteList;
 
-        $router[] = $routerApp = new RouteList("App");
+        $router[] = $routerApp = new RouteList("Back");
         $routerApp[] = new Route('admin/<presenter>/<action>[/<id>]', 'Dashboard:default');
 
         $router[] = $routerFront = new RouteList("Front");
         $routerFront[] = new Route('nabidka-mopedaut', 'Cars:default');
-        $routerFront[] = new Route('nahradni-dily', 'SpareParts:default');
+        $routerFront[] = new Route('nahradni-dily[/<seoName>]', 'SpareParts:default');
         $routerFront[] = new Route('kosik/osobni-udaje', 'Cart:step1');
         $routerFront[] = new Route('<presenter>/<action>', 'Homepage:default');
 

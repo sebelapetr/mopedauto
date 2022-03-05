@@ -1,0 +1,11 @@
+services:
+    - App\BackModule\Forms\ILoginFormFactory
+    - App\BackModule\Forms\IRegisterFormFactory
+    - App\BackModule\Forms\IEditCategoryFormFactory
+    - App\BackModule\Forms\IEditProductFormFactory
+    - App\BackModule\Forms\IProductsListFormFactory
+    - App\BackModule\Forms\IAddProductFormFactory
+    - App\BackModule\Forms\IAddCategoryFormFactory
+    - App\BackModule\Forms\ICategoryListFormFactory
+    - App\BackModule\Forms\IQuotesFormFactory
+    - App\BackModule\Forms\IOrdersFormFactory

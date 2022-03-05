@@ -30,7 +30,6 @@ services:
 	router: App\Router\RouterFactory::createRouter
 	- App\Model\UserRegistrationService
 	- App\Model\Security\Authenticator
-	- App\Model\EditParentCategoryService
 	- App\Model\CategoryService
 	- App\Model\ProductService
 	- App\Model\ShippingAndPaymentService
@@ -64,6 +63,6 @@ console:
 	url: %baseUrl%
 
 includes:
-    - ../AppModule/config/common.neon
+    - ../BackModule/config/common.neon
     - ../FrontModule/config/common.neon
     - ../ApiModule/config/common.neon

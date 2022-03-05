@@ -6,15 +6,31 @@
 <div class="sidebar-page-container">
     <div class="auto-container">
         <div class="row clearfix">
+
+            <!--Sidebar Side-->
+            <div class="sidebar-side col-lg-3 col-md-4 col-sm-12">
+                <aside class="sidebar default-sidebar">
+
+
+                    <div class="sidebar-widget categories">
+                        <div class="sidebar-title"><h2>Kategorie</h2></div>
+                        <div id="tree"></div>
+                    </div>
+
+                </aside>
+            </div>
+
             <!--content side-->
-            <div class="content-side col-lg-12 col-md-12 col-sm-12">
+            <div class="content-side col-lg-9 col-md-12 col-sm-12">
 
                 <div class="row clearfix">
-
-                    {foreach $products as $product}
-                        {include './include/product.latte', product => $product}
-                    {/foreach}
-
+                    {if count($products) > 0}
+                        {foreach $products as $product}
+                            {include './include/product.latte', product => $product}
+                        {/foreach}
+                    {else}
+                        Neni
+                    {/if}
                 </div>
 
                 {include './include/paginator.latte'}
@@ -35,3 +51,27 @@
         </div>
     </div>
 </section>
+
+{define scripts}
+    <script>
+        getCategoriesTree();
+
+        function getCategoriesTree() {
+            $.nette.ajax({
+                url: {link getCategoriesTree!},
+                type: 'GET',
+                success: function (payload) {
+                    console.log( JSON.parse(payload.tree));
+                    $('#tree').treeview({
+                        data: JSON.parse(payload.tree),
+                        enableLinks: true,
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(arguments);
+                }
+            });
+        }
+
+    </script>
+{/define}

@@ -1,0 +1,124 @@
+{switch $order->state}
+    {case 0}
+    {var $state = 'Objednávka byla zaregistrována a čeká na zaplacení'}
+    {var $button = 'Potvrdit zaplacení objednávky'}
+    {case 1}
+    {var $state = 'Objednávka byla zaplacena/na dobírku a čeká na potvrzení'}
+    {var $button = 'Potvrdit objednávku'}
+    {case 2}
+    {var $state = 'Objednávka byla potvrzena a čeká na vybavení'}
+    {var $button = 'Potvrdit vybavení objednávky'}
+    {case 3}
+    {var $state = 'Objednávka byla vybavena a čeká na odeslání'}
+    {var $button = 'Potvrdit odeslání objednávky'}
+    {case 4}
+    {var $state = 'Objednávka byla odeslána a čeká na doručení'}
+    {var $button = 'Potvrdit doručení objednávky'}
+    {case 5}
+    {var $state = 'Objednávka byla doručena'}
+    {var $button = 'Potvrdit vrácení objednávky'}
+    {case 6}
+    {var $state = 'Objednávka byla vrácena'}
+    {var $button = 'Potvrdit reklamaci objednávky'}
+    {case 7}
+    {var $state = 'Objednávka byla reklamována'}
+{/switch}
+{block content}
+<a n:href="Order:default" class="btn btn-primary" style="margin-top: 15px"><i class="fas fa-chevron-left"></i> Zpět na objednávky</a>
+<h2 style="margin-top: 30px">Detail objednávky č.{$order->id}</h2>
+<hr>
+<div class="col-sm-12" style="margin-top: 30px">
+    <h2>Stav objednávky:</h2>
+    <p>{$state}</p>
+    {if $order->state !== 6}
+        <a class="btn btn-success" href="{link changeState! $order->id}" >{$button}</a>
+    {/if}
+    <br>
+    <br>
+    <div class="">
+        {if $order->note}
+        <h3>Poznámka k objednávce</h3>
+            <p>{$order->note}</p>
+        {/if}
+        <h3>Osobní údaje</h3>
+        <table class="table table-border" style="width: 35%">
+            <tbody>
+                <tr><th>Jméno</th><td>{$order->name} {$order->surname}</td></tr>
+                <tr><th>Telefon</th><td>{$order->telephone}</td></tr>
+                <tr><th>Email</th><td>{$order->email}</td></tr>
+                <tr><th>Adresa</th><td>{$order->street}, {$order->city} {$order->psc}</td></tr>
+            </tbody>
+        </table>
+
+        {if $order->company}
+        <h3>Firemní údaje</h3>
+        <table class="table table-border" style="width: 35%">
+            <tbody>
+                <tr><th>Firma</th><td>{$order->company}</td></tr>
+                <tr><th>IČO</th><td>{$order->ico}</td></tr>
+                <tr><th>DIČ</th><td>{$order->dic}</td></tr>
+            </tbody>
+        </table>
+        {/if}
+
+        <h3>Dodací údaje</h3>
+        <table class="table table-border" style="width: 35%">
+            <tbody>
+                <tr><th>Jméno</th><td>{$order->deliveryName} {$order->deliverySurname}</td></tr>
+                <tr><th>Firma</th><td>{$order->deliveryCompany}</td></tr>
+                <tr><th>Adresa</th><td>{$order->deliveryStreet}, {$order->deliveryCity} {$order->deliveryPsc}</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Informace</h3>
+        <table class="table table-border" style="width: 25%">
+            <tbody>
+                <tr><th>Vytvořena</th><td>{$order->createdAt|date:'%d.%m.%Y %H:%M'}</td></tr>
+                <tr><th>Stav</th><td>{$order->state==0?'Nevyřízena':'Vyřízena'}</td></tr>
+            </tbody>
+        </table>
+        <hr>
+
+        <h3>Objednávka</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    {*<th>ID</th>*}
+                    {*<th>Typ</th>*}
+                    <th>Název</th>
+                    <th>Cena bez DPH</th>
+                    <th>Cena s DPH</th>
+                    <th>Počet</th>
+                    <th>DPH</th>
+                </tr>
+            </thead>
+            <tbody>
+            {foreach $order->ordersItems as $item}
+                {switch $item->type}
+                    {case 1}
+                        {var $type = "Produkt"}
+                    {case 2}
+                        {var $type = "Doprava"}
+                    {case 3}
+                        {var $type = "Platba"}
+                {/switch}
+                <tr>
+                    {*<td>{ifset $item->productInternalId}{$item->productInternalId->id}{/ifset}</td>*}
+                    {*<td>{$type}</td>*}
+                    <td>{$item->name|noescape}</td>
+                    <td>{$item->price} Kč</td>
+                    <td>{$item->priceVat} Kč</td>
+                    <td>{$item->quantity} Ks</td>
+                    <td>{$item->vat} %</td>
+                </tr>
+            {/foreach}
+                <tr>
+                    {*<td colspan="2"></td>*}
+                    <td><b>Cena celkem:</b></td>
+                    <td><b>{$order->totalPrice} Kč</b></td>
+                    <td><b>{$order->totalPriceVat} Kč</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

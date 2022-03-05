@@ -1,0 +1,34 @@
+{block content}
+<a n:href="Product:default" class="btn btn-primary" style="margin-top: 15px"><i class="fas fa-chevron-left"></i> Zpět do správy produktů</a>
+<h2 style="margin-top: 30px">Seznam produktů</h2>
+<hr>
+<div class="col-sm-12" style="margin-top: 30px">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Jméno</th>
+                    <th>Nákupní cena</th>
+                    <th>Prodejní cena</th>
+                    <th>Skladem</th>
+                    <th>Kategorie</th>
+                    <th colspan="2" style="text-align: center">Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+            {foreach $products as $product}
+                <tr>
+                    <td><b>{$product->id}</b></td>
+                    <td>{$product->productName}</td>
+                    <td>{$product->clientPriceVat} Kč</td>
+                    <td>{$product->catalogPriceVat} Kč</td>
+                    <td>{$product->minStockLevel}</td>
+                    <td>{$product->category->categorySingleName}</td>
+                    <td><a href="{link Product:edit $product->id}" >Upravit</a></td>
+                    <td><a href="{link delete! $product->id}" >Smazat</a></td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>

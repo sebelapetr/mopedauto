@@ -1,0 +1,100 @@
+{block content}
+<a n:href="Dashboard:default" class="btn btn-primary" style="margin-top: 15px"><i class="fas fa-chevron-left"></i> Zpět na přehled</a>
+<h2 style="margin-top: 30px">Správa objednávek</h2>
+<hr>
+<div class="col-sm-12" style="margin-top: 30px">
+    <div class="row">
+        <table class="table table-border">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Jméno</th>
+                <th>Email</th>
+                <th>Adresa</th>
+                <th>Cena celkem s DPH</th>
+                <th>Vytvořena</th>
+                <th>Stav</th>
+                <th>Akce</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $orders as $order}
+                {switch $order->state}
+                    {case 0}
+                    {var $state = 'Čeká na zaplacení'}
+                    {case 1}
+                    {var $state = 'Čeká'}
+                    {case 2}
+                    {var $state = 'Potvrzena'}
+                    {case 3}
+                    {var $state = 'Vybavena'}
+                    {case 4}
+                    {var $state = 'Odeslána'}
+                    {case 5}
+                    {var $state = 'Doručena'}
+                    {case 6}
+                    {var $state = 'Vrácena'}
+                    {case 7}
+                    {var $state = 'Reklamována'}
+                {/switch}
+                <tr>
+                    <td><b>{$order->id}</b></td>
+                    <td>{$order->name} {$order->surname}</td>
+                    <td>{$order->email}</td>
+                    <td>{$order->street}, {$order->city}</td>
+                    <td>{ceil($order->totalPriceVat)} Kč</td>
+                    <td>{$order->createdAt|date:'%d.%m.%Y %H:%M:%S'}</td>
+                    <td style="color: {$order->state==0?red:green}">
+                        {$state}
+                    </td>
+                    <td>
+                        <a href="{link detail $order->id}">Zobrazit detail</a>
+                    </td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>

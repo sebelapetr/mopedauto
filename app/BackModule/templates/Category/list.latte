@@ -1,0 +1,33 @@
+{block content}
+<a n:href="Category:default" class="btn btn-primary" style="margin-top: 15px"><i class="fas fa-chevron-left"></i> Zpět do správy kategorií</a>
+<h2 style="margin-top: 30px">Seznam kategorií</h2>
+<hr>
+<div class="col-sm-12" style="margin-top: 30px">
+    <div class="row">
+        <table class="table table-border">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Jméno</th>
+                    <th>Popis</th>
+                    <th>Viditelná</th>
+                    <th>Rodičovská kategorie</th>
+                    <th colspan="2" style="text-align: center">Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+            {foreach $parentCategories as $parentCategory}
+                <tr>
+                    <td><b>{$parentCategory->category->id}</b></td>
+                    <td>{$parentCategory->category->name}</td>
+                    <td>{$parentCategory->category->description}</td>
+                    <td>{$parentCategory->category->visible==1?'Ano':'Ne'}</td>
+                    <td>{ifset $parentCategory->parent}{$parentCategory->parent->name}{else}Hlavní kategorie{/ifset}</td>
+                    <td><a href="{link Category:edit $parentCategory->category->id}" >Upravit</a></td>
+                    <td><a href="{link delete! $parentCategory->category->id}" >Smazat</a></td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+{block content}
+    <h2 style="margin-top: 30px">Dashboard</h2>
+<hr>
+<div class="col-sm-12" style="margin-top: 30px">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Správa <b>objednávek</b></h5>
+                    <p class="card-text">Přidávání, upravování, mazání zpráv z formuláře a změna jejich stavu.</p>
+                    <a n:href="Order:default" class="btn btn-primary">Spravovat objednávky</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Správa <b>produktů</b></h5>
+                    <p class="card-text">Přidávání, upravování, mazání produktů a zařazování do kategorií.</p>
+                    <a n:href="Product:default" class="btn btn-primary">Spravovat produkty</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Správa <b>kategorií</b></h5>
+                    <p class="card-text">Přidávání, upravování, mazání kategorií a přiřazování jejich rodičovských kategorií.</p>
+                    <a n:href="Category:default" class="btn btn-primary">Spravovat kategorie</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Správa <b>zpráv z formuláře</b></h5>
+                    <p class="card-text">Přidávání, upravování, mazání zpráv z formuláře a změna jejich stavu.</p>
+                    <a n:href="Quote:default" class="btn btn-primary">Spravovat zprávy z formuláře</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="col-sm-12" style="margin-top: 30px">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Počet nevyřízených objednávek: <b>{$unsolvedOrdersNumber}</b></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Počet objednávek za {="now"|date:'%B'}: <b></b></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Celkový počet objednávek: <b>{$ordersNumber}</b></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Počet návštěv: <b></b></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Počet poptávek: <b>{$quotesNumber}</b></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Počet produktů: <b>{$productsNumber}</b></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Počet kategorií: <b>{$categoriesNumber}</b></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>

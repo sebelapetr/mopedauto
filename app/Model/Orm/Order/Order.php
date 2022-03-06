@@ -5,6 +5,7 @@ namespace App\Model;
 use Nette\Utils\DateTime;
 use Nextras\Dbal\Utils\DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
+use Nextras\Orm\Relationships\OneHasOne;
 
 /**
  * Class Order
@@ -36,6 +37,7 @@ use Nextras\Orm\Entity\Entity;
  * @property OrdersItem[] $ordersItems {1:m OrdersItem::$order}
  * @property string|NULL $invoice
  * @property int|NULL $typePayment
+ * @property OneHasOne|ComgatePayment|NULL $comgatePayment {1:1 ComgatePayment::$order, isMain=true}
  */
 Class Order extends Entity{
 

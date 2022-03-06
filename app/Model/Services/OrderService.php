@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Latte\Engine;
+use Nette\Application\LinkGenerator;
 use Nette\Caching\Storages\FileStorage;
 use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
@@ -20,13 +21,17 @@ class OrderService
     /** @var InvoiceService */
     public $invoiceService;
 
+    /** @var LinkGenerator */
+    public $linkGenerator;
+
     public const FROM_EMAIL = 'mopedauto.cz <info@mopedauto.cz>';
     public const NO_REPLY_EMAIL = 'mopedauto.cz <noreply@mopedauto.cz>';
 
-    public function __construct(Orm $orm, InvoiceService $invoiceService)
+    public function __construct(Orm $orm, InvoiceService $invoiceService, LinkGenerator $linkGenerator)
     {
         $this->orm = $orm;
         $this->invoiceService = $invoiceService;
+        $this->linkGenerator = $linkGenerator;
     }
 
     public function newOrder($values, $sessionProducts, $sessionShipping, $sessionPayment, $sessionOrder)
@@ -128,59 +133,25 @@ class OrderService
 
     public function sendMails($id){
         $latte = new Engine();
-        $orderEntity = $this->orm->orders->getById($id);
-        /*
-        $name = new Hi(new FileStorage(__DIR__ . '/../../AppModule/nameCache'));
-        $name->setType(Hi::TYPE_NAME);
-        $surname = new Hi(new FileStorage(__DIR__ . '/../../AppModule/nameCache'));
-        $surname->setType(Hi::TYPE_SURNAME);
-        $greetingsName = $name->to($orderEntity->name);
-        $greetingsSurname = $surname->to($orderEntity->surname);
-        if ($greetingsSurname->gender == $greetingsName->gender) {
-            if ($greetingsSurname->gender == 'male') {
-                $gender = 'pane';
-            } else {
-                $gender = 'paní';
-            }
-            $emailName = $greetingsSurname->vocativ;
-        } else {
-            $gender = "";
-            $emailName = $greetingsName->vocativ;
-        }
-        */
-        //$name = new Hi(new FileStorage(__DIR__ . '/../../AppModule/nameCache'));
-        //$name->setType(Hi::TYPE_NAME);
-       // $greetingsName = $name->to($orderEntity->name);
-       // if ($greetingsName){
-           // $emailName = $greetingsName->vocativ;
-        //} else {
-            $emailName = false;
-        //}
-        $hash = base64_encode($orderEntity->id).'8452';
-        $order = [
-            'id' => $orderEntity->id,
-            'name' => $emailName,
-            'ordersItems' => $orderEntity->ordersItems,
-            'totalPriceVat' => $orderEntity->totalPriceVat,
-            'basePath' => __DIR__,
-            'hash' => $hash
-        ];
+        $order = $this->orm->orders->getById($id);
+        $hash = base64_encode($order->id).'8452';
 
         $mail = new Message();
 
-        if ($orderEntity->typePayment == 2){
-            $mail->setFrom(self::FROM_EMAIL)
-                ->addTo($orderEntity->email)
-                ->setSubject('Vaše objednávka č. ' . $order['id'] . ' | Animalko.cz - Veterinární a chovatelské vybavení')
-                ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/orderSentBank.latte', $order))
-                ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo.png');
-        } else {
-            $mail->setFrom(self::FROM_EMAIL)
-                ->addTo($orderEntity->email)
-                ->setSubject('Vaše objednávka č. ' . $order['id'] . ' | Animalko.cz - Veterinární a chovatelské vybavení')
-                ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/orderSent.latte', $order))
-                ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo.png');
-        }
+        $title = 'Vaše objednávka č. ' . $order->id . ' | mopedauto.cz';
+        $mail->setFrom(self::FROM_EMAIL)
+            ->addTo($order->email)
+            ->addBcc(self::FROM_EMAIL)
+            ->setSubject($title)
+            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/orderSent.latte', [
+                'order' => $order,
+                'basePath' => __DIR__,
+                'hash' => $hash,
+                'orderDetailUrl' => $this->linkGenerator->link('Front:Cart:step3', ['hash' => $hash]),
+                'title' => $title
+            ]))
+            ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo.png');
+
         $mailer = new SendmailMailer();
         $mailer->send($mail);
     }

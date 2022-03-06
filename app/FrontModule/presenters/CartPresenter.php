@@ -21,7 +21,7 @@ class CartPresenter extends BasePresenter
     public function startup()
     {
         parent::startup();
-        if (!$this->isLinkCurrent('Cart:empty')) {
+        if (!$this->isLinkCurrent('Cart:empty') && !$this->isLinkCurrent('Cart:step3')) {
             if (empty($this->cartSession->getProducts()) || $this->cartSession == null) {
                 $this->redirect('empty');
             }

@@ -12,6 +12,7 @@ use Nextras\Orm\Model\Model;
  * @property-read OrdersRepository $orders
  * @property-read OrdersItemsRepository $ordersItems
  * @property-read NewslettersRepository $newsletters
+ * @property-read ComgatePaymentsRepository $comgatePayments
  */
 class Orm extends Model
 {

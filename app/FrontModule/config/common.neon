@@ -5,3 +5,6 @@ services:
     - App\FrontModule\Forms\INewsletterFormFactory
     - App\FrontModule\Forms\IPersonalDataFormFactory
     - App\FrontModule\Forms\IShippingAndPaymentFormFactory
+    - App\FrontModule\Forms\IContactFormFactory
+    - App\FrontModule\Forms\IRedemptionFormFactory
+    - App\FrontModule\Forms\IServiceFormFactory

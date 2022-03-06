@@ -20,6 +20,9 @@ class OrderService
     /** @var InvoiceService */
     public $invoiceService;
 
+    public const FROM_EMAIL = 'mopedauto.cz <info@mopedauto.cz>';
+    public const NO_REPLY_EMAIL = 'mopedauto.cz <noreply@mopedauto.cz>';
+
     public function __construct(Orm $orm, InvoiceService $invoiceService)
     {
         $this->orm = $orm;
@@ -166,18 +169,69 @@ class OrderService
         $mail = new Message();
 
         if ($orderEntity->typePayment == 2){
-            $mail->setFrom('Animalko.cz <info@animalko.cz>')
+            $mail->setFrom(self::FROM_EMAIL)
                 ->addTo($orderEntity->email)
                 ->setSubject('Vaše objednávka č. ' . $order['id'] . ' | Animalko.cz - Veterinární a chovatelské vybavení')
                 ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/orderSentBank.latte', $order))
                 ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo.png');
         } else {
-            $mail->setFrom('Animalko.cz <info@animalko.cz>')
+            $mail->setFrom(self::FROM_EMAIL)
                 ->addTo($orderEntity->email)
                 ->setSubject('Vaše objednávka č. ' . $order['id'] . ' | Animalko.cz - Veterinární a chovatelské vybavení')
                 ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/orderSent.latte', $order))
                 ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo.png');
         }
+        $mailer = new SendmailMailer();
+        $mailer->send($mail);
+    }
+
+    public function sentContactForm($values){
+        $latte = new Engine();
+
+        $subject = 'Nová zpráva z kontaktního formuláře!';
+
+        $mail = new Message();
+
+        $mail->setFrom(self::NO_REPLY_EMAIL)
+            ->addTo(self::FROM_EMAIL)
+            ->setSubject($subject)
+            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/newContact.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
+            ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo-l.png');
+
+        $mailer = new SendmailMailer();
+        $mailer->send($mail);
+    }
+
+    public function sentServiceForm($values){
+        $latte = new Engine();
+
+        $subject = 'Zájem o servis nebo opravu!';
+
+        $mail = new Message();
+
+        $mail->setFrom(self::NO_REPLY_EMAIL)
+            ->addTo(self::FROM_EMAIL)
+            ->setSubject($subject)
+            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/newService.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
+            ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo-l.png');
+
+        $mailer = new SendmailMailer();
+        $mailer->send($mail);
+    }
+
+    public function sentRedemptionForm($values){
+        $latte = new Engine();
+
+        $subject = 'Zájem o prodej auta!';
+
+        $mail = new Message();
+
+        $mail->setFrom(self::NO_REPLY_EMAIL)
+            ->addTo(self::FROM_EMAIL)
+            ->setSubject($subject)
+            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/newRedemption.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
+            ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo-l.png');
+
         $mailer = new SendmailMailer();
         $mailer->send($mail);
     }

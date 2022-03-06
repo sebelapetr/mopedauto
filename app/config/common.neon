@@ -34,7 +34,6 @@ services:
 	- App\Model\ProductService
 	- App\Model\ShippingAndPaymentService
 	- App\Model\OrderService
-	- App\CronModule\Model\FeederService
 	- App\Model\QuoteService
 	- App\Model\AddProductService
 	- App\Model\NewsletterService

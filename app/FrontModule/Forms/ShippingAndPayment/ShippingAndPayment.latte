@@ -1,28 +1,36 @@
 <form  n:name="shippingAndPaymentForm">
-    <h2 style="font-size:19px;font-weight:300">Způsob doručení</h2>
-    <div class="col-sm-12" style="padding: 0;margin-top:5px;margin-bottom: 30px;">
-        {foreach $form[shipping]->items as $key => $label}
-            <div class="col-sm-12" style="border:1px solid #0000001f;padding: 20px;">
-                <div class="row" style="margin: 0 10px">
-                    <input n:name="shipping:$key">
-                    <label n:name="shipping:$key" style="font-weight: 300;font-size: 15px;margin-left: 10px;cursor:pointer">{$label}</label>
-                    <a class="pull-right" style="color:black">{$key==1?'98 Kč':'Zdarma'}</a>
-                </div>
-            </div>
-        {/foreach}
+    <div id="shipping-container">
+        <h2>Způsob doručení</h2>
+        <div class="col-sm-12">
+            <span>
+                <input n:name="shipping:2">
+                <label n:name="shipping:2">Osobní odběr</label>
+                <a>Zdarma</a>
+            <br>
+            </span>
+            <span>
+                <input n:name="shipping:1">
+                <label n:name="shipping:1">PPL malý balík</label>
+                <a>161 Kč</a>
+            </span>
+        </div>
     </div>
-    <h2 style="font-size:19px;font-weight:300">Způsob platby</h2>
-    <div class="col-sm-12" style="padding: 0;margin-top:5px;margin-bottom: 20px;">
-        {foreach $form[payment]->items as $key => $label}
-            <div class="col-sm-12" style="border:1px solid #0000001f;padding: 20px;">
-                <div class="row" style="margin: 0 10px">
-                    <input n:name="payment:$key">
-                    <label n:name="payment:$key" style="font-weight: 300;font-size: 15px;margin-left: 10px;cursor:pointer">{$label}</label>
-                    <a class="pull-right" style="color:black">{$key==1?'30 Kč':'Zdarma'}</a>
-                </div>
-            </div>
-        {/foreach}
+    <div id="payment-container">
+        <h2>Způsob platby</h2>
+        <div class="col-sm-12">
+            <span id="payment-type-2">
+                <input n:name="payment:2">
+                <label n:name="payment:2">V hotovosti</label>
+                <a>Zdarma</a>
+            <br>
+            </span>
+            <span id="payment-type-1">
+                <input n:name="payment:1">
+                <label n:name="payment:1">Dobírka</label>
+                <a>30 Kč</a>
+            </span>
+        </div>
     </div>
-    <a href="{plink Homepage:default}" class="btn btn-default cart pull-left" style="width:20%;color:black;background: #f3f3f3;height: auto;padding: 14px">Zpět do obchodu</a>
-    <input n:name="submit" class="btn btn-default cart pull-right" style="width: 35%;height: 50px">
+    <a href="{plink Homepage:default}" class="btn btn-default cart pull-left">Zpět do obchodu</a>
+    <input n:name="submit" class="btn btn-default cart pull-right">
 </form>

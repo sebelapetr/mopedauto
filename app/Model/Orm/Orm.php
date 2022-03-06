@@ -6,6 +6,7 @@ use Nextras\Orm\Model\Model;
  * @property-read CategoriesRepository $categories
  * @property-read ProductsRepository $products
  * @property-read ProductCategoriesRepository $productCategories
+ * @property-read ProductImagesRepository $productImages
  * @property-read UsersRepository $users
  * @property-read QuotesRepository $quotes
  * @property-read OrdersRepository $orders

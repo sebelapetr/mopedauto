@@ -1,0 +1,15 @@
+{default $imageUrl = ""}
+{default $title = ""}
+<!--Page Title-->
+<section class="page-title" style="background-image:url({$imageUrl|noescape});">
+    <div class="auto-container">
+        <div class="inner-container clearfix">
+            <h1>{$title}</h1>
+            <ul class="bread-crumb clearfix">
+                <li><a n:href="Homepage:default">Úvod</a></li>
+                <li>{$title}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--End Page Title-->

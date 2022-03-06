@@ -553,6 +553,7 @@ img{
 	position:relative;
 	display:inline-block;
 	max-width:100%;
+	padding:4px;
 }
 
 .main-header .header-upper .upper-right{
@@ -4791,7 +4792,7 @@ button:focus{
 
 .sidebar-page-container{
 	position: relative;
-	padding: 120px 0 150px;
+	padding: 40px 0 80px;
 }
 
 .sidebar-page-container .sidebar-side,
@@ -8777,3 +8778,67 @@ button:focus{
 	opacity: .3;
 }
 
+.list-group.list-group-root {
+	padding: 0;
+	overflow: hidden;
+	border: 1px solid #e3e3e3;
+}
+
+.list-group.list-group-root .list-group {
+	margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+	border-radius: 0;
+	border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+	border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+	padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+	padding-left: 45px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group-item {
+	padding-left: 60px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+	padding-left: 75px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+	padding-left: 90px;
+}
+
+.list-group-item .fa {
+	margin-right: 5px;
+}
+
+.list-group-item:hover {
+	border-width: 1px 0 !important;
+	cursor: pointer;
+}
+
+.list-group-item a:hover {
+	text-decoration: underline;
+}
+
+.list-group-item i {
+	cursor: pointer;
+	color: #1c63b8;
+}
+
+.list-group-item-active {
+	background: #1c63b8;
+	color: white;
+}
+.list-group-item-active a {
+	color: white;
+}

@@ -1,0 +1,11 @@
+<div class="col-sm-12">
+    <a href="{link Homepage:default}"><i class="fa fa-home"></i></a>
+    {foreach $parentCategories as $parentCategory}
+        <a>
+            <i class="fas fa-angle-right"></i>
+        </a>
+        <a href="{link SpareParts:default, 'seoName' => $parentCategory->url}">
+            {$parentCategory->name}
+        </a>
+    {/foreach}
+</div>

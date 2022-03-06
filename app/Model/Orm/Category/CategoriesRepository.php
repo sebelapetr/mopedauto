@@ -9,6 +9,7 @@ use Nextras\Orm\Repository\Repository;
 /**
  * @method Result getParents(int $categoryId)
  * @method Result getChildren(int $categoryId)
+ * @method Result getChildrenLevel(int $categoryId, int $level)
  * @method Result getRoots()
  */
 class CategoriesRepository extends Repository{

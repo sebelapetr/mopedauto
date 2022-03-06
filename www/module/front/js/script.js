@@ -219,7 +219,7 @@
 			rtl: true,
 			smartSpeed: 500,
 			autoplay: true,
-			navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
+			navText: [ '<span class="fa fa-angle-right"></span>', '<span class="fa fa-angle-left"></span>' ],
 			responsive:{
 				0:{
 					items:1

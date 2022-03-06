@@ -25,7 +25,7 @@ class AddProductService
         $data["productName"] = $product->productName;
         $data["catalogPriceVat"] = $product->catalogPriceVat;
         $data["quantity"] = $values->quantity;
-        $data["photo"] = $product->image;
+        $data["photo"] = $product->getMainImage(ProductImage::SIZE_S)->filePath;
         $this->cartSession->addProduct($data);
     }
 }

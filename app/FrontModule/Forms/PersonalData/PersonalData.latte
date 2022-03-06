@@ -1,125 +1,107 @@
 <form  n:name="personalDataForm">
     <div class="col-sm-6">
-        <h2 style="font-size:19px;font-weight:300">Osobní údaje</h2>
-        <div class="form-group col-md-12" style="margin-bottom:0px">
-            <label for="inputEmail4" style="font-weight:300">Jméno *</label>
-            <input n:name="name" class="form-control" id="inputEmail4" required="required" placeholder="Pavel">
+        <h2>Osobní údaje</h2>
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">Jméno *</label>
+            <input n:name="name" class="form-control" id="inputEmail4" required="required">
         </div>
-        <div class="form-group col-md-12" style="margin-bottom:0px">
-            <label for="inputEmail4" style="font-weight:300">Příjmení *</label>
-            <input n:name="surname" class="form-control" id="inputEmail4" required="required" placeholder="Novák">
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">Příjmení *</label>
+            <input n:name="surname" class="form-control" id="inputEmail4" required="required">
         </div>
-        <div class="form-group col-md-12" style="margin-bottom:0px">
-            <label for="inputEmail4" style="font-weight:300">Telefon *</label>
-            <input n:name="telephone" class="form-control" id="inputEmail4" required="required" placeholder="+420605200686">
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">Telefon *</label>
+            <input n:name="telephone" class="form-control" id="inputEmail4" required="required">
         </div>
-        <div class="form-group col-md-12" style="margin-bottom:20px">
-            <label for="inputEmail4" style="font-weight:300">E-mail *</label>
-            <input n:name="email" class="form-control" id="inputEmail4" required="required" placeholder="pavel.novak@mail.cz">
-        </div>
-
-        <h2 style="font-size:19px;font-weight:300;">Adresa</h2>
-        <div class="form-group col-md-12" style="margin-bottom:0px">
-            <label for="inputEmail4" style="font-weight:300">Ulice a číslo popisné *</label>
-            <input n:name="street" class="form-control" id="inputEmail4" required="required" placeholder="Ulice 123">
-        </div>
-        <div class="form-group col-md-12" style="margin-bottom:0px">
-            <label for="inputEmail4" style="font-weight:300">Město *</label>
-            <input n:name="city" class="form-control" id="inputEmail4" required="required" placeholder="Brno">
-        </div>
-        <div class="form-group col-md-12" style="margin-bottom:20px">
-            <label for="inputEmail4" style="font-weight:300">PSČ *</label>
-            <input n:name="psc" class="form-control" id="inputEmail4" required="required" placeholder="60200">
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">E-mail *</label>
+            <input n:name="email" class="form-control" id="inputEmail4" required="required">
         </div>
 
-        <div class="form-group col-md-12" style="margin-bottom:20px">
-            <input type="checkbox" id="company" onchange="handleChange(this);"><label for="company" style="font-weight: 300"> Nakupuji na firmu</label>
+        <h2>Adresa</h2>
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">Ulice a číslo popisné *</label>
+            <input n:name="street" class="form-control" id="inputEmail4" required="required">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">Město *</label>
+            <input n:name="city" class="form-control" id="inputEmail4" required="required">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">PSČ *</label>
+            <input n:name="psc" class="form-control" id="inputEmail4" required="required">
         </div>
 
-        <div id="company-hidden" style="display: none">
-            <h2 style="font-size:19px;font-weight:300">Firemní údaje (Nakupuji na firmu)</h2>
-            <p style="color:rgba(0,0,0,.3)">(nejsme plátci DPH)</p>
-            <div class="form-group col-md-12" style="margin-bottom:0px">
-                <label for="inputEmail4" style="font-weight:300">Firma *</label>
+        <div class="form-group col-md-12">
+            <input type="checkbox" n:name="companyBuy"><label n:name="companyBuy"> Nakupuji na firmu</label>
+        </div>
+
+        <div id="company-wrapper">
+            <h2>Firemní údaje (Nakupuji na firmu)</h2>
+            <p>(nejsme plátci DPH)</p>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">Firma *</label>
                 <input n:name="company" class="form-control" id="inputEmail4"  placeholder="">
             </div>
-            <div class="form-group col-md-12" style="margin-bottom:20px">
-                <label for="inputEmail4" style="font-weight:300">IČO *</label>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">IČO *</label>
                 <input n:name="ico" class="form-control" id="inputEmail4"  placeholder="">
             </div>
             {*
-            <div class="form-group col-md-12" style="margin-bottom:0px">
-                <label for="inputEmail4" style="font-weight:300">DIČ</label>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">DIČ</label>
                 <input n:name="dic" class="form-control" id="inputEmail4"  placeholder="">
             </div>
             *}
         </div>
-        <script>
-            function handleChange(checkbox) {
-                if(checkbox.checked == true){
-                    document.getElementById("company-hidden").style.display = "block";
-                }else{
-                    document.getElementById("company-hidden").style.display = "none";
-                }
-            }
-        </script>
 
-        <div class="form-group col-md-12" style="margin-bottom:20px">
-            <input type="checkbox" id="adress" onchange="changeAddress(this);"><label for="adress" style="font-weight: 300"> Doručit na jinou adresu</label>
+        <div class="form-group col-md-12">
+            <input type="checkbox" n:name="otherAddress"><label n:name="otherAddress"> Doručit na jinou adresu</label>
         </div>
-        <div id="adress-hidden" style="display:none;">
-            <h2 style="font-size:19px;font-weight:300">Doručit na jinou adresu</h2>
-            <div class="form-group col-md-12" style="margin-bottom:0px">
-                <label for="inputEmail4" style="font-weight:300">Jméno *</label>
+
+        <div id="address-wrapper">
+            <h2>Doručit na jinou adresu</h2>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">Jméno *</label>
                 <input n:name="deliveryName" class="form-control" id="inputEmail4"  placeholder="">
             </div>
-            <div class="form-group col-md-12" style="margin-bottom:0px">
-                <label for="inputEmail4" style="font-weight:300">Příjmení *</label>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">Příjmení *</label>
                 <input n:name="deliverySurname" class="form-control" id="inputEmail4"  placeholder="">
             </div>
-            <div class="form-group col-md-12" style="margin-bottom:0px">
-                <label for="inputEmail4" style="font-weight:300">Firma</label>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">Firma</label>
                 <input n:name="deliveryCompany" class="form-control" id="inputEmail4"  placeholder="">
             </div>
-            <div class="form-group col-md-12" style="margin-bottom:0px">
-                <label for="inputEmail4" style="font-weight:300">Ulice a číslo popisné *</label>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">Ulice a číslo popisné *</label>
                 <input n:name="deliveryStreet" class="form-control" id="inputEmail4"  placeholder="">
             </div>
-            <div class="form-group col-md-12" style="margin-bottom:0px">
-                <label for="inputEmail4" style="font-weight:300">Město *</label>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">Město *</label>
                 <input n:name="deliveryCity" class="form-control" id="inputEmail4"  placeholder="">
             </div>
-            <div class="form-group col-md-12" style="margin-bottom:0px">
-                <label for="inputEmail4" style="font-weight:300">PSČ *</label>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">PSČ *</label>
                 <input n:name="deliveryPsc" class="form-control" id="inputEmail4"  placeholder="">
             </div>
         </div>
 
-        <script>
-            function changeAddress(checkbox) {
-                if(checkbox.checked == true){
-                    document.getElementById("adress-hidden").style.display = "block";
-                }else{
-                    document.getElementById("adress-hidden").style.display = "none";
-                }
-            }
-        </script>
-
-        <h2 style="font-size:19px;font-weight:300">Poznámka</h2>
-        <div class="form-group col-md-12" style="margin-bottom:0px">
-            <label for="inputEmail4" style="font-weight:300">Vaše poznámka</label>
+        <h2>Poznámka</h2>
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">Vaše poznámka</label>
             <textarea n:name="note" class="form-control"></textarea>
         </div>
     </div>
-    <div class="col-sm-12" style="margin: 40px 0 20px 0;font-weight: 300">
-        <p style="font-weight: bold">Informace, které nám předáváte, zpracováváme podle <a href="">pravidel zpracování osobních údajů.</a></p>
+    <div class="col-sm-12">
+        <p>Informace, které nám předáváte, zpracováváme podle <a href="">pravidel zpracování osobních údajů.</a></p>
         <p>
             <input type="checkbox" name="terms" id="termsAndConditions" required>
             <label for="termsAndConditions">Souhlasím s <a href="">obchodními podmínkami.</a></label>
         </p>
     </div>
     <div class="col-sm-12">
-        <a href="{plink Cart:step1}" class="btn btn-default cart pull-left" style="width:30%;color:black;background: #f3f3f3;height: auto;padding: 14px">Zpět k dopravě a platbě</a>
-        <input n:name="submit" class="btn btn-default cart pull-right" style="width: 35%;height: 50px">
+        <a href="{plink Cart:step1}" class="btn btn-default cart pull-left">Zpět k dopravě a platbě</a>
+        <input n:name="submit" class="btn btn-default cart pull-right">
     </div>
 </form>

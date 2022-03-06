@@ -4,7 +4,6 @@ namespace App\FrontModule\Presenters;
 
 use App\FrontModule\Forms\IFindFormFactory;
 use App\FrontModule\Forms\INewsletterFormFactory;
-use App\Model\Category;
 use App\Model\Session\CartSession;
 use Nette\Application\UI\Presenter;
 use App\Model\Orm;
@@ -41,6 +40,7 @@ abstract class BasePresenter extends Presenter{
 
     public function startup()
     {
+        Debugger::barDump($this->cartSession->getProducts());
         parent::startup();
     }
 
@@ -57,4 +57,5 @@ abstract class BasePresenter extends Presenter{
     protected function createComponentFindForm(){
         return $this->findFormFactory->create();
     }
+
 }

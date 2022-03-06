@@ -44,7 +44,7 @@ class AddCategoryForm extends Control{
     public function addCategoryFormSucceeded(Form $form, $values){
         $this->categoryService->addCategory($values);
         $this->getPresenter()->flashMessage("Kategorie byla úspěšně vytvořena.");
-
+        $this->getPresenter()->redirect('this');
         //$this->getPresenter()->redirect("Homepage:default");
     }
     public function render(){

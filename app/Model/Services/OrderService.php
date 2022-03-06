@@ -69,10 +69,10 @@ class OrderService
                 $product = $this->orm->products->getById($item['id']);
                 $orderItems = new OrdersItem();
                 $orderItems->name = $product->productName;
-                $orderItems->price = $product->catalogPrice;
+                $orderItems->price = $product->catalogPrice ? $product->catalogPrice : 0;
                 $orderItems->priceVat = $product->catalogPriceVat;
                 $orderItems->quantity = $item['quantity'];
-                $orderItems->vat = $product->vat;
+                $orderItems->vat = 21;
                 $orderItems->type = 1;
                 $orderItems->product = $product;
                 $orderItems->order = $order;
@@ -169,13 +169,13 @@ class OrderService
             $mail->setFrom('Animalko.cz <info@animalko.cz>')
                 ->addTo($orderEntity->email)
                 ->setSubject('Vaše objednávka č. ' . $order['id'] . ' | Animalko.cz - Veterinární a chovatelské vybavení')
-                ->setHtmlBody($latte->renderToString(__DIR__ . '/../../AppModule/templates/Emails/orderSentBank.latte', $order))
+                ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/orderSentBank.latte', $order))
                 ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo.png');
         } else {
             $mail->setFrom('Animalko.cz <info@animalko.cz>')
                 ->addTo($orderEntity->email)
                 ->setSubject('Vaše objednávka č. ' . $order['id'] . ' | Animalko.cz - Veterinární a chovatelské vybavení')
-                ->setHtmlBody($latte->renderToString(__DIR__ . '/../../AppModule/templates/Emails/orderSent.latte', $order))
+                ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/orderSent.latte', $order))
                 ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo.png');
         }
         $mailer = new SendmailMailer();

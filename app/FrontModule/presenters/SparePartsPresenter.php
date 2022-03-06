@@ -8,6 +8,7 @@ use App\Model\Product;
 use App\Model\Session\CartSession;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\DateTime;
+use Nette\Utils\Html;
 use Nette\Utils\Paginator;
 use Nextras\Dbal\Result\Result;
 use Tracy\Debugger;
@@ -23,8 +24,6 @@ class SparePartsPresenter extends BasePresenter
     /** @var int */
     public $lastPage;
 
-    public Product $currentProduct;
-
     /** @inject */
     public IAddProductFormFactory $addProductFormFactory;
 
@@ -34,9 +33,9 @@ class SparePartsPresenter extends BasePresenter
 
     public array $categoriesTree;
 
-    public array $categoriesTreeJs;
-
     public Category $actualCategory;
+
+    public Product $actualProduct;
 
     public function startup()
     {
@@ -62,23 +61,25 @@ class SparePartsPresenter extends BasePresenter
             }
         }
         $this->categoriesTree = $this->getCategoriesTree($this->rootCategories);
-        $this->categoriesTreeJs = $this->getCategoriesTreeJs($this->rootCategories);
     }
 
     public function renderDefault($page=1, $seoName = null)
     {
-        $parentCategories = $this->orm->categories->getChildren($this->actualCategory->id);
-        $childrenCategories = $this->orm->categories->getChildren($this->actualCategory->id)->fetchPairs(null, "id");
+        $parentCategories = $this->orm->categories->getParents($this->actualCategory->id);
+        $childrenCategories = $this->orm->categories->getChildren($this->actualCategory->id);
+        $nextChildrenCategories = $this->orm->categories->getChildrenLevel($this->actualCategory->id, -1);
 
         $this->template->rootCategories = $this->rootCategories;
 
         $this->template->categoriesTree = $this->categoriesTree;
+        $this->template->childrenCategories = $childrenCategories;
+        $this->template->nextChildrenCategories = $nextChildrenCategories;
         $this->template->parentCategories = $parentCategories;
 
         $this->limit = 12;
         $offset = $page>0?($page-1)*$this->limit:$page; /* -OFFSET PRODUKTŮ- */
 
-        $productsResult = $this->getProducts($childrenCategories);
+        $productsResult = $this->getProducts($childrenCategories->fetchPairs(null, "id"));
         $ids = empty($productsResult) ? [] : $productsResult->fetchPairs(null, "product_id");
 
         $products = $this->orm->products->findBy(["id" => $ids]);
@@ -87,6 +88,7 @@ class SparePartsPresenter extends BasePresenter
         $this->getTemplate()->actualPage = $page;
         $this->lastPage = ceil($products->countStored()/$this->limit);
         $this->getTemplate()->lastPage = $this->lastPage;
+        $this->getTemplate()->actualCategory = $this->actualCategory;
     }
 
     private function getProducts(array $childrenCategories): Result
@@ -120,24 +122,6 @@ class SparePartsPresenter extends BasePresenter
     }
 
     private function getCategoriesTree(Result $result): array
-    {
-        $categories = [];
-        foreach ($result as $category) {
-            $categories[] = [
-                'id' => $category->id,
-                'name' => $category->name,
-                'parent' => $category->parent,
-            ];
-        }
-
-        $tree = [];
-        foreach ($categories as $category){
-            $tree[$category['parent']][] = $category;
-        }
-        return $this->createTree($tree, array($categories[0]));
-    }
-
-    private function getCategoriesTreeJs(Result $result): array
     {
         $categories = [];
         foreach ($result as $category) {
@@ -190,14 +174,23 @@ class SparePartsPresenter extends BasePresenter
         return $this->pages;
     }
 
-    public function actionDetail($id)
+    public function actionDetail($seoName)
     {
-        $this->currentProduct = $this->orm->products->getById($id);
+        $productId = explode("-", $seoName);
+        if ($productId) {
+            $productId = isset($productId[0]) ? $productId[0] : null;
+            $this->actualProduct = $this->orm->products->getById($productId);
+            if (!$this->actualProduct) {
+                $this->redirect("SpareParts:default", ["page" => 1, "seoName" => null]);
+            }
+        } else {
+            $this->redirect("SpareParts:default", ["page" => 1, "seoName" => null]);
+        }
     }
 
     public function renderDetail($id)
     {
-        $this->getTemplate()->product = $this->currentProduct;
+        $this->getTemplate()->product = $this->actualProduct;
         $this->getTemplate()->productInCart = $this->productInCart($id);
         $this->getTemplate()->actualId = $id;
         $this->getTemplate()->session = $this->getSession()->getSection('products');
@@ -216,13 +209,12 @@ class SparePartsPresenter extends BasePresenter
     }
 
     protected function createComponentAddProductForm(){
-        return $this->addProductFormFactory->create($this->currentProduct);
+        return $this->addProductFormFactory->create($this->actualProduct);
     }
 
     public function handleGetCategoriesTree(): void
     {
-        Debugger::barDump($this->categoriesTree);
-        $this->getPayload()->tree = json_encode($this->categoriesTreeJs);
+        $this->getPayload()->tree = json_encode($this->categoriesTree);
         $this->sendPayload();
     }
 }

@@ -1,0 +1,11 @@
+<div class="col-sm-12">
+    <div class="features_items x700">
+        {foreach $nextChildrenCategories as $childrenCategory}
+            <a n:href="SpareParts:default, seoName => $childrenCategory->url">
+                <div class="col-sm-4 float-left">
+                    <span>{$childrenCategory->name} <i class="fas fa-angle-right pull-right"></i></span>
+                </div>
+            </a>
+        {/foreach}
+    </div>
+</div>

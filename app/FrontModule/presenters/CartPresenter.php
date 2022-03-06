@@ -17,6 +17,22 @@ class CartPresenter extends BasePresenter
     /** @inject */
     public IPersonalDataFormFactory $personalDataFormFactory;
 
+
+    public function startup()
+    {
+        parent::startup();
+        if (!$this->isLinkCurrent('Cart:empty')) {
+            if (empty($this->cartSession->getProducts()) || $this->cartSession == null) {
+                $this->redirect('empty');
+            }
+        }
+    }
+
+    public function renderEmpty()
+    {
+        $this->getTemplate()->productsInCart = $this->getProductsInCart();
+    }
+
     public function renderStep1()
     {
         $this->getTemplate()->cartCheck = 1;
@@ -31,9 +47,9 @@ class CartPresenter extends BasePresenter
         $this->getTemplate()->totalPrice = $this->getTotalPrice();
     }
 
-    public function renderStep3($id)
+    public function renderStep3($hash)
     {
-        $id = str_replace('8452', '', $id);
+        $id = str_replace('8452', '', $hash);
         $order = $this->orm->orders->getById(base64_decode($id));
         $deliveryDate = DateTime::from($order->createdAt);
         if ($deliveryDate->format("N") == 5) {
@@ -84,16 +100,19 @@ class CartPresenter extends BasePresenter
 
     public function handleRemoveProduct($id)
     {
-
+        $this->cartSession->removeProduct($id);
+        $this->redirect('this');
     }
 
-    public function handleAddProductNumber($id)
+    public function handleAddProductQuantity($id)
     {
-
+        $this->cartSession->addProductQuantity($id);
+        $this->redirect('this');
     }
 
-    public function handleRemoveProductNumber($id)
+    public function handleRemoveProductQuantity($id)
     {
-
+        $this->cartSession->removeProductQuantity($id);
+        $this->redirect('this');
     }
 }

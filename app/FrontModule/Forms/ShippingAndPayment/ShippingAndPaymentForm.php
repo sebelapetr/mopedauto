@@ -20,18 +20,25 @@ class ShippingAndPaymentForm extends Control{
     {
     }
 
-    protected function createComponentShippingAndPaymentForm(){
+    protected function createComponentShippingAndPaymentForm()
+    {
         $form = new Form();
-        $form->addRadioList('shipping', 'Způsob doručení', [
-            2=>'Osobní odběr na pobočce v Brně',
-            1=>'Doručení na adresu přepravcem GEIS'
-        ])
-        ->setDefaultValue(2);
-        $form->addRadioList('payment', 'Způsob platby', [2=>'Platba převodem na účet', 1=>'Dobírka GEIS'])
-        ->setDefaultValue(2);
-        $form->addSubmit('submit', 'Pokračovat v objednávce')
-            ->setDefaultValue('aa');
+
+        $form->addRadioList('shipping', 'Způsob doručení', [2=>'Osobní odběr',1=>'PPL malý balík'])
+            ->setRequired('Vyberte typ dopravy')
+            ->addCondition($form::FILLED, true)
+            ->toggle('payment-container')
+            ->addCondition($form::EQUAL, 2)
+            ->toggle('payment-type-2')
+            ->elseCondition()
+            ->toggle('payment-type-1');
+
+        $form->addRadioList('payment', 'Způsob platby', [2=>'V hotovosti', 1=>'Dobírka'])
+            ->setRequired('Vyberte typ platby');
+
+        $form->addSubmit('submit', 'Pokračovat v objednávce');
         $form->onSuccess[] = [$this, 'shippingAndPaymentFormSucceeded'];
+
         return $form;
     }
     public function shippingAndPaymentFormSucceeded(Form $form, ArrayHash $values){

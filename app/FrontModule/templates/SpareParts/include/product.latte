@@ -4,10 +4,14 @@
     <div class="feature-block">
         <div class="inner-box">
             <div class="image-box">
-                <img src="{$basePath}/images/products/{$product->image}" alt="">
+                {if $product->getMainImage(App\Model\ProductImage::SIZE_MD) !== null}
+                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_MD)->filePath}" alt="">
+                {else}
+                    <img src="{$basePath}/images/products/placeholder.jpg" alt="">
+                {/if}
                 <div class="overlay-box">
                     <div class="icon-box">
-                        <a href="{link SpareParts:detail $product->id}" class="cart-btn"><i class="fa fa-search"></i>
+                        <a href="{link SpareParts:detail, seoName => $product->url}" class="cart-btn"><i class="fa fa-search"></i>
                             Zobrazit</a>
                     </div>
                 </div>

@@ -1,86 +1,20 @@
 {block content}
 
 <section class="cart">
-
-    <!--Page Title-->
-    <!--    <section class="page-title" style="background-image:url(images/background/8.jpg);">-->
-    <!--        <div class="auto-container">-->
-    <!--            <div class="inner-container clearfix">-->
-    <!--                <h1>Košík</h1>-->
-    <!--                <ul class="bread-crumb clearfix">-->
-    <!--                    <li><a href="index.php">Úvod</a></li>-->
-    <!--                    <li>Košík</li>-->
-    <!--                </ul>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </section>-->
-    <!--End Page Title-->
-
-    <!--Cart Section-->
     <section class="cart-section">
         <div class="auto-container">
-            <div class="col-sm-12">
-                <div class="col-sm-4"><span>1. Doprava a platba</span></div>
-                <div class="col-sm-4"><span>2. Osobní údaje</span></div>
-                <div class="col-sm-4"><span>3. Dokončená objednávka</span></div>
-            </div>
+            {include './include/steps.latte', current => 2}
             <div class="row">
                 <div class="col-sm-8">
                     {control personalDataForm}
                 </div>
                 <div class="col-sm-4">
-                    <h2 style="font-size:19px;font-weight:300">Košík</h2>
-                    <div class="col-sm-12">
-                        <div class="row">
-                            {if $productsInCart !== null && count($productsInCart) > 0}
-                                {foreach $productsInCart as $productInCart}
-                                    {if $productInCart}
-                                        <div class="col-sm-12" style="border:1px solid #0000001f;text-align: right">
-                                            <a href="{link removeProduct! $productInCart['id']}" style="font-weight: 300;margin-top:10px;display:block;width:30px;text-align:center;float:right;padding: 3px 7px;color: black;"><i class="fas fa-times fa-xs"></i></a>
-                                            <div class="col-sm-3" style="text-align: center;padding: 0">
-                                                <img src="{$basePath}/images/products/{$productInCart['photo']}" alt="{$productInCart['productName']|noescape}" style="object-fit: cover;height: 130px;margin-top: 15px">
-                                            </div>
-                                            <div class="col-sm-9 pull-right" style="margin:20px 0px">
-                                                <div class="col-sm-12">
-                                                    {$productInCart['productName']|noescape}
-                                                </div>
-                                                <div class="col-sm-12" style="margin-top: 15px;">
-                                                    <a href="{link addProductNumber! $productInCart['id']}" style="font-weight: 300;padding: 2px 10px;color: black;background:#f3f3f3;">+</a>
-                                                    <a href="{link removeProductNumber! $productInCart['id']}" style="font-weight: 300;padding: 2px 10px;color: black;background: #f3f3f3;" {if $productInCart['quantity']<2}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}>-</a>
-                                                    <a class="" style="margin-left: 5px;color:black">{$productInCart['quantity']} Ks</a>
-                                                </div>
-                                                <div class="col-sm-12" style="margin-top: 15px;">
-                                                    <a class="pull-right" style="color:black;font-size:16px;">{$productInCart['catalogPriceVat']} Kč</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {/if}
-                                {/foreach}
-                            {else}
-                                <div class="col-sm-12" style="border:1px solid #0000001f;text-align: center;padding: 20px">
-                                    <a style="font-size: 17px;color:black;">Košík je prázdný</a>
-                                </div>
-                            {/if}
-                            <div class="col-sm-12" style="border:1px solid #0000001f;border-top:none;background: #f1f1f15e;">
-                                <div class="col-sm-12" style="text-align: right;">
-                                    <h3 style="font-weight: 500;font-size:18px;margin:15px 0;p">Celkem s DPH: {ceil($totalPrice)} Kč</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {include './include/cart.latte'}
                 </div>
             </div>
         </div>
     </section>
-    <!--End Cart Section-->
 
-    <section class="subscribe-section">
-        <div class="auto-container">
-            <div class="inner-container clearfix">
-                <h3>Nabídka náhradních dílů pro Mopedauta</h3>
-                <a href="#" class="call-btn">E-SHOP</a>
-            </div>
-        </div>
-    </section>
+    {include '../include/parts.latte'}
 
 </section>

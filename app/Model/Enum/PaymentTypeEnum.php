@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Model\Enum;
+namespace App\Model\Enum;
 
 class PaymentTypeEnum extends BaseEnum
 {

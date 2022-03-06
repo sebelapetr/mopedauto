@@ -1,0 +1,39 @@
+<h2>Košík</h2>
+<div class="col-sm-12">
+    <div class="row">
+        {if $productsInCart !== null && count($productsInCart) > 0}
+            {foreach $productsInCart as $productInCart}
+                {if $productInCart}
+                    <div class="col-sm-12">
+                        <a href="{link removeProduct! $productInCart['id']}"><i class="fas fa-times fa-xs"></i></a>
+                        <div class="col-sm-3">
+                            <img src="{$basePath}{$productInCart['photo']}" alt="{$productInCart['productName']|noescape}">
+                        </div>
+                        <div class="col-sm-9 pull-right">
+                            <div class="col-sm-12">
+                                {$productInCart['productName']|noescape}
+                            </div>
+                            <div class="col-sm-12" >
+                                <a href="{link addProductQuantity! $productInCart['id']}">+</a>
+                                <a href="{link removeProductQuantity! $productInCart['id']}" {if $productInCart['quantity']===1}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}>-</a>
+                                <a class="">{$productInCart['quantity']} Ks</a>
+                            </div>
+                            <div class="col-sm-12">
+                                <a class="pull-right">{$productInCart['catalogPriceVat']} Kč</a>
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+            {/foreach}
+        {else}
+            <div class="col-sm-12">
+                <a>Košík je prázdný</a>
+            </div>
+        {/if}
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <h3>Celkem s DPH: {ceil($totalPrice)} Kč</h3>
+            </div>
+        </div>
+    </div>
+</div>

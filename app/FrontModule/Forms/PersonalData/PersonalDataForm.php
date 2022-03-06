@@ -35,36 +35,57 @@ class PersonalDataForm extends Control{
     protected function createComponentPersonalDataForm(){
         $form = new Form();
         $form->addText('name')
-        ->setRequired();
+        ->setRequired('Vyplňte jméno');
         $form->addText('surname')
-        ->setRequired();
+        ->setRequired('Vyplňte příjmení');
         $form->addText('telephone')
-        ->setRequired();
+        ->setRequired('Vyplňte telefon');
         $form->addEmail('email')
-        ->setRequired();
+        ->setRequired('Vyplňte email');
         //--------------------------------------//
-        $form->addText('company');
-        $form->addText('ico');
+        $form->addCheckbox('companyBuy')
+            ->addCondition($form::EQUAL, true)
+            ->toggle('company-wrapper');
+        $form->addText('company')
+            ->addConditionOn( $form['companyBuy'], $form::EQUAL, TRUE )
+            ->setRequired('Vyplňte název firmy');
+        $form->addText('ico')
+            ->addConditionOn( $form['companyBuy'], $form::EQUAL, TRUE )
+            ->setRequired('Vyplňte IČO firmy');
         $form->addText('dic');
         //---------------------------------------//
         $form->addText('street')
-        ->setRequired();
+        ->setRequired('Vyplňte ulici a č.p.');
         $form->addText('city')
-        ->setRequired();
+        ->setRequired('Vyplňte město');
         $form->addText('psc')
-        ->setRequired();
+        ->setRequired('Vyplňte PSČ');
         //--------------------------------------//
-        $form->addText('deliveryName');
-        $form->addText('deliverySurname');
+        $form->addCheckbox('otherAddress')
+            ->addCondition($form::EQUAL, true)
+            ->toggle('address-wrapper');
+        $form->addText('deliveryName')
+            ->addConditionOn( $form['otherAddress'], $form::EQUAL, TRUE )
+            ->setRequired('Vyplňte doručovací jméno');
+        $form->addText('deliverySurname')
+            ->addConditionOn( $form['otherAddress'], $form::EQUAL, TRUE )
+            ->setRequired('Vyplňte doručovací příjmení');
         $form->addText('deliveryCompany');
-        $form->addText('deliveryStreet');
-        $form->addText('deliveryCity');
-        $form->addText('deliveryPsc');
+        $form->addText('deliveryStreet')
+            ->addConditionOn( $form['otherAddress'], $form::EQUAL, TRUE )
+            ->setRequired('Vyplňte doručovací ulici a č.p.');
+        $form->addText('deliveryCity')
+            ->addConditionOn( $form['otherAddress'], $form::EQUAL, TRUE )
+            ->setRequired('Vyplňte doručovací město');
+        $form->addText('deliveryPsc')
+            ->addConditionOn( $form['otherAddress'], $form::EQUAL, TRUE )
+            ->setRequired('Vyplňte doručovací PSČ');
         //--------------------------------------//
         $form->addTextArea('note');
         //-------------------------------------//
         $form->addCheckbox('newsletter');
-        $form->addCheckbox('terms');
+        $form->addCheckbox('terms')
+            ->setRequired('Pro odeslání objednávky je potřeba odsouhlasit obchodní podmínky.');
         $form->addSubmit('submit', 'Odeslat objednávku');
         $form->onSuccess[] = [$this, 'personalDataFormSucceeded'];
         return $form;

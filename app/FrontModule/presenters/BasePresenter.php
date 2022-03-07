@@ -4,7 +4,7 @@ namespace App\FrontModule\Presenters;
 
 use App\FrontModule\Forms\IFindFormFactory;
 use App\FrontModule\Forms\INewsletterFormFactory;
-use App\Model\Session\CartSession;
+use App\Model\Session\CartService;
 use Nette\Application\UI\Presenter;
 use App\Model\Orm;
 use Tracy\Debugger;
@@ -15,7 +15,7 @@ abstract class BasePresenter extends Presenter{
     public Orm $orm;
 
     /** @inject */
-    public CartSession $cartSession;
+    public CartService $cartService;
 
     /** @inject */
     public INewsletterFormFactory $newsletterFormFactory;
@@ -40,14 +40,13 @@ abstract class BasePresenter extends Presenter{
 
     public function startup()
     {
-        Debugger::barDump($this->cartSession->getProducts());
         parent::startup();
     }
 
     public function beforeRender()
     {
         parent::beforeRender();
-        $this->template->productsInCartCount = $this->cartSession->getProducts() ? count($this->cartSession->getProducts()) : 0;
+        $this->template->productsInCartCount = $this->cartService->getOrder()->ordersItems->countStored();
     }
 
     protected function createComponentNewsletterForm(){
@@ -58,4 +57,24 @@ abstract class BasePresenter extends Presenter{
         return $this->findFormFactory->create();
     }
 
+    public function handleRemoveProductFromCart($id)
+    {
+        $orderItem = $this->cartService->getOrder()->ordersItems->toCollection()->getById($id);
+        $this->cartService->removeProductFromCart($orderItem);
+        $this->redirect('this');
+    }
+
+    public function handleAddProductQuantity($id)
+    {
+        $orderItem = $this->cartService->getOrder()->ordersItems->toCollection()->getById($id);
+        $this->cartService->addProductQuantity($orderItem);
+        $this->redirect('this');
+    }
+
+    public function handleRemoveProductQuantity($id)
+    {
+        $orderItem = $this->cartService->getOrder()->ordersItems->toCollection()->getById($id);
+        $this->cartService->removeProductQuantity($orderItem);
+        $this->redirect('this');
+    }
 }

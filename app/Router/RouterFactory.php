@@ -25,12 +25,13 @@ final class RouterFactory
         $routerFront[] = new Route('nahradni-dily/produkt/<seoName>', 'SpareParts:detail');
         $routerFront[] = new Route('kosik/osobni-udaje', 'Cart:step1');
         $routerFront[] = new Route('kosik/doprava-a-platba', 'Cart:step2');
-        $routerFront[] = new Route('kosik/dokoncena-objednavka/<hash>', 'Cart:step3');
+        $routerFront[] = new Route('dokoncena-objednavka/detail/<hash>', 'Cart:step3');
         $routerFront[] = new Route('kosik/prazdny-kosik', 'Cart:empty');
         $routerFront[] = new Route('vykup', 'Pages:redemption');
         $routerFront[] = new Route('servis', 'Pages:service');
         $routerFront[] = new Route('o-mopedautech', 'Pages:about');
         $routerFront[] = new Route('kontakt', 'Pages:contact');
+        $routerFront[] = new Route('order/payment-result/<id>', 'Comgate:paymentResult');
         $routerFront[] = new Route('<presenter>/<action>', 'Homepage:default');
 
 		return $router;

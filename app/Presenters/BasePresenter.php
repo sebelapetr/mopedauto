@@ -13,7 +13,7 @@ namespace App\Presenters;
 use App\FrontModule\Forms\IFindFormFactory;
 use App\FrontModule\Forms\INewsletterFormFactory;
 use App\Model\Orm;
-use App\Model\Session\CartSession;
+use App\Model\Session\CartService;
 use Nette\Application\UI\Presenter;
 
 abstract class BasePresenter extends Presenter
@@ -23,7 +23,7 @@ abstract class BasePresenter extends Presenter
     public Orm $orm;
 
     /** @inject */
-    public CartSession $cartSession;
+    public CartService $cartService;
 
     /** @inject */
     public INewsletterFormFactory $newsletterFormFactory;
@@ -55,7 +55,7 @@ abstract class BasePresenter extends Presenter
     public function beforeRender()
     {
         parent::beforeRender();
-        $this->template->productsInCartCount = $this->cartSession->getProducts() ? count($this->cartSession->getProducts()) : 0;
+        $this->template->productsInCartCount = $this->cartService->getOrder()->ordersItems->countStored();
     }
 
     protected function createComponentNewsletterForm()

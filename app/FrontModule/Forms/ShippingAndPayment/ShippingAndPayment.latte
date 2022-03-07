@@ -3,14 +3,14 @@
         <h2>Způsob doručení</h2>
         <div class="col-sm-12">
             <span>
-                <input n:name="shipping:2">
-                <label n:name="shipping:2">Osobní odběr</label>
+                <input n:name="shipping:App\Model\Order::TYPE_DELIVERY_PERSONAL">
+                <label n:name="shipping:App\Model\Order::TYPE_DELIVERY_PERSONAL">Osobní odběr</label>
                 <a>Zdarma</a>
             <br>
             </span>
             <span>
-                <input n:name="shipping:1">
-                <label n:name="shipping:1">PPL malý balík</label>
+                <input n:name="shipping:App\Model\Order::TYPE_DELIVERY_ADDRESS">
+                <label n:name="shipping:App\Model\Order::TYPE_DELIVERY_ADDRESS">PPL malý balík</label>
                 <a>161 Kč</a>
             </span>
         </div>
@@ -18,16 +18,22 @@
     <div id="payment-container">
         <h2>Způsob platby</h2>
         <div class="col-sm-12">
-            <span id="payment-type-2">
-                <input n:name="payment:2">
-                <label n:name="payment:2">V hotovosti</label>
+            <span id="payment-type-{App\Model\Order::TYPE_PAYMENT_CASH}">
+                <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH">
+                <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH">V hotovosti</label>
                 <a>Zdarma</a>
             <br>
             </span>
-            <span id="payment-type-1">
-                <input n:name="payment:1">
-                <label n:name="payment:1">Dobírka</label>
-                <a>30 Kč</a>
+            <span id="payment-type-{App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY}">
+                <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY">
+                <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY">Dobírka</label>
+                <a>Zdarma</a>
+            <br>
+            </span>
+            <span id="payment-type-{App\Model\Order::TYPE_PAYMENT_CARD}">
+                <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CARD">
+                <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CARD">Kartou</label>
+                <a>Zdarma</a>
             </span>
         </div>
     </div>

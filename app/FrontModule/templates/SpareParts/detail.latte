@@ -1,4 +1,5 @@
 {varType App\Model\Product $product}
+{block title}{$product->productName}{/block}
 {block content}
 
 <section class="detail">
@@ -10,6 +11,7 @@
             <div class="auto-container">
                 <div class="row clearfix">
                     <div class="content-column col-lg-12 col-md-12 col-sm-12">
+                        {include './include/path.latte', product => $product}
                         <div class="product-details">
 
                             <!--Basic Details-->
@@ -35,7 +37,10 @@
                                                     {$product->catalogPriceVat} Kč s DPH
                                                 </div>
                                                 <div class="item-price">
-                                                    {$product->catalogPriceVat / 1.21|number:0} Kč bez DPH
+                                                    {$product->catalogPriceVat / 1.21|number:0, '', ''} Kč bez DPH
+                                                </div>
+                                                <div class="item-price">
+                                                    Obj č.: {$product->number}
                                                 </div>
                                                 <span class="review"></span>
                                             </div>
@@ -43,7 +48,8 @@
                                                 {if !$productInCart}
                                                     {control addProductForm}
                                                 {else}
-                                                    <a href="{link Cart:step1}" class="theme-btn btn-style-two"><i class="fa fa-check"></i>Zboží čeká v košíku</a>
+                                                    <p><i class="fa fa-check"></i>Zboží čeká v košíku</p>
+                                                    <a href="{link Cart:step1}" class="theme-btn btn-style-two">Pokračovat do košíku</a>
                                                 {/if}
                                             </div>
                                         </div>
@@ -55,6 +61,7 @@
                             <!--Product Info Tabs-->
                             <div class="product-info-tabs">
 
+                                {*
                                 <!--Product Tabs-->
                                 <div class="prod-tabs tabs-box" id="product-tabs">
 
@@ -94,11 +101,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End product info tabs -->
+                            </div><!-- End product info tabs -->*}
 
                         </div>
                     </div>
-
+                    {include '../include/parts.latte'}
                 </div>
             </div>
         </div>

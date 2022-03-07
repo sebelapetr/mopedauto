@@ -24,7 +24,8 @@
 		"phpoffice/phpspreadsheet": "^1.14",
 		"contributte/console": "^0.8.0",
 		"contributte/translation": "^0.7.0",
-		"ublaboo/datagrid": "v6.2.21"
+		"ublaboo/datagrid": "v6.2.21",
+		"contributte/comgate": "^0.2.0"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0",

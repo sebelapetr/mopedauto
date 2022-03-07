@@ -4,7 +4,13 @@
 
 parameters:
     baseUrl: 'http://localhost.loc'
+    comgate:
+        isTest: true
 
+comgate:
+    merchant: "123456"
+    secret: 'asfSAFFAooisafiofa'
+    test: true
 
 dbal:
 	connectionTz: auto-offset

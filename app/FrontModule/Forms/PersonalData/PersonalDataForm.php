@@ -2,10 +2,13 @@
 
 namespace App\FrontModule\Forms;
 
+use App\Model\ComgatePayment;
 use App\Model\Order;
 use App\Model\OrderService;
+use App\Model\Orm;
 use App\Model\QuoteService;
-use App\Model\Session\CartSession;
+use App\Model\Services\ComgateService;
+use App\Model\Session\CartService;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
@@ -24,12 +27,19 @@ class PersonalDataForm extends Control{
     public $orderService;
 
     /** @inject */
-    public CartSession $cartSession;
+    public CartService $cartService;
 
-    public function __construct(OrderService $orderService, CartSession $cartSession)
+    public Orm $orm;
+
+    public ComgateService $comgateService;
+
+
+    public function __construct(OrderService $orderService, CartService $cartService, Orm $orm, ComgateService $comgateService)
     {
         $this->orderService = $orderService;
-        $this->cartSession = $cartSession;
+        $this->cartService = $cartService;
+        $this->orm = $orm;
+        $this->comgateService = $comgateService;
     }
 
     protected function createComponentPersonalDataForm(){
@@ -91,17 +101,51 @@ class PersonalDataForm extends Control{
         return $form;
     }
     public function personalDataFormSucceeded(Form $form, ArrayHash $values){
-        $sessionProducts = $this->cartSession->getProducts();
-        $sessionShipping = $this->getPresenter()->getSession('shipping');
-        $sessionPayment = $this->getPresenter()->getSession('payment');
-        $sessionOrder = $this->getPresenter()->getSession('order');
-        $this->orderService->newOrder($values, $sessionProducts, $sessionShipping, $sessionPayment, $sessionOrder);
-        $productsSection = $this->cartSession->reset();
-        $shippingSection = $this->getPresenter()->getSession()->getSection('shipping');
-        unset($shippingSection->shipping);
-        $paymentSection = $this->getPresenter()->getSession()->getSection('payment');
-        unset($paymentSection->payment);
-        $this->getPresenter()->redirect('step3', base64_encode($sessionOrder->order).'8452');
+
+        $order = $this->orderService->saveOrder($this->cartService->getOrder(), $values);
+
+        if($order->typePayment === Order::TYPE_PAYMENT_CARD){
+            if($order->comgatePayment){
+                if($order->comgatePayment->status === ComgatePayment::STATE_PAID){
+                    $this->presenter->flashMessage('Tato objednávka již byla zaplacena kartou');
+                    $this->presenter->redirect('this');
+                    return;
+                }
+
+                $this->orm->remove($order->comgatePayment);
+            }
+            $payment = $this->comgateService->createPayment($order);
+
+            Debugger::barDump($payment);
+            Debugger::barDump($payment->isOk());
+            if(!$payment->isOk()){
+                Debugger::log($payment, 'comgate-error');
+                $this->presenter->flashMessage('Nepodařilo se vytvořit platbu kartou. Zkuste to prosím znovu nebo zvolte jinou platební metodu.');
+                $this->presenter->redirect('this');
+                return;
+            }
+
+            $paymentData = $payment->getData();
+            if($paymentData && $paymentData['redirect']){
+                $this->comgateService->logPayment($paymentData['transId'], $order);
+
+                header("Location: " . $paymentData['redirect']);
+                exit();
+            }
+        }else{
+            $order->state = Order::ORDER_STATE_RECEIVED;
+            $this->orm->persistAndFlush($order);
+            $orderSent = $this->orderService->sendMails($order);
+            if ($orderSent)
+            {
+                $this->cartService->reset();
+                $shippingSection = $this->getPresenter()->getSession()->getSection('shipping');
+                unset($shippingSection->shipping);
+                $paymentSection = $this->getPresenter()->getSession()->getSection('payment');
+                unset($paymentSection->payment);
+                $this->getPresenter()->redirect('step3', base64_encode($order->id).'8452');
+            }
+        }
     }
     public function render(){
         $this->getTemplate()->setFile(__DIR__ . "/../../forms/PersonalData/PersonalData.latte");

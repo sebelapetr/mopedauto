@@ -12,7 +12,7 @@ use Nextras\Orm\Entity\Entity;
  * @property string|NULL $seoName
  * @property string|NULL $description
  * @property string $url {virtual}
- * @property Product[] $product {1:m Product::$category}
+ * @property Product[]|NULL $productCategories {1:m ProductCategory::$category}
  * @property Category|NULL $parent {m:1 Category::$categories}
  * @property Category[]|NULL $categories {1:m Category::$parent}
  */

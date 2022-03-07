@@ -1,11 +1,14 @@
+{varType App\Model\Order $order}
 {block robots}noindex, nofollow{/block}
+{*
 {if $order->typePayment == 2}
     {var $state2 = 'Objednávka byla zaplacena čeká na potvrzení'}
 {else}
     {var $state2 = 'Objednávka byla zaregistrována do systému a čeká na potvrzení'}
-{/if}
+{/if}*}
 {block title}Děkujeme za objednávku!{/block}
 {block content}
+{*
 {switch $order->state}
     {case 0}
     {var $state = 'Objednávka byla zaregistrována do systému a čeká na zaplacení'}
@@ -23,9 +26,9 @@
     {var $state = 'Objednávka byla vrácena'}
     {case 7}
     {var $state = 'Objednávka byla reklamována'}
-{/switch}
+{/switch}*}
 <div class="col-sm-12" style="background: #f9f9f9;margin: -30px 0 30px 0">
-    <h2 style="font-size:19px;font-weight: 300;margin: 10px 0">Stav objednávky: {$state}</h2>
+    <h2 style="font-size:19px;font-weight: 300;margin: 10px 0">Stav objednávky: {*$state*}</h2>
 </div>
 <h1 style="margin:0px;font-size:28px;font-weight: 300;margin-bottom: 15px">Děkujeme za objednávku!</h1>
 <p style="margin-bottom: 50px">
@@ -73,7 +76,7 @@
         <caption>Informace o objednávce<hr style="margin: 10px 0"></caption>
         <tr><td>Objednávka byla odeslána:</td> <td>{$order->createdAt|date:'%d.%m.%Y %H:%M:%S'}</td></tr>
         <tr><td>Předpokládané datum dodání:</td> <td>do {$deliveryDate|date:'%d.%m.%Y'}</td></tr>
-        <tr><td>Stav objednávky:</td> <td>{$state}</td></tr>
+        <tr><td>Stav objednávky:</td> <td>{$order->state}</td></tr>
         </table>
     </div>
     <div class="col-sm-4">

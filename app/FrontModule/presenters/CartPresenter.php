@@ -4,7 +4,7 @@ namespace App\FrontModule\Presenters;
 
 use App\FrontModule\Forms\IShippingAndPaymentFormFactory;
 use App\FrontModule\Forms\IPersonalDataFormFactory;
-use App\Model\Session\CartSession;
+use App\Model\Session\CartService;
 use Nette\Utils\DateTime;
 use Tracy\Debugger;
 
@@ -22,29 +22,15 @@ class CartPresenter extends BasePresenter
     {
         parent::startup();
         if (!$this->isLinkCurrent('Cart:empty') && !$this->isLinkCurrent('Cart:step3')) {
-            if (empty($this->cartSession->getProducts()) || $this->cartSession == null) {
+            if ($this->cartService->getOrder()->ordersItems->countStored() == 0) {
                 $this->redirect('empty');
             }
         }
+        $this->template->order = $this->cartService->getOrder();
     }
 
     public function renderEmpty()
     {
-        $this->getTemplate()->productsInCart = $this->getProductsInCart();
-    }
-
-    public function renderStep1()
-    {
-        $this->getTemplate()->cartCheck = 1;
-        $this->getTemplate()->productsInCart = $this->getProductsInCart();
-        $this->getTemplate()->totalPrice = $this->getTotalPrice();
-    }
-
-    public function renderStep2()
-    {
-        $this->getTemplate()->cartCheck = 1;
-        $this->getTemplate()->productsInCart = $this->getProductsInCart();
-        $this->getTemplate()->totalPrice = $this->getTotalPrice();
     }
 
     public function renderStep3($hash)
@@ -67,12 +53,8 @@ class CartPresenter extends BasePresenter
         $this->getTemplate()->deliveryDate = $deliveryDate;
     }
 
-    public function getProductsInCart(){
-        return $this->cartSession->getProducts();
-    }
-
     public function getTotalPrice(){
-        $products = $this->cartSession->getProducts();
+        /*$products = $this->cartService->getProducts();
         $shippingSession = $this->getSession()->getSection('shipping');
         $paymentSession = $this->getSession()->getSection('payment');
         $totalPrice = 0;
@@ -84,8 +66,8 @@ class CartPresenter extends BasePresenter
             $payment = ($paymentSession->payment == 1 ? '30' : '0');
             $totalPrice += $shipping;
             $totalPrice += $payment;
-        }
-        return $totalPrice;
+        }*/
+        return $this->cartService->getOrder()->totalPriceVat;
     }
 
     public function createComponentShippingAndPaymentForm()
@@ -98,21 +80,5 @@ class CartPresenter extends BasePresenter
         return $this->personalDataFormFactory->create();
     }
 
-    public function handleRemoveProduct($id)
-    {
-        $this->cartSession->removeProduct($id);
-        $this->redirect('this');
-    }
 
-    public function handleAddProductQuantity($id)
-    {
-        $this->cartSession->addProductQuantity($id);
-        $this->redirect('this');
-    }
-
-    public function handleRemoveProductQuantity($id)
-    {
-        $this->cartSession->removeProductQuantity($id);
-        $this->redirect('this');
-    }
 }

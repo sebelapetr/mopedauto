@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\Services\ComgateService;
 use Latte\Engine;
 use Nette\Application\LinkGenerator;
 use Nette\Caching\Storages\FileStorage;
@@ -24,22 +25,21 @@ class OrderService
     /** @var LinkGenerator */
     public $linkGenerator;
 
+    public ComgateService $comgateService;
+
     public const FROM_EMAIL = 'mopedauto.cz <info@mopedauto.cz>';
     public const NO_REPLY_EMAIL = 'mopedauto.cz <noreply@mopedauto.cz>';
 
-    public function __construct(Orm $orm, InvoiceService $invoiceService, LinkGenerator $linkGenerator)
+    public function __construct(Orm $orm, InvoiceService $invoiceService, LinkGenerator $linkGenerator, ComgateService $comgateService)
     {
         $this->orm = $orm;
         $this->invoiceService = $invoiceService;
         $this->linkGenerator = $linkGenerator;
+        $this->comgateService = $comgateService;
     }
 
-    public function newOrder($values, $sessionProducts, $sessionShipping, $sessionPayment, $sessionOrder)
+    public function saveOrder(Order $order, $values)
     {
-        if (!$sessionProducts) {
-           return;
-        }
-        $order = new Order();
         $order->name = $values->name;
         $order->surname = $values->surname;
         $order->telephone = $values->telephone;
@@ -57,83 +57,19 @@ class OrderService
         $order->deliveryStreet = $values->deliveryStreet;
         $order->deliveryCity = $values->deliveryCity;
         $order->deliveryPsc = $values->deliveryPsc;
-        $order->newsletter = 1;//$values->newsletter;
+        $order->newsletter = 1;
         $order->totalPrice = 0;
         $order->totalPriceVat = 0;
-        if ($sessionPayment->payment == 2) {
-            $order->state = 0;
-        } else {
-            $order->state = 1;
-        }
         $order->createdAt = date("Y-m-d h:i:sa");
-        $order->typePayment = $sessionPayment->payment;
         $this->orm->persistAndFlush($order);
 
-        $totalPrice = 0;
-        $totalPriceVat = 0;
-
-        foreach ($sessionProducts as $item) {
-            if($item){
-                $product = $this->orm->products->getById($item['id']);
-                $orderItems = new OrdersItem();
-                $orderItems->name = $product->productName;
-                $orderItems->price = $product->catalogPrice ? $product->catalogPrice : 0;
-                $orderItems->priceVat = $product->catalogPriceVat;
-                $orderItems->quantity = $item['quantity'];
-                $orderItems->vat = 21;
-                $orderItems->type = 1;
-                $orderItems->product = $product;
-                $orderItems->order = $order;
-                $totalPrice += $product->catalogPrice*$item['quantity'];
-                $totalPriceVat += $product->catalogPriceVat*$item['quantity'];
-                try {
-                    $this->orm->persistAndFlush($orderItems);
-                } catch (\Exception $e) {
-                    Debugger::log($e);
-                }
-            }
-        }
-
-        $orderItemsShipping = new OrdersItem();
-        $orderItemsShipping->name = ($sessionShipping->shipping == 1?'Doručení na adresu přepravcem GEIS':'Osobní odběr na pobočce v Brně');
-        $orderItemsShipping->price = ($sessionShipping->shipping == 1?'81':'0');
-        $orderItemsShipping->priceVat = ($sessionShipping->shipping == 1?'98':'0');
-        $orderItemsShipping->quantity = 1;
-        $orderItemsShipping->vat = 21;
-        $orderItemsShipping->type = 2;
-        $orderItemsShipping->order = $order;
-        $this->orm->persistAndFlush($orderItemsShipping);
-
-        $orderItemsPayment = new OrdersItem();
-        $orderItemsPayment->name = ($sessionPayment->payment == 1?'Dobírka GEIS':'Platba převodem na účet');
-        $orderItemsPayment->price = ($sessionPayment->payment == 1?'25':'0');
-        $orderItemsPayment->priceVat = ($sessionPayment->payment == 1?'30':'0');
-        $orderItemsPayment->quantity = 1;
-        $orderItemsPayment->vat = 21;
-        $orderItemsPayment->type = 3;
-        $orderItemsPayment->order = $order;
-        $this->orm->persistAndFlush($orderItemsPayment);
-
-        $totalPrice += $orderItemsShipping->price;
-        $totalPriceVat += $orderItemsShipping->priceVat;
-        $totalPrice += $orderItemsPayment->price;
-        $totalPriceVat += $orderItemsPayment->priceVat;
-
-        $order->totalPrice = $totalPrice;
-        $order->totalPriceVat = $totalPriceVat;
         $this->orm->persistAndFlush($order);
 
-        $sessionOrder->order = $order->id;
-
-        //$this->invoiceService->createInvoice($order);
-
-        $this->sendMails($order->id);
-
+        return $order;
     }
 
-    public function sendMails($id){
+    public function sendMails(Order $order){
         $latte = new Engine();
-        $order = $this->orm->orders->getById($id);
         $hash = base64_encode($order->id).'8452';
 
         $mail = new Message();
@@ -154,6 +90,8 @@ class OrderService
 
         $mailer = new SendmailMailer();
         $mailer->send($mail);
+
+        return true;
     }
 
     public function sentContactForm($values){

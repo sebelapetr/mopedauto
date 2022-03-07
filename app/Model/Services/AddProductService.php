@@ -3,29 +3,23 @@
 namespace App\Model;
 
 use App\Model\Orm;
-use App\Model\Session\CartSession;
+use App\Model\Session\CartService;
 
 class AddProductService
 {
     private Orm $orm;
 
-    public CartSession $cartSession;
+    public CartService $cartService;
 
-    public function __construct(Orm $orm, CartSession $cartSession)
+    public function __construct(Orm $orm, CartService $cartService)
     {
         $this->orm = $orm;
-        $this->cartSession = $cartSession;
+        $this->cartService = $cartService;
     }
 
     public function addProduct($values)
     {
         $product = $this->orm->products->getById($values->id);
-
-        $data["id"] = $product->id;
-        $data["productName"] = $product->productName;
-        $data["catalogPriceVat"] = $product->catalogPriceVat;
-        $data["quantity"] = $values->quantity;
-        $data["photo"] = $product->getMainImage(ProductImage::SIZE_S)->filePath;
-        $this->cartSession->addProduct($data);
+        $this->cartService->addProductToCart($product, $values->quantity);
     }
 }

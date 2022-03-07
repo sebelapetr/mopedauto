@@ -5,7 +5,7 @@ namespace App\FrontModule\Presenters;
 use App\FrontModule\Forms\IAddProductFormFactory;
 use App\Model\Category;
 use App\Model\Product;
-use App\Model\Session\CartSession;
+use App\Model\Session\CartService;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\DateTime;
 use Nette\Utils\Html;
@@ -89,6 +89,11 @@ class SparePartsPresenter extends BasePresenter
         $this->lastPage = ceil($products->countStored()/$this->limit);
         $this->getTemplate()->lastPage = $this->lastPage;
         $this->getTemplate()->actualCategory = $this->actualCategory;
+        $title = '';
+        foreach($parentCategories as $parentCategory) {
+            $title .= $parentCategory->name . ' ';
+        }
+        $this->template->categoryTitle = $title;
     }
 
     private function getProducts(array $childrenCategories): Result
@@ -188,19 +193,18 @@ class SparePartsPresenter extends BasePresenter
         }
     }
 
-    public function renderDetail($id)
+    public function renderDetail()
     {
+        $parentCategories = $this->orm->categories->getParents($this->actualProduct->getMainCategory()->id);
         $this->getTemplate()->product = $this->actualProduct;
-        $this->getTemplate()->productInCart = $this->productInCart($id);
-        $this->getTemplate()->actualId = $id;
+        $this->getTemplate()->productInCart = $this->productInCart($this->actualProduct->id);
+        $this->getTemplate()->actualId = $this->actualProduct->id;
         $this->getTemplate()->session = $this->getSession()->getSection('products');
+        $this->template->parentCategories = $parentCategories;
     }
 
     public function productInCart($id){
-        if ($this->cartSession->getProducts()) {
-            return array_key_exists($id, $this->cartSession->getProducts());
-        }
-        return false;
+        return in_array($id, $this->cartService->getOrder()->ordersItems->toCollection()->fetchPairs(null, 'product->id'));
     }
 
     function cesky_den($den) {

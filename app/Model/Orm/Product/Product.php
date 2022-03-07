@@ -13,6 +13,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string|NULL $productName
  * @property string|NULL $brandName
  * @property int|NULL $vendorInternalId
+ * @property string|NULL $number
  * @property string|NULL $vendorName
  * @property string|NULL $ean
  * @property string|NULL $seoName
@@ -35,7 +36,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string|NULL $priceList
  * @property string|NULL $restrictions
  * @property string|NULL $tooOrder
- * @property Category|NULL $category {m:1 Category::$product}
+ * @property ProductCategory[]|NULL|OneHasMany $productCategories {1:m ProductCategory::$product}
  * @property Quote|NULL $quote {1:m Quote::$product}
  * @property OrdersItem|NULL $orderItem {1:m OrdersItem::$product}
  * @property ProductImage[]|NULL|OneHasMany $images {1:m ProductImage::$product}
@@ -43,21 +44,17 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int|NULL $available
  * @property string $url {virtual}
  */
-class Product extends Entity{
-
-    public function productInCart($id, $sessionProduct){
-        if($sessionProduct->$id)
-        {
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+class Product extends Entity
+{
 
     public function getMainImage(string $size): ?ProductImage
     {
         return $this->images->countStored() !== 0 ? $this->images->toCollection()->getBy(['sort' => 0, 'size' => $size]) : null;
+    }
+
+    public function getMainCategory(): ?Category
+    {
+        return $this->productCategories->countStored() !== 0 ? $this->productCategories->toCollection()->getBy([])->category : null;
     }
 
     public function getterUrl(): string

@@ -57,6 +57,7 @@ class AddProductForm extends Control{
             $soubor->move("img/" . $values->image->name);
         }
         $this->getPresenter()->flashMessage("Produkt byl úspěšně přidán.");
+        $this->getPresenter()->redirect('this');
     }
     public function render(){
         $this->getTemplate()->setFile(__DIR__  .  "/../../forms/AddProduct/AddProduct.latte");

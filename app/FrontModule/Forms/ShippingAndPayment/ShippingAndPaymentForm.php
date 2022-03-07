@@ -2,7 +2,11 @@
 
 namespace App\FrontModule\Forms;
 
+use App\Model\Order;
+use App\Model\OrdersItem;
+use App\Model\Orm;
 use App\Model\QuoteService;
+use App\Model\Session\CartService;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
@@ -14,26 +18,45 @@ interface IShippingAndPaymentFormFactory{
     function create();
 }
 
-class ShippingAndPaymentForm extends Control{
+class ShippingAndPaymentForm extends Control
+{
 
-    public function __construct()
+    public CartService $cartService;
+
+    public Orm $orm;
+
+    public function __construct(CartService $cartService, Orm $orm)
     {
+        $this->cartService = $cartService;
+        $this->orm = $orm;
     }
 
     protected function createComponentShippingAndPaymentForm()
     {
         $form = new Form();
 
-        $form->addRadioList('shipping', 'Způsob doručení', [2=>'Osobní odběr',1=>'PPL malý balík'])
+        $form->addRadioList('shipping', 'Způsob doručení', [
+            Order::TYPE_DELIVERY_PERSONAL => 'Osobní odběr',
+            Order::TYPE_DELIVERY_ADDRESS => 'PPL malý balík'
+        ])
+            ->setDefaultValue($this->cartService->getOrder()->typeDelivery)
             ->setRequired('Vyberte typ dopravy')
             ->addCondition($form::FILLED, true)
             ->toggle('payment-container')
-            ->addCondition($form::EQUAL, 2)
-            ->toggle('payment-type-2')
+            ->addCondition($form::EQUAL, Order::TYPE_DELIVERY_PERSONAL)
+            ->toggle('payment-type-'.Order::TYPE_PAYMENT_CASH)
+            ->toggle('payment-type-'.Order::TYPE_PAYMENT_CARD)
             ->elseCondition()
-            ->toggle('payment-type-1');
+            ->toggle('payment-type-'.Order::TYPE_PAYMENT_CASH_ON_DELIVERY)
+            ->toggle('payment-type-'.Order::TYPE_PAYMENT_CARD);
 
-        $form->addRadioList('payment', 'Způsob platby', [2=>'V hotovosti', 1=>'Dobírka'])
+        $form->addRadioList('payment', 'Způsob platby', [
+            Order::TYPE_PAYMENT_CASH => 'V hotovosti',
+            Order::TYPE_PAYMENT_CASH_ON_DELIVERY => 'Dobírka',
+            Order::TYPE_PAYMENT_CARD => 'Kartou'
+        ])
+
+            ->setDefaultValue($this->cartService->getOrder()->typePayment)
             ->setRequired('Vyberte typ platby');
 
         $form->addSubmit('submit', 'Pokračovat v objednávce');
@@ -41,14 +64,47 @@ class ShippingAndPaymentForm extends Control{
 
         return $form;
     }
-    public function shippingAndPaymentFormSucceeded(Form $form, ArrayHash $values){
-        $shippingSection = $this->getPresenter()->getSession()->getSection('shipping');
-        $paymentSection = $this->getPresenter()->getSession()->getSection('payment');
-        $shippingSection->shipping = $values->shipping;
-        $paymentSection->payment = $values->payment;
-        $this->getPresenter()->redirect('step2');
 
-        //$this->getPresenter()->redirect("Homepage:default");
+    public function shippingAndPaymentFormSucceeded(Form $form, ArrayHash $values)
+    {
+        $order = $this->cartService->getOrder();
+
+        $items = $order->ordersItems->toCollection();
+        $shipping = $items->getBy(["type" => OrdersItem::TYPE_SHIPPING]);
+        if ($shipping) {
+            $this->orm->remove($shipping);
+        }
+        $payment = $items->getBy(["type" => OrdersItem::TYPE_PAYMENT]);
+        if ($payment) {
+            $this->orm->remove($payment);
+        }
+        $this->orm->flush();
+
+        $order->typeDelivery = $values->shipping;
+        $orderItemsShipping = new OrdersItem();
+        $orderItemsShipping->name = $values->shipping;
+        $orderItemsShipping->type = OrdersItem::TYPE_SHIPPING;
+        $orderItemsShipping->price = $order->getShippingPrice(false);
+        $orderItemsShipping->priceVat = $order->getShippingPrice(true);
+        $orderItemsShipping->quantity = 1;
+        $orderItemsShipping->vat = 21;
+        $orderItemsShipping->order = $order;
+        $this->orm->persistAndFlush($orderItemsShipping);
+        $this->cartService->recountOrder();
+
+        $order->typePayment = $values->payment;
+        $orderItemsPayment = new OrdersItem();
+        $orderItemsPayment->name = $values->payment;
+        $orderItemsPayment->type = OrdersItem::TYPE_PAYMENT;
+        $orderItemsPayment->price = $order->getPaymentPrice(false);
+        $orderItemsPayment->priceVat = $order->getPaymentPrice(false);
+        $orderItemsPayment->quantity = 1;
+        $orderItemsPayment->vat = 21;
+        $orderItemsPayment->order = $order;
+        $this->orm->persistAndFlush($orderItemsPayment);
+        $this->cartService->recountOrder();
+
+        $this->getPresenter()->redirect('step2');
     }
     public function render(){
         $this->getTemplate()->setFile(__DIR__  .  "/../../forms/ShippingAndPayment/ShippingAndPayment.latte");

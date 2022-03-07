@@ -10,6 +10,7 @@ extensions:
     migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
     console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
     translation: Contributte\Translation\DI\TranslationExtension
+    comgate: Contributte\Comgate\DI\ComgateExtension
 
 application:
 	errorPresenter: Error
@@ -39,8 +40,15 @@ services:
 	- App\Model\NewsletterService
 	- App\Model\FindService
 	- App\Model\InvoiceService
-	- App\Model\Session\CartSession(@session::getSection('products'))
-	
+	- App\Model\Session\CartService(@session::getSection('products'))
+	- App\Model\Services\ComgateService
+
+
+decorator:
+    App\Model\Services\ComgateService:
+        setup:
+            - $isTest = %comgate.isTest%
+
 orm:
     model: App\Model\Orm
 

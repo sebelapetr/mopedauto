@@ -1,25 +1,29 @@
 <h2>Košík</h2>
 <div class="col-sm-12">
     <div class="row">
-        {if $productsInCart !== null && count($productsInCart) > 0}
-            {foreach $productsInCart as $productInCart}
-                {if $productInCart}
+        {varType App\Model\Order $order}
+        {if $order->ordersItems->countStored() !== 0}
+            {varType App\Model\OrdersItem $orderItem}
+            {foreach $order->ordersItems as $orderItem}
+                {if $orderItem}
                     <div class="col-sm-12">
-                        <a href="{link removeProduct! $productInCart['id']}"><i class="fas fa-times fa-xs"></i></a>
+                        <a href="{link removeProductFromCart! $orderItem->id}"  n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT"><i class="fas fa-times fa-xs"></i></a>
                         <div class="col-sm-3">
-                            <img src="{$basePath}{$productInCart['photo']}" alt="{$productInCart['productName']|noescape}">
+                            {var $image = $orderItem->product ? $orderItem->product->getMainImage(App\Model\ProductImage::SIZE_S) : null}
+                            {var $imagePath = $image ? $image->filePath : null}
+                            <img src="{$basePath}{$imagePath}" alt="{$orderItem->name|noescape}" n:if="$imagePath">
                         </div>
                         <div class="col-sm-9 pull-right">
                             <div class="col-sm-12">
-                                {$productInCart['productName']|noescape}
+                                {$orderItem->name|noescape}
                             </div>
-                            <div class="col-sm-12" >
-                                <a href="{link addProductQuantity! $productInCart['id']}">+</a>
-                                <a href="{link removeProductQuantity! $productInCart['id']}" {if $productInCart['quantity']===1}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}>-</a>
-                                <a class="">{$productInCart['quantity']} Ks</a>
+                            <div class="col-sm-12" n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT">
+                                <a href="{link addProductQuantity! $orderItem->id}">+</a>
+                                <a href="{link removeProductQuantity! $orderItem->id}" {if $orderItem->quantity===1}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}>-</a>
+                                <a class="">{$orderItem->quantity} Ks</a>
                             </div>
                             <div class="col-sm-12">
-                                <a class="pull-right">{$productInCart['catalogPriceVat']} Kč</a>
+                                <a class="pull-right">{$orderItem->priceVat} Kč</a>
                             </div>
                         </div>
                     </div>
@@ -32,7 +36,7 @@
         {/if}
         <div class="col-sm-12">
             <div class="col-sm-12">
-                <h3>Celkem s DPH: {ceil($totalPrice)} Kč</h3>
+                <h3>Celkem s DPH: {$order->totalPriceVat} Kč</h3>
             </div>
         </div>
     </div>

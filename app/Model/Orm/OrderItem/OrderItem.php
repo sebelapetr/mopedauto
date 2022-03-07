@@ -10,7 +10,7 @@ use Nextras\Orm\Entity\Entity;
  * Class OrdersItem
  * @package App\Model
  * @property int $id {primary}
- * @property int $type
+ * @property string $type {enum self::TYPE_*}
  * @property string $name
  * @property float $price
  * @property float $priceVat
@@ -22,6 +22,9 @@ use Nextras\Orm\Entity\Entity;
  * @property Order|NULL $order {m:1 Order::$ordersItems}
 
  */
-Class OrdersItem extends Entity{
-
+class OrdersItem extends Entity
+{
+    public const TYPE_SHIPPING = "SHIPPING";
+    public const TYPE_PAYMENT = "PAYMENT";
+    public const TYPE_PRODUCT = "PRODUCT";
 }

@@ -1,0 +1,37 @@
+{form form}
+    {foreach $form->getErrors() as $error}
+        <div class="card bg-danger text-white shadow mb-3">
+            <div class="card-body">
+                {$error}
+            </div>
+        </div>
+    {/foreach}
+
+    <div id="accordion" class="form">
+        {foreach $rights as $right}
+            <div class="card my-2">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <a href="#" class="btn btn-link" data-toggle="collapse" data-target="#collapse-{$right->id}" aria-controls="collapse-{$right->id}">
+                          {_'rights.'.$right->name.'.title'}
+                        </a>
+                    </h5>
+                </div>
+
+                <div id="collapse-{$right->id}" class="collapse" aria-labelledby="heading-{$right->id}" data-parent="#accordion">
+                    <div class="card-body">
+                        {foreach $right->actions as $action}
+                            <div class="form-check">
+                                <input n:name="allowedActions:$action->id" class="form-check-input" />
+                                <label n:name="allowedActions:$action->id" class="form-check-label"> {_'rights.'.$right->name.'.'.$action->name}</label>
+                            </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+        {/foreach}
+        <div class="form-group">
+            {input send}
+        </div>
+    </div>
+{/form}

@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Nette\Security\Passwords;
+use Nette\Utils\ArrayHash;
 use Nette\Utils\FileSystem;
 use Tracy\Debugger;
 use Nette\SmartObject;
@@ -64,56 +65,21 @@ class ProductService{
         }
     }
 
-    public function addProduct($values){
-        $product = $this->orm->products->getBy(['productName'=>$values->name]);
-        if ($product !== NULL){
-            ?>
-            <script>alert("Pozor! produkt se stejným názvem již existuje.")</script>
-            <?php
+    public function editProduct(?Product $product, ArrayHash $values)
+    {
+        if (!$product) {
+            $product = new Product();
         }
-        $product = new Product();
-        $product->productName = $values->name;
-        $product->normPrice = $values->normPrice;
-        $product->price = $values->price;
-        $product->manufacturer = $values->manufacturer;
-        $product->deliveryTime = $values->deliveryTime;
-        $product->length = $values->length;
-        $product->width = $values->width;
-        $product->height = $values->height;
-        $product->weight = $values->weight;
-        $product->dumbellsWeight = $values->dumbellsWeight;
-        $product->description = $values->description;
-        $product->image = $values->image->name;
-        $product->visible = $values->visible;
+        $product->productName = $values->productName;
+        $product->seoName = $values->seoName;
+        $product->number = $values->number;
+        $product->discount = $values->discount;
         $product->new = $values->new;
-        $product->repaired = $values->repaired;
-        $this->orm->persistAndFlush($product);
-
-        if ($this->categoriesExists()) {
-            $product = $this->orm->products->getBy(["id" => $product->id]);
-            $product->category = $values->category;
-            $this->orm->persistAndFlush($product);
-        }
-    }
-
-    public function editProduct($values){
-        $product = $this->orm->products->getBy(["id"=>$values->id]);
-        $product->name = $values->name;
-        $product->normPrice = $values->normPrice;
-        $product->price = $values->price;
-        $product->manufacturer = $values->manufacturer;
-        $product->deliveryTime = $values->deliveryTime;
-        $product->weight = $values->weight;
-        $product->dumbellsWeight = $values->dumbellsWeight;
-        $product->length = $values->length;$product->width = $values->width;
-        $product->height = $values->height;
-        if ($values->image->name) {$product->image = $values->image->name;}
-        $product->description = $values->description;
-        $product->new = $values->new;
-        $product->repaired = $values->repaired;
+        $product->isHeavy = $values->isHeavy;
         $product->visible = $values->visible;
-        $product->category = $values->category;
+        $product->description = $values->description;
         $this->orm->persistAndFlush($product);
+        return $product;
     }
 
     public function redirectTo($values){

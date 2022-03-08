@@ -2,13 +2,13 @@
 <div class="styled-pagination text-center clearfix">
     <ul class="clearfix">
         <li>
-            <a n:if="$actualPage>1" class="prev" href="{link SpareParts:default $actualPage-1}">
+            <a n:if="$actualPage>1" class="prev" href="{link SpareParts:default ,'seoName' => $actualCategory->url, 'page' => $actualPage-1}">
                 <span class="fa fa-angle-left"></span>
             </a>
         </li>
         {if $actualPage>=6 and $lastPage>6}
             <li>
-                <a href="{link SpareParts:default 1}">1</a>
+                <a href="{link SpareParts:default ,'seoName' => $actualCategory->url, 'page' => 1}">1</a>
             </li>
             <li>
                 <a style="background: transparent; border: none; cursor: unset;" class="no_hover">...</a>
@@ -16,7 +16,7 @@
         {/if}
         {foreach $pages as $page}
             <li>
-                <a class="{if $page==$actualPage}active{/if}" href="{link SpareParts:default $page}">{$page}</a>
+                <a class="{if $page==$actualPage}active{/if}" href="{link SpareParts:default ,'seoName' => $actualCategory->url, 'page' => $page}">{$page}</a>
             </li>
         {/foreach}
         {if $actualPage!=$lastPage and $actualPage!=$lastPage-1}
@@ -25,10 +25,10 @@
                     <a style="background: transparent; border: none; cursor: unset;" class="no_hover">...</a>
                 </li>
                 <li>
-                    <a href="{link SpareParts:default $lastPage}">{$lastPage}</a>
+                    <a href="{link SpareParts:default ,'seoName' => $actualCategory->url, 'page' => $lastPage}">{$lastPage}</a>
                 </li>
                 <li>
-                    <a class="next" href="{link SpareParts:default $actualPage+1}">
+                    <a class="next" href="{link SpareParts:default ,'seoName' => $actualCategory->url, 'page' => $actualPage+1}">
                         <span class="fa fa-angle-right"></span>
                     </a>
                 </li>

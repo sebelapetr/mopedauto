@@ -17,6 +17,9 @@ application:
 	mapping:
 		*: App\*Module\Presenters\*Presenter
 
+latte:
+    macros:
+        - App\Model\Latte\LatteMacros
 
 session:
 	expiration: 14 days
@@ -30,7 +33,6 @@ di:
 services:
 	router: App\Router\RouterFactory::createRouter
 	- App\Model\UserRegistrationService
-	- App\Model\Security\Authenticator
 	- App\Model\CategoryService
 	- App\Model\ProductService
 	- App\Model\ShippingAndPaymentService
@@ -42,6 +44,10 @@ services:
 	- App\Model\InvoiceService
 	- App\Model\Session\CartService(@session::getSection('products'))
 	- App\Model\Services\ComgateService
+	- App\Model\Security\Authenticator
+	- App\Model\Authorizator
+	user:
+	    class: App\Model\Security\User
 
 
 decorator:
@@ -70,6 +76,6 @@ console:
 	url: %baseUrl%
 
 includes:
-    - ../BackModule/config/common.neon
+    - ../AdminModule/config/common.neon
     - ../FrontModule/config/common.neon
     - ../ApiModule/config/common.neon

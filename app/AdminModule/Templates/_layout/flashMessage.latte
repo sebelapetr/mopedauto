@@ -1,0 +1,23 @@
+<div role="alert" aria-live="assertive" aria-atomic="true" n:class="toast, $flashMessage->type" data-delay="8000" n:snippet="flash">
+    {if $flashMessage->type == 'SUCCESS'}
+        {var $bgClass = 'bg-success'}
+    {elseif $flashMessage->type == 'WARNING'}
+        {var $bgClass = 'bg-warning'}
+    {elseif $flashMessage->type == 'INFO'}
+        {var $bgClass = 'bg-info'}
+    {elseif $flashMessage->type == 'DANGER'}
+        {var $bgClass = 'bg-danger'}
+    {else}
+        {var $bgClass = 'bg-info'}
+    {/if}
+    <div class="toast-header {$bgClass} text-white">
+        <strong class="mr-auto">Upozornění</strong>
+        <small class="text-muted"></small>
+        <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body">
+        {_$flashMessage->message}
+    </div>
+</div>

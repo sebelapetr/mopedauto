@@ -1,0 +1,30 @@
+{varType array $categoryParent}
+{varType array $categoriesTree}
+
+{define categoryItem}
+    {if isset($categoryParent['nodes']) && !empty($categoryParent['nodes'])}
+        <span href="#item-{$categoryParent['id']}" class="list-group-item {if $categoryParent['state']['selected']}list-group-item-active{/if}" data-toggle="collapse">
+            <i  class="fa fa-chevron-right"></i>
+            {$categoryParent['text']}
+            <input type="checkbox" data-category-id="{$categoryParent['id']}" class="ml-1 category-add-checkbox" {if $presenter->checkCategory($categoryParent['id'])}checked{/if}>
+        </span>
+        <div class="list-group collapse {if $categoryParent['state']['expanded']}show{/if}" id="item-{$categoryParent['id']}">
+            {foreach $categoryParent['nodes'] as $node}
+                {include categoryItem 'categoryParent' => $node, 'parentId' => $categoryParent['id']}
+            {/foreach}
+        </div>
+    {else}
+        <span class="list-group-item {if $categoryParent['state']['selected']}list-group-item-active{/if}">
+            {$categoryParent['text']}
+            <input type="checkbox" data-category-id="{$categoryParent['id']}" class="ml-1 category-add-checkbox" {if $presenter->checkCategory($categoryParent['id'])}checked{/if}>
+        </span>
+    {/if}
+{/define}
+
+<div class="table-responsive">
+    <div class="list-group list-group-root well">
+        {foreach $categoriesTree as $categoryParent}
+            {include categoryItem 'categoryParent' => $categoryParent, 'parentId' => 0}
+        {/foreach}
+    </div>
+</div>

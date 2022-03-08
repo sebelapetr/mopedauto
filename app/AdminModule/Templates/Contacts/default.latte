@@ -1,0 +1,32 @@
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">{_app.couriers.title}</h1>
+    </div>
+    <div class="col-sm-6">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a n:class="$active ? active, nav-link" n:href="this, active => true">Aktivní</a>
+            </li>
+            <li class="nav-item">
+                <a n:class="!$active ? active, nav-link" n:href="this, active => false">Neaktivní</a>
+            </li>
+        </ul>
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">{_app.couriers.couriersList}</h6>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    {control couriersDatagrid}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

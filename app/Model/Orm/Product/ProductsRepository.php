@@ -25,4 +25,13 @@ class ProductsRepository extends Repository{
     {
         return [Product::class];
     }
+
+    public function getById($id, $includeDeleted = false): ?Product
+    {
+        $args['id'] = $id;
+        if (!$includeDeleted) {
+            $args['deleted'] = false;
+        }
+        return $this->getBy($args);
+    }
 }

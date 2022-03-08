@@ -51,12 +51,22 @@ class OrderService
         $order->company = $values->company;
         $order->ico = $values->ico;
         $order->dic = $values->dic;
-        $order->deliveryName = $values->deliveryName;
-        $order->deliverySurname = $values->deliverySurname;
-        $order->deliveryCompany = $values->deliveryCompany;
-        $order->deliveryStreet = $values->deliveryStreet;
-        $order->deliveryCity = $values->deliveryCity;
-        $order->deliveryPsc = $values->deliveryPsc;
+
+        if ($values->otherAddress == true) {
+            $order->deliveryName = $values->deliveryName;
+            $order->deliverySurname = $values->deliverySurname;
+            $order->deliveryCompany = $values->deliveryCompany;
+            $order->deliveryStreet = $values->deliveryStreet;
+            $order->deliveryCity = $values->deliveryCity;
+            $order->deliveryPsc = $values->deliveryPsc;
+        } else {
+            $order->deliveryName = $order->name;
+            $order->deliverySurname = $order->surname;
+            $order->deliveryCompany = $order->company;
+            $order->deliveryStreet = $order->street;
+            $order->deliveryCity = $order->city;
+            $order->deliveryPsc = $order->psc;
+        }
         $order->newsletter = 1;
         $order->totalPrice = 0;
         $order->totalPriceVat = 0;

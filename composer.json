@@ -1,5 +1,5 @@
 {
-	"description": "Internal system for Soused.Online",
+	"description": "Internal system for mopedauto.cz",
 	"type": "project",
 	"require": {
 		"php": ">= 7.4",

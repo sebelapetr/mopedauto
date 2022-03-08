@@ -3,3 +3,7 @@ notAssigned: 'Nepřiřazený'
 edit: 'Upravit'
 delete: 'Smazat'
 moduls: 'Moduly'
+detail: 'Detail'
+login:
+    success: 'Přihlášení proběhlo úspěšně'
+    userNotFound: 'Uživatel nebyl nalezen.'

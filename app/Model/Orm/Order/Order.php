@@ -106,4 +106,10 @@ Class Order extends Entity
             return $priceWithVat;
         }
     }
+
+
+    public function getAddressString(): string
+    {
+        return $this->street . ' ' . $this->deliveryStreet . ', ' . $this->deliveryCity . ' ' . $this->deliveryPsc;
+    }
 }

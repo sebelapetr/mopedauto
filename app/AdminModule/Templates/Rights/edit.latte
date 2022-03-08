@@ -1,0 +1,32 @@
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">{_app.rights.title}</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">{_app.rights.role}</h6>
+            </div>
+            <ul class="list-group">
+                {foreach $roles as $role}
+                    <a n:href="edit, $role->id"><li n:class="$role->id === $editRole->id ? active, list-group-item">{_'roles.'.$role->intName}</li></a>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">{_app.rights.edit, ['name' => null]}</h6>
+            </div>
+            <div class="card-body">
+                {control editRightsForm}
+            </div>
+        </div>
+    </div>
+</div>

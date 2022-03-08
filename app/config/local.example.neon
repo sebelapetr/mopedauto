@@ -17,6 +17,6 @@ dbal:
 	simpleStorageTz: "Europe/Prague"
 	driver: mysqli
 	host: localhost
-	database: soused-online
+	database: database
 	username: root
 	password:

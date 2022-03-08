@@ -17,11 +17,14 @@ final class RouterFactory
 		$router = new RouteList;
 
         $router[] = $routerApp = new RouteList("Back");
-        $routerApp[] = new Route('admin/<presenter>/<action>[/<id>]', 'Dashboard:default');
+        $routerApp[] = new Route('adminn/<presenter>/<action>[/<id>]', 'Dashboard:default');
+
+        $router[] = $routerAdmin = new RouteList("Admin");
+        $routerAdmin[] = new Route('admin/<presenter>/<action>[/<id>]', 'Authentication:default');
 
         $router[] = $routerFront = new RouteList("Front");
         $routerFront[] = new Route('nabidka-mopedaut', 'Cars:default');
-        $routerFront[] = new Route('nahradni-dily[/<seoName>]', 'SpareParts:default');
+        $routerFront[] = new Route('nahradni-dily[/<seoName>][/<page>]', 'SpareParts:default');
         $routerFront[] = new Route('nahradni-dily/produkt/<seoName>', 'SpareParts:detail');
         $routerFront[] = new Route('kosik/osobni-udaje', 'Cart:step1');
         $routerFront[] = new Route('kosik/doprava-a-platba', 'Cart:step2');

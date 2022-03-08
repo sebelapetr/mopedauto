@@ -1,0 +1,36 @@
+# Author: Petr Šebela
+# Date: 21. 9. 2020
+# Time: 22:37
+
+services:
+    #SERVICES
+
+    #COMPONENTS
+    - App\AdminModule\Components\IMenuComponentFactory
+
+    #DATAGRIDS
+    - App\AdminModule\Components\ProductsDatagridFactory
+    - App\AdminModule\Components\OrdersDatagridFactory
+    - App\AdminModule\Components\DocumentsDatagridFactory
+    - App\AdminModule\Components\CouriersDatagridFactory
+
+    #FORMS
+    - App\AdminModule\Forms\ICategoryFormFactory
+    - App\BackModule\Forms\IProductFormFactory
+    - App\AdminModule\Forms\IVehicleFormFactory
+    - App\AdminModule\Forms\ICityFormFactory
+    - App\AdminModule\Forms\IZipFormFactory
+    - App\AdminModule\Forms\IPartnerBranchFormFactory
+    - App\AdminModule\Forms\IDeliveryTypeFormFactory
+    - App\AdminModule\Forms\IDocumentFormFactory
+    - App\AdminModule\Forms\IPaymentTypeFormFactory
+    - App\AdminModule\Forms\IVehicleLogFormFactory
+    - App\AdminModule\Forms\ILoginFormFactory
+    - App\AdminModule\Forms\IEditRightsFormFactory
+    - App\AdminModule\Forms\ISettingsFormFactory
+    - App\AdminModule\Forms\IUserFormFactory
+    - App\AdminModule\Forms\IOrderLogFormFactory
+    - App\AdminModule\Forms\IKnowledgeFormFactory
+    - App\AdminModule\Forms\IOrderStateFormFactory
+    - App\AdminModule\Forms\IAssignCourierFormFactory
+    - App\AdminModule\Forms\IOrderFormFactory

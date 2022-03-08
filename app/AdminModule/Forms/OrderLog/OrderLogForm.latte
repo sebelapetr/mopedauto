@@ -1,0 +1,26 @@
+{form form}
+{foreach $form->getErrors() as $error}
+    <div class="card bg-danger text-white shadow mb-3">
+        <div class="card-body">
+            {$error}
+        </div>
+    </div>
+{/foreach}
+<div class="form">
+    <div class="form-group">
+        {label order}
+        {input order}
+    </div>
+    <div class="form-group">
+        {label orderState}
+        {input orderState}
+    </div>
+    <div class="form-group">
+        {label assignedTo}
+        {input assignedTo}
+    </div>
+    <div class="form-group">
+        {input send}
+    </div>
+</div>
+{/form}

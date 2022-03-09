@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbdfd47e6a2303dd98bc55a682cb4915",
+    "content-hash": "30c1ad2e9d10e4fe7238596ab267b8fa",
     "packages": [
         {
             "name": "brick/math",
@@ -768,6 +768,57 @@
                 }
             ],
             "time": "2021-10-05T13:56:00+00:00"
+        },
+        {
+            "name": "ijvo/jquery-fileupload",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/IJVo/jQuery-FileUpload.git",
+                "reference": "17e77c2c92817d80dc20d498554280166f6fab43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/IJVo/jQuery-FileUpload/zipball/17e77c2c92817d80dc20d498554280166f6fab43",
+                "reference": "17e77c2c92817d80dc20d498554280166f6fab43",
+                "shasum": ""
+            },
+            "require": {
+                "latte/latte": "^2.5",
+                "nette/application": "^3.0",
+                "nette/di": "^3.0",
+                "nette/forms": "^3.0",
+                "nette/http": "^3.0",
+                "nette/utils": "^3.0",
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan 'Zechy' Zechovský",
+                    "email": "email@zechy.cz",
+                    "homepage": "http://zechy.cz"
+                },
+                {
+                    "name": "Ing. Jaroslav Vaculik -IJVo",
+                    "homepage": "https://ijvo.cz"
+                }
+            ],
+            "description": "Nette UploadControl rozšířené o blueimp jQuery FileUpload.",
+            "homepage": "https://github.com/JZechy/jQuery-FileUpload",
+            "support": {
+                "source": "https://github.com/IJVo/jQuery-FileUpload/tree/2.1.3"
+            },
+            "time": "2020-09-15T11:41:11+00:00"
         },
         {
             "name": "latte/latte",

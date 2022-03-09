@@ -20,9 +20,9 @@
                                     <div class="image-column col-lg-5 col-md-12 col-sm-12">
                                         <figure class="image-box">
                                             {if $product->getMainImage(App\Model\ProductImage::SIZE_MD) !== null}
-                                                <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}" class="lightbox-image"
+                                                <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_ORIGINAL)->filePath}" class="lightbox-image"
                                                    title="Image Caption Here">
-                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_MD)->filePath}" alt="">
+                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}" alt="">
                                                 </a>
                                             {else}
                                                 <img src="{$basePath}/images/products/placeholder.jpg" alt="">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\BackModule\Forms;
+namespace App\AdminModule\Forms;
 
 use App\Model\OrderService;
 use App\Model\QuoteService;

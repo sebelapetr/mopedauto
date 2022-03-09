@@ -11,6 +11,13 @@ extensions:
     console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
     translation: Contributte\Translation\DI\TranslationExtension
     comgate: Contributte\Comgate\DI\ComgateExtension
+    fileUpload: Zet\FileUpload\FileUploadExtension
+
+fileUpload:
+	maxFiles: 20
+	maxFileSize: 10M
+	fileFilter: Zet\FileUpload\Filter\ImageFilter
+	uploadModel: App\Model\Upload\UploadService
 
 application:
 	errorPresenter: Error
@@ -32,6 +39,7 @@ di:
 
 services:
 	router: App\Router\RouterFactory::createRouter
+	- App\Model\Upload\UploadService
 	- App\Model\UserRegistrationService
 	- App\Model\CategoryService
 	- App\Model\ProductService

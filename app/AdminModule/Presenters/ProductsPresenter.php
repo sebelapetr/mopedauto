@@ -12,8 +12,10 @@ namespace App\AdminModule\Presenters;
 
 use App\AdminModule\Components\Datagrids\ProductsDatagrid;
 use App\AdminModule\Components\ProductsDatagridFactory;
-use App\BackModule\Forms\IProductFormFactory;
-use App\BackModule\Forms\ProductForm;
+use App\AdminModule\Forms\IProductFormFactory;
+use App\AdminModule\Forms\IProductImagesFormFactory;
+use App\AdminModule\Forms\ProductForm;
+use App\AdminModule\Forms\ProductImagesForm;
 use App\FrontModule\Presenters\BasePresenter;
 use App\Model\Product;
 use App\Model\ProductCategory;
@@ -27,6 +29,9 @@ class ProductsPresenter extends BaseAppPresenter
 
     /** @inject */
     public IProductFormFactory $productFormFactory;
+
+    /** @inject */
+    public IProductImagesFormFactory $productImagesFormFactory;
 
     public ?Product $actualProduct;
 
@@ -82,6 +87,11 @@ class ProductsPresenter extends BaseAppPresenter
     public function createComponentProductForm(): ProductForm
     {
         return $this->productFormFactory->create($this->actualProduct);
+    }
+
+    public function createComponentProductImagesForm(): ProductImagesForm
+    {
+        return $this->productImagesFormFactory->create($this->actualProduct);
     }
 
     public function handleDelete(int $id): void

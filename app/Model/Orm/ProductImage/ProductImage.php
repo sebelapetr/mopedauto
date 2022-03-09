@@ -8,6 +8,7 @@ use Nextras\Orm\Entity\Entity;
  * Class ProductImage
  * @package App\Model
  * @property int $id {primary}
+ * @property string $originalName
  * @property string $fileName
  * @property string $filePath
  * @property string $size {enum self::SIZE_*}

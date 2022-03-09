@@ -16,7 +16,7 @@ services:
 
     #FORMS
     - App\AdminModule\Forms\ICategoryFormFactory
-    - App\BackModule\Forms\IProductFormFactory
+    - App\AdminModule\Forms\IProductFormFactory
     - App\AdminModule\Forms\IVehicleFormFactory
     - App\AdminModule\Forms\ICityFormFactory
     - App\AdminModule\Forms\IZipFormFactory
@@ -34,3 +34,4 @@ services:
     - App\AdminModule\Forms\IOrderStateFormFactory
     - App\AdminModule\Forms\IAssignCourierFormFactory
     - App\AdminModule\Forms\IOrderFormFactory
+    - App\AdminModule\Forms\IProductImagesFormFactory

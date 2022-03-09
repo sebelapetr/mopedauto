@@ -82,7 +82,11 @@ class SparePartsPresenter extends BasePresenter
         $productsResult = $this->getProducts($childrenCategories->fetchPairs(null, "id"));
         $ids = empty($productsResult) ? [] : $productsResult->fetchPairs(null, "product_id");
 
-        $products = $this->orm->products->findBy(["id" => $ids]);
+        $products = $this->orm->products->findBy([
+            "id" => $ids,
+            "visible" => true,
+            "deleted" => false
+        ]);
         $this->getTemplate()->products = $products->limitBy($this->limit,$offset);
         $this->getTemplate()->pages = $this->getPages($page, $products->countStored());
         $this->getTemplate()->actualPage = $page;

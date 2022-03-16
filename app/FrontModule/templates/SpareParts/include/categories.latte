@@ -1,9 +1,9 @@
-<div class="col-sm-12">
-    <div class="features_items x700">
+<div class="col-sm-12 sub_cat-o-pc" style="padding: 15px">
+    <div class="features_items">
         {foreach $nextChildrenCategories as $childrenCategory}
-            <a n:href="SpareParts:default, seoName => $childrenCategory->url">
+            <a n:href="SpareParts:default, seoName => $childrenCategory->url" style="color: #36404b;">
                 <div class="col-sm-4 float-left">
-                    <span>{$childrenCategory->name} <i class="fas fa-angle-right pull-right"></i></span>
+                    <span>{$childrenCategory->name} <i class="flaticon-right-arrow pull-right"></i></span>
                 </div>
             </a>
         {/foreach}

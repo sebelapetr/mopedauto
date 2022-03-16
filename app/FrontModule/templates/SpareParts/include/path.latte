@@ -1,18 +1,18 @@
 {varType App\Model\Product $product}
 {default $product = false}
 <div class="col-sm-12">
-    <a href="{link Homepage:default}"><i class="fa fa-home"></i></a>
+    <a href="{link Homepage:default}"><i class="flaticon-home"></i></a>
     {foreach $parentCategories as $parentCategory}
         <a>
-            <i class="fas fa-angle-right"></i>
+            <i class="flaticon-right-arrow"></i>
         </a>
         <a href="{link SpareParts:default, 'seoName' => $parentCategory->url}">
             {$parentCategory->name}
         </a>
     {/foreach}
-    <a>
-        <i class="fas fa-angle-right"></i>
-    </a>
+{*    <a>*}
+{*        <i class="flaticon-right-arrow"></i>*}
+{*    </a>*}
     <a n:if="$product">
         {$product->productName}
     </a>

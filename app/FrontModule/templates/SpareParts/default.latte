@@ -5,7 +5,7 @@
 
 {block content}
 
-{default $imageUrl = "/module/front/images/background/8.jpg"}
+{default $imageUrl = "/module/front/images/slider.jpg"}
 <!--Page Title-->
 <section class="page-title" style="background-image:url({$imageUrl|noescape});">
     <div class="auto-container">
@@ -25,14 +25,14 @@
 
                     <div class="sidebar-widget categories">
 
-                        <div class="sidebar-title mb-1"><h2>Kategorie</h2></div>
+                        <div class="sidebar-title mb-4"><h2>Kategorie</h2></div>
 
                         <div class="list-group list-group-root well">
 
                             {define categoryItem}
                                 {if isset($categoryParent['nodes']) && !empty($categoryParent['nodes'])}
                                     <span href="#item-{$categoryParent['id']}" class="list-group-item {if $categoryParent['state']['selected']}list-group-item-active{/if}" data-toggle="collapse">
-                                        <i  class="fa fa-chevron-right"></i>
+                                        <span class="list-group-item-chevron"><i  class="fa fa-chevron-right"></i></span>
                                         <a href="{$categoryParent['href']}">{$categoryParent['text']}</a>
                                     </span>
                                     <div class="list-group collapse {if $categoryParent['state']['expanded']}show{/if}" id="item-{$categoryParent['id']}">
@@ -106,6 +106,8 @@
                     .toggleClass('fa-chevron-right')
                     .toggleClass('fa-chevron-down');
             });
+
+            $('.collapse').hasClass('show').children('i').addClass('fa-chevron-down');
 
         });
     </script>

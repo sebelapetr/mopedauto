@@ -62,6 +62,8 @@ Class Order extends Entity
     const ORDER_STATE_UNFINISHED = "UNFINISHED";
     const ORDER_STATE_CREATED = "CREATED";
     const ORDER_STATE_RECEIVED = "RECEIVED";
+    const ORDER_STATE_COMPLETE = "COMPLETE";
+    const ORDER_STATE_STORNO = "STORNO";
 
     const PAYMENT_STATE_NOT_PAID = "NOT_PAID";
     const PAYMENT_STATE_PAID = "PAID";
@@ -111,5 +113,15 @@ Class Order extends Entity
     public function getAddressString(): string
     {
         return $this->street . ' ' . $this->deliveryStreet . ', ' . $this->deliveryCity . ' ' . $this->deliveryPsc;
+    }
+
+    public function getShippingOrderItem(): ?OrdersItem
+    {
+        return $this->ordersItems->toCollection()->getBy(['type' => OrdersItem::TYPE_SHIPPING]);
+    }
+
+    public function getPaymentOrderItem(): ?OrdersItem
+    {
+        return $this->ordersItems->toCollection()->getBy(['type' => OrdersItem::TYPE_PAYMENT]);
     }
 }

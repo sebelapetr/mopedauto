@@ -30,22 +30,22 @@ class OrdersDatagrid extends BasicDatagrid
     {
         $domain = "entity.order";
 
-        $this->setDataSource($this->orm->orders->findAll());
+        $this->setDataSource($this->orm->orders->findAllFinished([]));
 
         $this->setColumnsHideable();
 
-        $this->addColumnText('id', 'common.id')
+        $this->addColumnText('id', 'Číslo objednávky')
             ->setSortable()
             ->setFilterText();
 
-        $this->addColumnText("createdAt", $domain.".createdAt")
+        $this->addColumnText("createdAt", "Datum")
             ->setRenderer(function (Order $item) {
                 return $item->createdAt->format('d.m.Y H:i');
             })
             ->setSortable()
             ->setFilterDate();
 
-        $this->addColumnText("name", $domain.".contactName")
+        $this->addColumnText("name", "Jméno")
             ->setSortable()
             ->setFilterText();
 
@@ -58,12 +58,14 @@ class OrdersDatagrid extends BasicDatagrid
             ->setFilterText();
 
         $this->addColumnText("state", $domain.".state")
+            ->setRenderer(function(Order $order) use ($domain) {
+                return $this->translator->translate($domain.'.state_'.$order->state);
+            })
             ->setSortable()
             ->setFilterSelect([
-                Order::ORDER_STATE_UNFINISHED => Order::ORDER_STATE_UNFINISHED,
-                Order::ORDER_STATE_CREATED => Order::ORDER_STATE_CREATED,
-                Order::ORDER_STATE_RECEIVED => Order::ORDER_STATE_RECEIVED,
-            ]);
+                Order::ORDER_STATE_CREATED => $this->translator->translate($domain.'.state_'.Order::ORDER_STATE_CREATED),
+                Order::ORDER_STATE_RECEIVED => $this->translator->translate($domain.'.state_'.Order::ORDER_STATE_RECEIVED),
+            ])->setPrompt('');
 
         $this->addAction('detail', 'Detail')
             ->setClass('btn btn-success btn-sm');

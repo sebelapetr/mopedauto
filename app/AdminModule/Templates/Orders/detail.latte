@@ -13,17 +13,13 @@
 <div class="row">
     <div class="col-sm-12 mb-4">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body text-dark">
+                <span class="font-weight-bold">Datum vytvoření:</span> {$item->createdAt|date:'d.m.Y H:i'}
                 <a class="btn btn-primary float-right text-white btn-sm mx-1" href="#" data-toggle="modal" data-target="#changeOrderStateModal"><i class="fas fa-exchange-altř"></i> Změnit stav objednávky</a>
-                <a class="btn btn-primary float-right text-white btn-sm mx-1" href="sms:{$item->phoneNumber}"><i class="fas fa-comment"></i> Poslat SMS zákazníkovi</a>
-                <a class="btn btn-primary float-right text-white btn-sm mx-1" href="tel:{$item->phoneNumber}"><i class="fas fa-phone"></i> Zavolat zákazníkovi</a>
-                <a class="btn btn-primary float-right text-white btn-sm mx-1" href="sms:{$item->partnerBranch->phoneNumber}" n:if="$item->partnerBranch"><i class="fas fa-comment"></i> Poslat SMS pobočce</a>
-                <a class="btn btn-primary float-right text-white btn-sm mx-1" href="tel:{$item->partnerBranch->phoneNumber}" n:if="$item->partnerBranch"><i class="fas fa-phone"></i> Zavolat pobočce</a>
-                <a class="btn btn-success float-right text-white btn-sm mx-1" n:href="printLabel!" target="_blank"><i class="fas fa-tag"></i> Tisknout štítek</a>
             </div>
         </div>
     </div>
-    <div class="col-sm-6" n:ifIsAllowed="orders:showbasicinfo">
+    <div class="col-sm-6">
         <div class="card mb-4">
             <div class="card-header py-3">
                 <div class="row">
@@ -38,32 +34,30 @@
                 <div class="table-responsive table-borderless">
                     <table class="table">
                         <tr>
+                            <th>Jméno a příjmení:</th>
+                            <td>{$item->name} {$item->surname}</td>
+                        </tr>
+                        <tr>
                             <th>Email:</th>
                             <td>{$item->email}</td>
                         </tr>
                         <tr>
+                            <th>Telefon:</th>
+                            <td>{$item->telephone}</td>
+                        </tr>
+                        <tr>
                             <th>Fakturační údaje:</th>
                             <td>
-                                {if $item->invoicingCity && $item->invoicingZip}
-                                    {$item->nameInvoicing} {$item->surnameInvoicing}, {$item->streetInvoicing}, {$item->invoicingCity->name} {$item->invoicingZip->zip}
-                                {/if}
+                                {$item->name} {$item->surname}, {$item->street}, {$item->city} {$item->psc}
                             </td>
                         </tr>
                         <tr>
                             <th>IČ:</th>
-                            <td>{$item->ic}</td>
+                            <td>{$item->ico}</td>
                         </tr>
                         <tr>
                             <th>DIČ:</th>
                             <td>{$item->dic}</td>
-                        </tr>
-                        <tr>
-                            <th>Datum vytvoření:</th>
-                            <td>{$item->createdAt|date:'d.m.Y H:i'}</td>
-                        </tr>
-                        <tr>
-                            <th>Zdroj objednávky:</th>
-                            <td>{$item->orderSource}</td>
                         </tr>
                     </table>
                 </div>
@@ -86,40 +80,25 @@
                     <table class="table">
                         <tr>
                             <th>Stav objednávky:</th>
-                            <td>{if $item->getLastOrderLog()}
-                                    <label class="btn btn-secondary btn-sm">{_'entity.orderLog.orderState'.$item->getLastOrderLog()->orderState->type}</label>
-                                {else}
-                                    <label class="btn btn-secondary btn-sm">Není známo</label>
-                                {/if}
+                            <td>
+                                <label class="btn btn-secondary btn-sm">{_'entity.order.state_'.$item->state}</label>
                             </td>
-                        </tr>
-                        <tr>
-                            <th>Předpokládané datum doručení:</th>
-                            <td>{$item->deliveryDate|date:'d.m.Y H:i'}</td>
-                        </tr>
+                        </tr
                         <tr>
                             <th>Adresa:</th>
-                            <td>{$item->street} {$item->addressNumber}, {$item->city->name} {$item->zip->zip}</td>
+                            <td>{$item->deliveryStreet}, {$item->deliveryCity} {$item->deliveryPsc}</td>
                         </tr>
                         <tr>
                             <th>Kontaktní údaje:</th>
-                            <td>{$item->contactName} {$item->contactSurname}, {$item->phoneNumber}</td>
+                            <td>{$item->deliveryName} {$item->deliverySurname} {$item->deliveryCompany}</td>
                         </tr>
                         <tr>
                             <th>Typ doručení:</th>
-                            <td>{_'entity.deliveryType.type'.$item->deliveryType->type}</td>
+                            <td>{$item->getShippingOrderItem()->name}</td>
                         </tr>
                         <tr>
                             <th>Typ platby:</th>
-                            <td>{_'entity.paymentType.type'.$item->paymentType->type}</td>
-                        </tr>
-                        <tr>
-                            <th>Navázaná pobočka:</th>
-                            <td>{$item->partnerBranch->name} - {$item->partnerBranch->street} {$item->partnerBranch->addressNumber}, {$item->partnerBranch->city->name} {$item->partnerBranch->zip->zip}</td>
-                        </tr>
-                        <tr>
-                            <th>EAN kód:</th>
-                            <td>{$item->eanCode}</td>
+                            <td>{$item->getPaymentOrderItem()->name}</td>
                         </tr>
                     </table>
                 </div>
@@ -131,9 +110,6 @@
             <li class="nav-item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Položky</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Záznamy</a>
-            </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -144,78 +120,30 @@
                                 <th scope="col">ID položky</th>
                                 <th scope="col">Název</th>
                                 <th scope="col">Počet</th>
-                                <th scope="col">Popis</th>
-                                <th scope="col">Váha</th>
-                                <th scope="col">Rozměr</th>
                                 <th scope="col">Cena s DPH</th>
                                 <th scope="col">Cena bez DPH</th>
                                 <th scope="col">DPH</th>
-                                <th scope="col">Stav</th>
-                                <th scope="col">Změna stavu</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {var $totalWeight = 0}
-                            {var $totalBrutto = 0}
-                            {var $totalNetto = 0}
-                            {foreach $item->orderItems as $orderItem}
+                            {foreach $item->ordersItems as $orderItem}
                                 <tr>
                                     <th scope="row">{$orderItem->id}</th>
-                                    <td>{$orderItem->itemName}</td>
+                                    <td>{$orderItem->name}</td>
                                     <td>{$orderItem->quantity} ks</td>
-                                    <td>{$orderItem->description}</td>
-                                    <td>{$orderItem->weight}</td>
-                                    <td>{$orderItem->resolution}</td>
-                                    <td>{$orderItem->brutto} Kč</td>
-                                    <td>{$orderItem->netto} Kč</td>
+                                    <td>{$orderItem->priceVat} Kč</td>
+                                    <td>{$orderItem->price} Kč</td>
                                     <td>{$orderItem->vat} %</td>
-                                    <td>{$orderItem->orderItemState->type}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-danger m-1" n:if="$orderItem->orderItemState->type !== App\Model\OrderItemState::TYPE_DAMAGED">Poškozeno</a>
-                                        <a href="#" class="btn btn-sm btn-warning m-1" n:if="$orderItem->orderItemState->type !== App\Model\OrderItemState::TYPE_NOT_TAKEN">Nepřevzato</a>
-                                    </td>
                                 </tr>
-                                {var $totalWeight = $totalWeight + $orderItem->weight}
-                                {var $totalBrutto = $totalBrutto + $orderItem->brutto}
-                                {var $totalNetto = $totalNetto + $orderItem->netto}
                             {/foreach}
                             <tr>
                                 <th scope="row">Celkem</th>
                                 <td></td>
                                 <td></td>
-                                <td></td>
-                                <td class="font-weight-bold">{$totalWeight}</td>
-                                <td></td>
-                                <td class="font-weight-bold">{$totalBrutto} Kč</td>
-                                <td class="font-weight-bold">{$totalNetto} Kč</td>
-                                <td></td>
-                                <td></td>
+                                <td class="font-weight-bold">{$item->totalPriceVat} Kč</td>
+                                <td class="font-weight-bold">{$item->totalPrice} Kč</td>
                                 <td></td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th scope="col">Datum</th>
-                            <th scope="col">Stav</th>
-                            <th scope="col">Vytvořeno uživatelem</th>
-                            <th scope="col">Přiřazeno uživateli</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {foreach $item->orderLogs->toCollection()->orderBy('createdAt', 'DESC') as $orderLog}
-                            <tr>
-                                <th scope="row">{$orderLog->createdAt|date:'d.m.Y H:i'}</th>
-                                <td>{_'entity.orderLog.orderState'.$orderLog->orderState->type}</td>
-                                <td>{if $orderLog->createdBy}{$orderLog->createdBy->name} {$orderLog->createdBy->surname}{/if}</td>
-                                <td>{if $orderLog->assignedTo}{$orderLog->assignedTo->name} {$orderLog->assignedTo->surname}{/if}</td>
-                            </tr>
-                        {/foreach}
                         </tbody>
                     </table>
                 </div>

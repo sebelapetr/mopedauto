@@ -36,25 +36,16 @@ class OrderStateForm extends Nette\Application\UI\Control
         $form = new Nette\Application\UI\Form();
 
         $states = [];
-        foreach ($this->orm->orderStates->findAll() as $orderState)
-        {
-            $states[$orderState->id] = $this->translator->translate('entity.orderLog.orderState'.$orderState->type);
-        }
+        $states[Order::ORDER_STATE_RECEIVED] = $this->translator->translate('entity.order.state_'.Order::ORDER_STATE_RECEIVED);
+        $states[Order::ORDER_STATE_COMPLETE] = $this->translator->translate('entity.order.state_'.Order::ORDER_STATE_COMPLETE);
+        $states[Order::ORDER_STATE_STORNO] = $this->translator->translate('entity.order.state_'.Order::ORDER_STATE_STORNO);
+
         $form->addSelect('state', 'Stav:', $states)
             ->setHtmlAttribute('class', 'form-control')
             ->setRequired();
 
-        $users = [null => ''];
-        foreach ($this->orm->users->findBy(['role->intName' => Role::INT_NAME_COURIER, 'workingNow' => true]) as $user)
-        {
-            $users[$user->id] = $user->name . ' ' . $user->surname;
-        }
-        $form->addSelect('assignTo', 'Přiřadit uživateli:', $users)
-            ->setHtmlAttribute('class', 'form-control');
-
         $form->addSubmit('send', 'Změnit stav objednávky')
             ->setHtmlAttribute('class', 'btn btn-success btn-sm');
-
 
         $form->onSuccess[] = [$this, 'onSuccess'];
 
@@ -66,17 +57,8 @@ class OrderStateForm extends Nette\Application\UI\Control
     {
         $values = $form->getValues();
 
-        $orderLog = new OrderLog();
-
-        $orderLog->order = $this->order;
-        $orderLog->orderState = $this->orm->orderStates->getById($values->state);
-        if ($values->assignTo)
-        {
-            $orderLog->assignedTo = $this->orm->users->getById($values->assignTo);
-        }
-        $orderLog->createdBy = $this->getPresenter()->user->user;
-
-        $this->orm->persistAndFlush($orderLog);
+        $this->order->state = $values->state;
+        $this->orm->persistAndFlush($this->order);
 
         $this->getPresenter()->flashMessage('Stav objednávky byl změněný');
         $this->getPresenter()->redirect('this');

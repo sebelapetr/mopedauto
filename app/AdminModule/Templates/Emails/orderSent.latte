@@ -1,0 +1,78 @@
+{varType App\Model\Order $order}
+{include './include/header.latte', title => $title}
+
+<div class="content">
+    <table>
+        <tr>
+            <td>
+                <h4>Dobrý den,</h4>
+                <p class="lead">
+                    děkujeme za Vaši objednávku.
+                    <br>
+                    Vaše objednávka <b>č. {$order->id}</b> bude zkontrolována a poté expedována našim pracovníkem.
+                    <br>
+                    Budeme Vás informovat o čase doručení.
+                    <br><br>
+                    <a href="{$orderDetailUrl}" class="btn" style="background: #e6e3e3;border-radius: 0;color:black">Sledovat stav objednávky</a>
+                </p>
+                <p>
+                <table class="table table-striped" style="margin: 10px;">
+                    <thead>
+                    <tr><th></th><th>Název</th><th>Cena s DPH</th><th>Množství</th><th>Celková cena s DPH</th></tr>
+                    </thead>
+                    <tbody>
+                    {varType App\Model\OrdersItem $item}
+                    {foreach $order->ordersItems as $item}
+                        <tr><td></td><td>{$item->name|noescape}</td><td>{$item->priceVat} Kč</td><td>{$item->quantity} ks</td><td>{$item->priceVat*$item->quantity} Kč</td></tr>
+                    {/foreach}
+                    <tr><td></td><td  colspan="3" style="text-align: right"><b>Celkem s DPH: </b></td><td><b>{ceil($order->totalPriceVat)} Kč</b></td></tr>
+                    </tbody>
+                </table>
+                </p>
+                <br/>
+
+                <!-- social & contact -->
+                <table class="social" width="100%">
+                    <tr>
+                        <td>
+
+                            <!--- column 1 -->
+                            <table align="left" class="column">
+                                <tr>
+                                    <td>
+
+                                        <h5 class="">Spojte se s námi!</h5>
+                                        <p class="">
+                                            <a href="https://www.facebook.com/mopedautocz" class="soc-btn fb">Facebook</a>
+                                        </p>
+
+
+                                    </td>
+                                </tr>
+                            </table><!-- /column 1 -->
+
+                            <!--- column 2 -->
+                            <table align="left" class="column">
+                                <tr>
+                                    <td>
+
+                                        <h5 class="">Kontakt:</h5>
+                                        <p>Telefon: <strong>+420 723 049 353</strong><br/>
+                                            Email: <strong><a href="emailto:info@mopedauto.cz">info@mopedauto.cz</a></strong></p>
+
+                                    </td>
+                                </tr>
+                            </table><!-- /column 2 -->
+
+                            <span class="clear"></span>
+
+                        </td>
+                    </tr>
+                </table><!-- /social & contact -->
+
+
+            </td>
+        </tr>
+    </table>
+</div>
+{include './include/footer.latte'}

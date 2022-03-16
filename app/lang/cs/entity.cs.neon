@@ -49,6 +49,16 @@ order:
     deliveryType: 'Doručení'
     state: 'Stav objednávky'
     totalPriceVat: 'Cena s DPH'
+    shipping_ADDRESS: 'PPL malý balík'
+    shipping_PERSONAL: 'Osobní odběr'
+    payment_CASH_ON_DELIVERY: 'Platba dobírkou'
+    payment_CARD: 'Platba kartou'
+    payment_CASH: 'Platba v hotovosti'
+    state_UNFINISHED: 'Neodeslaná'
+    state_CREATED: 'Odeslaná'
+    state_RECEIVED: 'Příjmutá'
+    state_COMPLETE: 'Vyřízená'
+    state_STORNO: 'Stornovaná'
 
 partnerBranch:
     name: 'Název'

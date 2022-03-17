@@ -1,107 +1,150 @@
-<form  n:name="personalDataForm">
-    <div class="col-sm-6">
-        <h2>Osobní údaje</h2>
-        <div class="form-group col-md-12">
-            <label for="inputEmail4">Jméno *</label>
+<form  n:name="personalDataForm" class="cart-form-s checkout-form">
+
+    <div class="row clearfix">
+        <div class="col-sm-12">
+            <h2>Osobní údaje</h2>
+        </div>
+        <!--Form Group-->
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <div class="field-label">Jméno <sup>*</sup></div>
             <input n:name="name" class="form-control" id="inputEmail4" required="required">
         </div>
-        <div class="form-group col-md-12">
-            <label for="inputEmail4">Příjmení *</label>
+
+        <!--Form Group-->
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <div class="field-label">Příjmení <sup>*</sup></div>
             <input n:name="surname" class="form-control" id="inputEmail4" required="required">
         </div>
-        <div class="form-group col-md-12">
-            <label for="inputEmail4">Telefon *</label>
+
+        <!--Form Group-->
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <div class="field-label">Telefon <sup>*</sup></div>
             <input n:name="telephone" class="form-control" id="inputEmail4" required="required">
         </div>
-        <div class="form-group col-md-12">
-            <label for="inputEmail4">E-mail *</label>
+
+        <!--Form Group-->
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <div class="field-label">E-mail <sup>*</sup></div>
             <input n:name="email" class="form-control" id="inputEmail4" required="required">
         </div>
 
-        <h2>Adresa</h2>
-        <div class="form-group col-md-12">
-            <label for="inputEmail4">Ulice a číslo popisné *</label>
+        <div class="col-sm-12">
+            <h2>Adresa</h2>
+        </div>
+        <!--Form Group-->
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <div class="field-label">Ulice a číslo popisné <sup>*</sup></div>
             <input n:name="street" class="form-control" id="inputEmail4" required="required">
         </div>
-        <div class="form-group col-md-12">
-            <label for="inputEmail4">Město *</label>
+        <!--Form Group-->
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <div class="field-label">Město <sup>*</sup></div>
             <input n:name="city" class="form-control" id="inputEmail4" required="required">
         </div>
-        <div class="form-group col-md-12">
-            <label for="inputEmail4">PSČ *</label>
+        <!--Form Group-->
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <div class="field-label">PSČ <sup>*</sup></div>
             <input n:name="psc" class="form-control" id="inputEmail4" required="required">
         </div>
+    </div>
 
-        <div class="form-group col-md-12">
-            <input type="checkbox" n:name="companyBuy"><label n:name="companyBuy"> Nakupuji na firmu</label>
+    <div class="col-sm-12" style="padding: 0">
+        <label n:name="companyBuy">
+            <input type="checkbox" n:name="companyBuy">
+            Nakupuji na firmu
+        </label>
+    </div>
+
+    <div id="company-wrapper">
+        <div class="col-sm-12" style="padding: 0 0 25px;">
+            <h2>Firemní údaje <span style="font-size: 1rem;">(Nakupuji na firmu)</span></h2>
+            <sup>(nejsme plátci DPH)</sup>
         </div>
 
-        <div id="company-wrapper">
-            <h2>Firemní údaje (Nakupuji na firmu)</h2>
-            <p>(nejsme plátci DPH)</p>
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">Firma *</label>
-                <input n:name="company" class="form-control" id="inputEmail4"  placeholder="">
+        <div class="row">
+            <!--Form Group-->
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <div class="field-label">Firma <sup>*</sup></div>
+                <input n:name="company" class="form-control" id="inputEmail4" placeholder="">
             </div>
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">IČO *</label>
-                <input n:name="ico" class="form-control" id="inputEmail4"  placeholder="">
+            <!--Form Group-->
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <div class="field-label">IČO <sup>*</sup></div>
+                <input n:name="ico" class="form-control" id="inputEmail4" placeholder="">
             </div>
-            {*
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">DIČ</label>
-                <input n:name="dic" class="form-control" id="inputEmail4"  placeholder="">
-            </div>
-            *}
         </div>
 
-        <div class="form-group col-md-12">
-            <input type="checkbox" n:name="otherAddress"><label n:name="otherAddress"> Doručit na jinou adresu</label>
-        </div>
+    </div>
 
-        <div id="address-wrapper">
+    <div class="col-sm-12" style="padding: 0">
+        <label n:name="otherAddress">
+            <input type="checkbox" n:name="otherAddress">
+            Doručit na jinou adresu
+        </label>
+    </div>
+
+    <div id="address-wrapper">
+        <div class="col-sm-12" style="padding: 0">
             <h2>Doručit na jinou adresu</h2>
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">Jméno *</label>
-                <input n:name="deliveryName" class="form-control" id="inputEmail4"  placeholder="">
+        </div>
+        <div class="row">
+            <!--Form Group-->
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <div class="field-label">Jméno <sup>*</sup></div>
+                <input n:name="deliveryName" class="form-control" id="inputEmail4" placeholder="">
             </div>
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">Příjmení *</label>
-                <input n:name="deliverySurname" class="form-control" id="inputEmail4"  placeholder="">
+            <!--Form Group-->
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <div class="field-label">Příjmení <sup>*</sup></div>
+                <input n:name="deliverySurname" class="form-control" id="inputEmail4" placeholder="">
             </div>
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">Firma</label>
-                <input n:name="deliveryCompany" class="form-control" id="inputEmail4"  placeholder="">
+            <!--Form Group-->
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <div class="field-label">Firma </div>
+                <input n:name="deliveryCompany" class="form-control" id="inputEmail4" placeholder="">
             </div>
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">Ulice a číslo popisné *</label>
-                <input n:name="deliveryStreet" class="form-control" id="inputEmail4"  placeholder="">
+            <!--Form Group-->
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <div class="field-label">Ulice a číslo popisné<sup>*</sup></div>
+                <input n:name="deliveryStreet" class="form-control" id="inputEmail4" placeholder="">
             </div>
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">Město *</label>
-                <input n:name="deliveryCity" class="form-control" id="inputEmail4"  placeholder="">
+            <!--Form Group-->
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <div class="field-label">Město<sup>*</sup></div>
+                <input n:name="deliveryCity" class="form-control" id="inputEmail4" placeholder="">
             </div>
-            <div class="form-group col-md-12">
-                <label for="inputEmail4">PSČ *</label>
-                <input n:name="deliveryPsc" class="form-control" id="inputEmail4"  placeholder="">
+            <!--Form Group-->
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <div class="field-label">PSČ<sup>*</sup></div>
+                <input n:name="deliveryPsc" class="form-control" id="inputEmail4" placeholder="">
             </div>
         </div>
+    </div>
 
-        <h2>Poznámka</h2>
+    <div class="row clearfix">
+        <div class="col-sm-12">
+            <h2>Poznámka</h2>
+        </div>
+
+        <!--Form Group-->
         <div class="form-group col-md-12">
-            <label for="inputEmail4">Vaše poznámka</label>
+            <div class="field-label">Vaše poznámka</div>
             <textarea n:name="note" class="form-control"></textarea>
         </div>
-    </div>
-    <div class="col-sm-12">
-        <p>Informace, které nám předáváte, zpracováváme podle <a href="">pravidel zpracování osobních údajů.</a></p>
-        <p>
-            <input type="checkbox" name="terms" id="termsAndConditions" required>
-            <label for="termsAndConditions">Souhlasím s <a href="">obchodními podmínkami.</a></label>
-        </p>
-    </div>
-    <div class="col-sm-12">
-        <a href="{plink Cart:step1}" class="btn btn-default cart pull-left">Zpět k dopravě a platbě</a>
-        <input n:name="submit" class="btn btn-default cart pull-right">
+
+        <div class="col-sm-12" style="padding-top: 25px">
+            Informace, které nám předáváte, zpracováváme podle <a href="">pravidel zpracování osobních údajů.</a>
+        </div>
+        <div class="col-sm-12">
+            <label for="termsAndConditions">
+                <input type="checkbox" name="terms" id="termsAndConditions" required>
+                Souhlasím s <a href="">obchodními podmínkami.</a>
+            </label>
+        </div>
+
+        <div class="col-sm-12" style="padding-top: 25px">
+            <a href="{plink Cart:step1}" class="btn btn-default cart pull-left">Zpět k dopravě a platbě</a>
+            <input n:name="submit" class="btn btn-default cart pull-right">
+        </div>
     </div>
 </form>

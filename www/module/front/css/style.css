@@ -4561,7 +4561,8 @@ button:focus{
 
 .main-footer .footer-logo img{
 	display:block;
-	max-width:100%;
+	max-width: 170px;
+	width: 100%;
 }
 
 .main-footer .footer-column .widget-title{

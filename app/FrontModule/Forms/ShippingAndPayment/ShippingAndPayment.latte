@@ -1,40 +1,38 @@
-<form  n:name="shippingAndPaymentForm">
+<form n:name="shippingAndPaymentForm" class="cart-form-s checkout-form">
     <div id="shipping-container">
         <h2>Způsob doručení</h2>
         <div class="col-sm-12">
-            <span>
+            <label n:name="shipping:App\Model\Order::TYPE_DELIVERY_PERSONAL">
                 <input n:name="shipping:App\Model\Order::TYPE_DELIVERY_PERSONAL">
-                <label n:name="shipping:App\Model\Order::TYPE_DELIVERY_PERSONAL">Osobní odběr</label>
-                <a>Zdarma</a>
-            <br>
-            </span>
-            <span>
+                Osobní odběr <span class="font-weight-bold">Zdarma</span>
+            </label>
+            <label n:name="shipping:App\Model\Order::TYPE_DELIVERY_ADDRESS">
                 <input n:name="shipping:App\Model\Order::TYPE_DELIVERY_ADDRESS">
-                <label n:name="shipping:App\Model\Order::TYPE_DELIVERY_ADDRESS">PPL malý balík</label>
-                <a>161 Kč</a>
-            </span>
+                PPL malý balík <span class="font-weight-bold">161 Kč</span>
+            </label>
         </div>
     </div>
     <div id="payment-container">
         <h2>Způsob platby</h2>
         <div class="col-sm-12">
-            <span id="payment-type-{App\Model\Order::TYPE_PAYMENT_CASH}">
-                <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH">
-                <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH">V hotovosti</label>
-                <a>Zdarma</a>
-            <br>
-            </span>
-            <span id="payment-type-{App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY}">
-                <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY">
-                <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY">Dobírka</label>
-                <a>Zdarma</a>
-            <br>
-            </span>
-            <span id="payment-type-{App\Model\Order::TYPE_PAYMENT_CARD}">
-                <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CARD">
-                <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CARD">Kartou</label>
-                <a>Zdarma</a>
-            </span>
+            <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH">
+                <div id="payment-type-{App\Model\Order::TYPE_PAYMENT_CASH}">
+                    <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH">
+                    V hotovosti <span class="font-weight-bold">Zdarma</span>
+                </div>
+            </label>
+            <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY">
+                <div id="payment-type-{App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY}">
+                    <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CASH_ON_DELIVERY">
+                    Dobírka <span class="font-weight-bold">Zdarma</span>
+                </div>
+            </label>
+            <label n:name="payment:App\Model\Order::TYPE_PAYMENT_CARD">
+                <div id="payment-type-{App\Model\Order::TYPE_PAYMENT_CARD}">
+                    <input n:name="payment:App\Model\Order::TYPE_PAYMENT_CARD">
+                    Kartou <span class="font-weight-bold">Zdarma</span>
+                </div>
+            </label>
         </div>
     </div>
     <a href="{plink Homepage:default}" class="btn btn-default cart pull-left">Zpět do obchodu</a>

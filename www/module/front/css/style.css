@@ -67,6 +67,10 @@ p{
 	margin: 0;
 }
 
+label {
+	cursor: pointer;
+}
+
 ::-webkit-input-placeholder{color: inherit;}
 ::-moz-input-placeholder{color: inherit;}
 ::-ms-input-placeholder{color: inherit;}
@@ -6882,6 +6886,16 @@ button:focus{
 	text-transform: capitalize;
 	font-weight: 500;
 	padding: 13px 50px;
+}
+
+.cart-form-s h2 {
+	color: #36404b;
+	padding: 15px 0;
+}
+
+.cart-form-s label {
+	display: table-row;
+	line-height: 2.5;
 }
 
 .shipping-block{

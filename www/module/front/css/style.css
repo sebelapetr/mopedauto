@@ -298,6 +298,23 @@ ul,li{
 	background:#ffffff;
 }
 
+.btn-style-six {
+	position: relative;
+	font-size: 14px;
+	color: #ffffff !important;
+	border-radius: 0;
+	padding: 13px 30px;
+	line-height: 20px;
+	font-weight: 700;
+	background: #1c63b8;
+	/*border: 2px solid transparent;*/
+	text-transform: uppercase;
+}
+
+.btn-style-six:hover {
+	background: #1956a2;
+}
+
 .btn-style-def {
 	position: relative;
 	font-size: 14px;
@@ -1650,7 +1667,8 @@ button:focus{
 
 .shop-item .feature-block {
 	border: 1px solid #e3e3e3;
-	height: 100%;
+	/*height: 100%;*/
+	padding: 0 5px
 }
 
 .feature-block .image-box .price{
@@ -5462,7 +5480,7 @@ button:focus{
 
 .shop-item .lower-content{
 	position: relative;
-	padding: 30px 0px 0;
+	padding: 15px 0 0;
 	text-align: center;
 	border: none;
 }
@@ -5478,7 +5496,12 @@ button:focus{
 	margin-bottom: 10px;
 }
 
-.shop-item .lower-content h3 a{
+.shop-item .lower-content h5 {
+	height: 74px;
+	line-height: 1.1;
+}
+
+.shop-item .lower-content h3 a, .shop-item .lower-content h5 a{
 	color: #36404b;
 	-webkit-transition: all 300ms ease;
 	-moz-transition: all 300ms ease;
@@ -5487,7 +5510,7 @@ button:focus{
 	transition: all 300ms ease;
 }
 
-.shop-item .lower-content h3 a:hover{
+.shop-item .lower-content h3 a:hover, .shop-item .lower-content h5 a:hover{
 	color: #1c63b8;
 }
 
@@ -5495,7 +5518,8 @@ button:focus{
 	position: relative;
 	display: block;
 	font-size: 16px;
-	color: #36404b;
+	font-weight: 600;
+	color: #1c63b8;
 	line-height: 25px;
 	margin-bottom: 15px;
 }
@@ -5506,14 +5530,6 @@ button:focus{
 	line-height: 20px;
 	color: #1c63b8;
 	font-weight: 900;
-}
-
-.shop-item .lower-content .price{
-	font-size: 16px;
-	line-height: 20px;
-	color: #36404b;
-	font-weight: 500;
-	margin-bottom: 20px;
 }
 
 .shop-item .lower-content .price del{

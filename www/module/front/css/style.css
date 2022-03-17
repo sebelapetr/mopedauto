@@ -4148,7 +4148,7 @@ button:focus{
 }
 
 .contact-form .form-group textarea{
-	height: 240px;
+	height: 240px !important;
 	resize: none;
 }
 

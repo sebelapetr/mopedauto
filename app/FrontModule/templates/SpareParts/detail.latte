@@ -1,4 +1,5 @@
 {varType App\Model\Product $product}
+{varType App\Model\ProductImage $productImage}
 {block title}{$product->productName}{/block}
 {block content}
 
@@ -38,41 +39,20 @@
                                             {else}
                                                 <img src="{$basePath}/images/products/placeholder.jpg" class='gallery-img' alt="">
                                             {/if}
-                                            <div class="row">
+                                            {var $otherImages = $product->getOtherImages(App\Model\ProductImage::SIZE_S)}
+                                            <div class="row" n:if="$otherImages->countStored() > 0">
                                                 <div class="col-sm-12">
                                                     <!-- Slider main container -->
                                                     <div class="swiper swiper-photos" style="overflow: hidden">
                                                         <!-- Additional required wrapper -->
                                                         <div class="swiper-wrapper">
                                                             <!-- Slides -->
-                                                            <div class="swiper-slide">
-                                                                <a data-fancybox="gallery" href="{$basePath}/images/products/placeholder.jpg"
+                                                            <div class="swiper-slide" n:foreach="$otherImages as $productImage">
+                                                                {var $originImage = $product->getImageOtherSize($productImage, App\Model\ProductImage::SIZE_ORIGINAL)}
+                                                                {var $originSizePath = $originImage ? $originImage->filePath : $productImage->filePath}
+                                                                <a data-fancybox="gallery" href="{$basePath}{$originSizePath}"
                                                                    title="Image Caption Here">
-                                                                    <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                                </a>
-                                                            </div>
-                                                            <div class="swiper-slide">
-                                                                <a data-fancybox="gallery" href="{$basePath}/images/products/placeholder.jpg"
-                                                                   title="Image Caption Here">
-                                                                    <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                                </a>
-                                                            </div>
-                                                            <div class="swiper-slide">
-                                                                <a data-fancybox="gallery" href="{$basePath}/images/products/placeholder.jpg"
-                                                                   title="Image Caption Here">
-                                                                    <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                                </a>
-                                                            </div>
-                                                            <div class="swiper-slide">
-                                                                <a data-fancybox="gallery" href="{$basePath}/images/products/placeholder.jpg"
-                                                                   title="Image Caption Here">
-                                                                    <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                                </a>
-                                                            </div>
-                                                            <div class="swiper-slide">
-                                                                <a data-fancybox="gallery" href="{$basePath}/images/products/placeholder.jpg"
-                                                                   title="Image Caption Here">
-                                                                    <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
+                                                                    <img src="{$basePath}{$productImage->filePath}" alt="{$productImage->originalName}">
                                                                 </a>
                                                             </div>
                                                         </div>

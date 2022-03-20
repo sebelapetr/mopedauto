@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Nette\Application\LinkGenerator;
+use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Relationships\OneHasMany;
 
@@ -54,6 +55,17 @@ class Product extends Entity
     public function getMainImage(string $size): ?ProductImage
     {
         return $this->images->countStored() !== 0 ? $this->images->toCollection()->getBy(['sort' => 0, 'size' => $size]) : null;
+    }
+
+    public function getOtherImages(string $size): ICollection
+    {
+        return $this->images->toCollection()->findBy(['size' => $size])->limitBy(50, 1);
+    }
+
+    public function getImageOtherSize(ProductImage $productImage, string $size): ?ProductImage
+    {
+        $fileName = str_replace($productImage->size, $size, $productImage->fileName);
+        return $this->images->toCollection()->getBy(['fileName' => $fileName]);
     }
 
     public function getMainCategory(): ?Category

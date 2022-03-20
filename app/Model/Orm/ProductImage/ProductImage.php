@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Nextras\Orm\Entity\Entity;
+use Tracy\Debugger;
 
 /**
  * Class ProductImage

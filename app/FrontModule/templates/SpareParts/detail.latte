@@ -4,6 +4,16 @@
 
 <section class="detail">
 
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+        <div class="slides"></div>
+        <!--                        <h3 class="title"></h3>-->
+        <a class="prev"></a>
+        <a class="next"></a>
+        <a class="close"></a>
+        <a class="play-pause"></a>
+        <!--                        <ol class="indicator"></ol>-->
+    </div>
+
     <section class="detail-section">
 
         <!--Shop Single-->
@@ -12,44 +22,97 @@
                 <div class="row clearfix">
                     <div class="content-column col-lg-12 col-md-12 col-sm-12">
                         {include './include/path.latte', product => $product}
-                        <div class="product-details">
+                        <div class="product-details" style="padding: 25px 0;">
 
                             <!--Basic Details-->
                             <div class="basic-details">
                                 <div class="row clearfix">
                                     <div class="image-column col-lg-5 col-md-12 col-sm-12">
-                                        <figure class="image-box">
+
+                                        <figure id="links" class="links">
                                             {if $product->getMainImage(App\Model\ProductImage::SIZE_MD) !== null}
-                                                <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}" class="lightbox-image"
-                                                   title="Image Caption Here">
-                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_MD)->filePath}" alt="">
+                                                <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}"
+                                                   title="Image Caption Here" data-gallery="">
+                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_MD)->filePath}" class='gallery-img' alt="">
                                                 </a>
                                             {else}
-                                                <img src="{$basePath}/images/products/placeholder.jpg" alt="">
+                                                <img src="{$basePath}/images/products/placeholder.jpg" class='gallery-img' alt="">
                                             {/if}
+                                            <div class="row">
+                                                <div class="col-3" style="margin-bottom: 15px">
+                                                    <a href="{$basePath}/images/products/placeholder.jpg"
+                                                       title="Image Caption Here" data-gallery="">
+                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-3" style="margin-bottom: 15px">
+                                                    <a href="{$basePath}/images/products/placeholder.jpg"
+                                                       title="Image Caption Here" data-gallery="">
+                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-3" style="margin-bottom: 15px">
+                                                    <a href="{$basePath}/images/products/placeholder.jpg"
+                                                       title="Image Caption Here" data-gallery="">
+                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-3" style="margin-bottom: 15px">
+                                                    <a href="{$basePath}/images/products/placeholder.jpg"
+                                                       title="Image Caption Here" data-gallery="">
+                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-3" style="margin-bottom: 15px">
+                                                    <a href="{$basePath}/images/products/placeholder.jpg"
+                                                       title="Image Caption Here" data-gallery="">
+                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-3" style="margin-bottom: 15px">
+                                                    <a href="{$basePath}/images/products/placeholder.jpg"
+                                                       title="Image Caption Here" data-gallery="">
+                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-3" style="margin-bottom: 15px">
+                                                    <a href="{$basePath}/images/products/placeholder.jpg"
+                                                       title="Image Caption Here" data-gallery="">
+                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </figure>
                                     </div>
                                     <div class="info-column col-lg-7 col-md-12 col-sm-12">
                                         <div class="inner-column">
-                                            <div class="details-header">
+                                            <div class="details-header" style="margin-bottom: 15px;">
                                                 <h4>{$product->productName|noescape}</h4>
-                                                <div class="item-price">
-                                                    {$product->catalogPriceVat} Kč s DPH
-                                                </div>
-                                                <div class="item-price">
-                                                    {$product->catalogPriceVat / 1.21|number:0, '', ''} Kč bez DPH
-                                                </div>
                                                 <div class="item-price">
                                                     Obj č.: {$product->number}
                                                 </div>
+
+
+                                                <div style="background: #efefef; padding: 15px 15px; height: 80px;">
+                                                    <div class="item-price pull-left">
+                                                        <span class="font-weight-bold">Cena s DPH</span> <br>
+                                                        <span style="font-size: 0.9rem">Cena bez DPH </span>
+                                                    </div>
+                                                    <div class="item-price pull-right">
+                                                        <span class="font-weight-bold" style="font-size: 1.4rem; color: #1c63b8;">{$product->catalogPriceVat} Kč </span><br>
+                                                        <span style="font-size: 0.9rem">{$product->catalogPriceVat / 1.21|number:0, '', ''} Kč </span>
+                                                    </div>
+
+                                                </div>
+
                                                 <span class="review"></span>
                                             </div>
-                                            <div class="clearfix">
+                                            <div class="clearfix pull-right">
                                                 {if !$productInCart}
                                                     {control addProductForm}
                                                 {else}
-                                                    <p><i class="fa fa-check"></i>Zboží čeká v košíku</p>
-                                                    <a href="{link Cart:step1}" class="theme-btn btn-style-two">Pokračovat do košíku</a>
+                                                    <p class="alert alert-success" style="float: left; margin-right: 15px; border-radius: 0; height: 54px; line-height: 2.1"><i class="fa fa-check"></i> Zboží čeká v košíku</p>
+                                                    <a href="{link Cart:step1}" class="theme-btn btn-style-six">Pokračovat do košíku</a>
                                                 {/if}
                                             </div>
                                         </div>

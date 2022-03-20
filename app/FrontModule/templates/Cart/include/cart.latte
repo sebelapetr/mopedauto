@@ -9,27 +9,32 @@
             {varType App\Model\OrdersItem $orderItem}
             {foreach $order->ordersItems as $orderItem}
                 {if $orderItem}
-                    <div class="col-sm-12">
-                        <a href="{link removeProductFromCart! $orderItem->id}"  n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT"><i class="fas fa-times fa-xs"></i></a>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
+                            <a href="{link removeProductFromCart! $orderItem->id}" n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT" style="position: absolute; top: 0; left: 5px; color: red"><i class="fas fa-times fa-xs"></i></a>
+
                             {var $image = $orderItem->product ? $orderItem->product->getMainImage(App\Model\ProductImage::SIZE_S) : null}
                             {var $imagePath = $image ? $image->filePath : null}
-                            <img src="{$basePath}{$imagePath}" alt="{$orderItem->name|noescape}" n:if="$imagePath">
+                            <img src="{$basePath}{$imagePath}" alt="{$orderItem->name|noescape}" n:if="$imagePath" style="    padding: 10px 0;">
                         </div>
-                        <div class="col-sm-9 pull-right">
-                            <div class="col-sm-12">
+                        <div class="col-sm-8 pull-right">
+                            <div style="color: #36404b; padding: 10px 0;">
                                 {$orderItem->name|noescape}
                             </div>
-                            <div class="col-sm-12" n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT">
-                                <a href="{link addProductQuantity! $orderItem->id}">+</a>
-                                <a href="{link removeProductQuantity! $orderItem->id}" {if $orderItem->quantity===1}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}>-</a>
+                            <div n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT" style="font-size: 0.8rem;">
+                                <div style="background: #efefef; padding: 0 7px; display: inline-flex;">
+                                    <a href="{link addProductQuantity! $orderItem->id}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                </div>
+                                <span style="color: #36404b">
                                 <a class="">{$orderItem->quantity} Ks</a>
+                                </span>
+                                <div style="background: #efefef; padding: 0 7px; display: inline-flex;">
+                                <a href="{link removeProductQuantity! $orderItem->id}" {if $orderItem->quantity===1}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                </div>
                             </div>
-                            <div class="col-sm-12">
-                                <a class="pull-right">{$orderItem->priceVat} Kč</a>
+                            <div style="font-size: 1.1rem; color: #1c63b8; font-weight: 600;">
+                                <a class="pull-right" style="margin-bottom: 8px;">{$orderItem->priceVat} Kč</a>
                             </div>
                         </div>
-                    </div>
                 {/if}
             {/foreach}
         {else}
@@ -45,5 +50,6 @@
 </div>
 
 <div class="col-sm-12" style="padding: 25px 0 0">
+    <a href="#" class="theme-btn btn-style-def pull-left">Zpět</a>
     <a href="#" class="theme-btn btn-style-def pull-right">Pokračovat v objednávce</a>
 </div>

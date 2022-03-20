@@ -217,7 +217,7 @@ class SparePartsPresenter extends BasePresenter
     }
 
     public function productInCart($id){
-        return in_array($id, $this->cartService->getOrder()->ordersItems->toCollection()->fetchPairs(null, 'product->id'));
+        return in_array($id, $this->cartService->getOrder()->ordersItems->toCollection()->findBy(['product!=' => null])->fetchPairs(null, 'product->id'));
     }
 
     function cesky_den($den) {

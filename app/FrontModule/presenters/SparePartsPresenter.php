@@ -6,6 +6,7 @@ use App\FrontModule\Forms\IAddProductFormFactory;
 use App\Model\Category;
 use App\Model\Product;
 use App\Model\Session\CartService;
+use Nette\Caching\Cache;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\DateTime;
 use Nette\Utils\Html;
@@ -41,7 +42,7 @@ class SparePartsPresenter extends BasePresenter
     {
         parent::startup();
         $this->rootCategory = $this->orm->categories->getBy(["categoryLabel" => BasePresenter::INITIAL_CATEGORY_SPARE_PARTS]);
-        $this->rootCategories = $this->orm->categories->getChildren($this->rootCategory->id);;
+        $this->rootCategories = $this->orm->categories->getChildren($this->rootCategory->id);
     }
 
     public function actionDefault($page = 1, $seoName = null)
@@ -60,7 +61,14 @@ class SparePartsPresenter extends BasePresenter
                 $this->redirect("this", ["page" => 1, "seoName" => null]);
             }
         }
-        $this->categoriesTree = $this->getCategoriesTree($this->rootCategories);
+        $key = 'categories-tree';
+
+        //$this->cache->remove($key);
+
+        $this->categoriesTree = $this->cache->load($key, function (&$dependencies) use ($key) {
+            $dependencies[Cache::EXPIRE] = '15 minutes';
+            return $this->getCategoriesTree($this->rootCategories);
+        });
     }
 
     public function renderDefault($page=1, $seoName = null)
@@ -82,7 +90,11 @@ class SparePartsPresenter extends BasePresenter
         $productsResult = $this->getProducts($childrenCategories->fetchPairs(null, "id"));
         $ids = empty($productsResult) ? [] : $productsResult->fetchPairs(null, "product_id");
 
-        $products = $this->orm->products->findBy(["id" => $ids]);
+        $products = $this->orm->products->findBy([
+            "id" => $ids,
+            "visible" => true,
+            "deleted" => false
+        ]);
         $this->getTemplate()->products = $products->limitBy($this->limit,$offset);
         $this->getTemplate()->pages = $this->getPages($page, $products->countStored());
         $this->getTemplate()->actualPage = $page;
@@ -149,7 +161,8 @@ class SparePartsPresenter extends BasePresenter
             $tree[$category['parent']][] = $category;
         }
         $tree = $this->createTree($tree, array($categories[0]));
-        return $tree[0]['nodes'];
+        $tree = $tree[0]['nodes'];
+        return $tree;
     }
 
     private function getCategoryTreeItemChildren($treeItem) {

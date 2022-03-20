@@ -1,0 +1,123 @@
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">Detail produktu {$item->productName}</h1>
+    </div>
+    <div class="col-sm-6">
+        <a n:href="default" class="btn btn-success btn-sm float-right">Zpět na přehled produků</a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="m-0 font-weight-bold text-dark">{_app.partners.basicInformations}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <a n:href="delete!, $item->id" class="btn btn-sm btn-danger ml-2 float-right">Smazat</a>
+                        <a n:href="edit, $item->id" class="btn btn-sm btn-success float-right">Upravit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <tr>
+                            <th>Název:</th>
+                            <td>{$item->productName}</td>
+                        </tr>
+                        <tr>
+                            <th>Seo název:</th>
+                            <td>{$item->seoName}</td>
+                        </tr>
+                        <tr>
+                            <th>Číslo:</th>
+                            <td>{$item->number}</td>
+                        </tr>
+                        <tr>
+                            <th>Novinka:</th>
+                            <td>{$item->new ? 'Ano' : 'Ne'}</td>
+                        </tr>
+                        <tr>
+                            <th>Akce:</th>
+                            <td>{$item->discount ? 'Ano' : 'Ne'}</td>
+                        </tr>
+                        <tr>
+                            <th>Těžký produkt (dražší dopravné):</th>
+                            <td>{$item->isHeavy ? 'Ano' : 'Ne'}</td>
+                        </tr>
+                        <tr>
+                            <th>Viditelné:</th>
+                            <td>{$item->visible ? 'Ano' : 'Ne'}</td>
+                        </tr>
+                        <tr>
+                            <th>Popis:</th>
+                            <td>{$item->description|truncate:100}</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs" id="partnerTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Kategorie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Obrázky</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="table-responsive">
+                    {include './include/productCategories.latte'}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="my-5">
+                    {control productImagesForm}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block js}
+    {snippet scripts}
+        <script>
+            var loadingEl = $('<i class="fas fa-spinner fa-pulse"></i>');
+            $('.category-add-checkbox').click(function () {
+                var checkbox = $(this);
+                var categoryId = $(this).data('category-id');
+                $('.category-add-checkbox').attr("disabled", true);
+                checkbox.after(loadingEl);
+                $.nette.ajax({
+                    url: {link toggleProductToCategory!},
+                    method: 'POST',
+                    data: {
+                        categoryId: categoryId
+                    },
+                    success: function (payload) {
+                      loadingEl.remove();
+                        $('.category-add-checkbox').removeAttr("disabled");
+                    },
+                    error: function (xhr, ajaxOptions, thrownError)
+                    {
+
+                    }
+                });
+            });
+        </script>
+    {/snippet}
+{/block}

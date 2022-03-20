@@ -18,7 +18,7 @@
             </div>
             <div class="lower-content">
                 <span class="price">{$product->catalogPriceVat} Kč</span>
-                <h5><a href="{link SpareParts:detail $product->id}">{$product->productName|noescape}</a></h5>
+                <h5><a href="{link SpareParts:detail, seoName => $product->url}">{$product->productName|noescape}</a></h5>
             </div>
         </div>
     </div>

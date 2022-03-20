@@ -1,0 +1,172 @@
+{varType App\Model\Order $item}
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">{_app.orders.detail, ['name' => $item->id]}</h1>
+    </div>
+    <div class="col-sm-6">
+        <a n:href="default" class="btn btn-success btn-sm float-right">{_app.orders.ordersList}</a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12 mb-4">
+        <div class="card">
+            <div class="card-body text-dark">
+                <span class="font-weight-bold">Datum vytvoření:</span> {$item->createdAt|date:'d.m.Y H:i'}
+                <a class="btn btn-primary float-right text-white btn-sm mx-1" href="#" data-toggle="modal" data-target="#changeOrderStateModal"><i class="fas fa-exchange-altř"></i> Změnit stav objednávky</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="m-0 font-weight-bold text-dark">{_app.orders.basicInformations}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <tr>
+                            <th>Jméno a příjmení:</th>
+                            <td>{$item->name} {$item->surname}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{$item->email}</td>
+                        </tr>
+                        <tr>
+                            <th>Telefon:</th>
+                            <td>{$item->telephone}</td>
+                        </tr>
+                        <tr>
+                            <th>Fakturační údaje:</th>
+                            <td>
+                                {$item->name} {$item->surname}, {$item->street}, {$item->city} {$item->psc}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>IČ:</th>
+                            <td>{$item->ico}</td>
+                        </tr>
+                        <tr>
+                            <th>DIČ:</th>
+                            <td>{$item->dic}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="m-0 font-weight-bold text-dark">{_app.orders.deliveryInformations}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <tr>
+                            <th>Stav objednávky:</th>
+                            <td>
+                                <label class="btn btn-secondary btn-sm">{_'entity.order.state_'.$item->state}</label>
+                            </td>
+                        </tr
+                        <tr>
+                            <th>Adresa:</th>
+                            <td>{$item->deliveryStreet}, {$item->deliveryCity} {$item->deliveryPsc}</td>
+                        </tr>
+                        <tr>
+                            <th>Kontaktní údaje:</th>
+                            <td>{$item->deliveryName} {$item->deliverySurname} {$item->deliveryCompany}</td>
+                        </tr>
+                        <tr>
+                            <th>Typ doručení:</th>
+                            <td>{$item->getShippingOrderItem()->name}</td>
+                        </tr>
+                        <tr>
+                            <th>Typ platby:</th>
+                            <td>{$item->getPaymentOrderItem()->name}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs" id="partnerTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Položky</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID položky</th>
+                                <th scope="col">Název</th>
+                                <th scope="col">Počet</th>
+                                <th scope="col">Cena s DPH</th>
+                                <th scope="col">Cena bez DPH</th>
+                                <th scope="col">DPH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foreach $item->ordersItems as $orderItem}
+                                <tr>
+                                    <th scope="row">{$orderItem->id}</th>
+                                    <td>{$orderItem->name}</td>
+                                    <td>{$orderItem->quantity} ks</td>
+                                    <td>{$orderItem->priceVat} Kč</td>
+                                    <td>{$orderItem->price} Kč</td>
+                                    <td>{$orderItem->vat} %</td>
+                                </tr>
+                            {/foreach}
+                            <tr>
+                                <th scope="row">Celkem</th>
+                                <td></td>
+                                <td></td>
+                                <td class="font-weight-bold">{$item->totalPriceVat} Kč</td>
+                                <td class="font-weight-bold">{$item->totalPrice} Kč</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeOrderStateModal" tabindex="-1" role="dialog" aria-labelledby="changeOrderStateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeOrderStateModalLabel">Změnit stav objednávky č. {$item->id}</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {control changeOrderStateForm}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Zrušit</button>
+            </div>
+        </div>
+    </div>
+</div>

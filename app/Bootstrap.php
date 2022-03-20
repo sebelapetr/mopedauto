@@ -22,6 +22,7 @@ class Bootstrap
 
         define("WWW_DIR", __DIR__.'/../www');
         define("APP_DIR", __DIR__);
+        define("TEMP_DIR", __DIR__.'/../temp');
 
         $debugIps = require __DIR__ . '/../debug-ips.php';
         $configurator->setDebugMode($debugIps);

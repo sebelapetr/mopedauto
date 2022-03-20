@@ -31,10 +31,9 @@
 
                                         <figure id="links" class="links">
                                             {if $product->getMainImage(App\Model\ProductImage::SIZE_MD) !== null}
-                                                <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}"
+                                                <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_ORIGINAL)->filePath}"
                                                    title="Image Caption Here" data-gallery="">
-                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_MD)->filePath}" class='gallery-img' alt="">
-                                                </a>
+                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}" class='gallery-img' alt="">
                                             {else}
                                                 <img src="{$basePath}/images/products/placeholder.jpg" class='gallery-img' alt="">
                                             {/if}

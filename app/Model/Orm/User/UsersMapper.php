@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Nextras\Orm\Mapper\Mapper;
 
-class UsersMapper extends Mapper{
+class UsersMapper extends Mapper
+{
     
 }

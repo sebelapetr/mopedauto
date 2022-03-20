@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    {include "_layout/head.latte"}
+    {include "_layout/head-scripts.latte"}
+</head>
+<body id="page-top">
+    <div id="wrapper">
+
+        {control menuComponent}
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+
+                {include '_layout/navbar.latte'}
+
+                <div class="container-fluid">
+                    {snippetArea flashesArea}
+                        <div style="position: absolute; top: 100px; right: 0;z-index: 1000">
+                            {foreach $flashes as $flashMessage}
+                                {include '_layout/flashMessage.latte', flashMessage => $flashMessage}
+                            {/foreach}
+                        </div>
+                    {/snippetArea}
+
+                    {include #content}
+                </div>
+            </div>
+
+            {include  '_layout/footer.latte'}
+
+        </div>
+
+    </div>
+
+    {include '_layout/scroll.latte'}
+
+    {include '_layout/logoutModal.latte'}
+
+    {include '_layout/footer-scripts.latte'}
+
+    {ifset #js}
+        {include #js}
+    {/ifset}
+
+<script>
+    $('.toast').toast('show')
+</script>
+</body>
+</html>

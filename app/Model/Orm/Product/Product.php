@@ -30,7 +30,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string|NULL $description
  * @property int|NULL $weight
  * @property bool|NULL $recept
- * @property int|NULL $active
+ * @property boolean $visible {default false}
  * @property string|NULL $sukl
  * @property string|NULL $pdkId
  * @property string|NULL $priceList
@@ -41,8 +41,12 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property OrdersItem|NULL $orderItem {1:m OrdersItem::$product}
  * @property ProductImage[]|NULL|OneHasMany $images {1:m ProductImage::$product}
  * @property int|NULL $saled
- * @property int|NULL $available
  * @property string $url {virtual}
+ * @property boolean $deleted {default false}
+ * @property boolean $sale {default false}
+ * @property boolean $isHeavy {default false}
+ * @property boolean $new {default false}
+ * @property boolean $discount {default false}
  */
 class Product extends Entity
 {

@@ -1,0 +1,24 @@
+{layout '../@layoutLogin.latte'}
+{block content}
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="text-center">
+                        <img src="{$basePath}/images/logo.svg" class="my-5" height="75" style="margin-top:25% !important;"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        {control loginForm}
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="#">Zapomněli jste heslo?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

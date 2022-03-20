@@ -45,6 +45,20 @@ order:
     zip: 'PSČ'
     invoicingZip: 'Fakturační PSČ'
     address: 'Adresa doručení'
+    paymentType: 'Platba'
+    deliveryType: 'Doručení'
+    state: 'Stav objednávky'
+    totalPriceVat: 'Cena s DPH'
+    shipping_ADDRESS: 'PPL malý balík'
+    shipping_PERSONAL: 'Osobní odběr'
+    payment_CASH_ON_DELIVERY: 'Platba dobírkou'
+    payment_CARD: 'Platba kartou'
+    payment_CASH: 'Platba v hotovosti'
+    state_UNFINISHED: 'Neodeslaná'
+    state_CREATED: 'Odeslaná'
+    state_RECEIVED: 'Příjmutá'
+    state_COMPLETE: 'Vyřízená'
+    state_STORNO: 'Stornovaná'
 
 partnerBranch:
     name: 'Název'
@@ -60,6 +74,7 @@ partnerBranch:
 
 city:
     name: 'Název'
+    zips: 'PSČ'
 
 zip:
     zip: 'PSČ'
@@ -68,6 +83,9 @@ zip:
 deliveryType:
     description: 'Popis'
     type: 'Typ'
+    typeSUPER_EXPRESS: 'Superexpress'
+    typeEXPRESS: 'Express'
+    typeSTANDARD: 'Standard'
 
 document:
     createdAt: 'Datum vytvoření'
@@ -77,3 +95,58 @@ document:
 paymentType:
     description: 'Popis'
     type: 'Typ'
+    typeCARD: 'Karta'
+    typeCASH: 'Hotovost'
+    typeMEAL_TICKET: 'Stravenka'
+
+vehicleLog:
+    createdAt: 'Datum vytvoření'
+    event: 'Událost'
+    createdBy: 'Vytvořil'
+    vehicleId: 'SPZ'
+    active: 'Aktivní?'
+    eventACCIDENT: 'Nehoda'
+    eventTANKING: 'Tankování'
+    eventASSIGN: 'Převzetí'
+    eventDESSIGN: 'Předání'
+
+orderLog:
+    createdAt: 'Datum vytvoření'
+    assignedTo: 'Přiřazeno'
+    createdBy: 'Vytvořil'
+    order: 'Objednávka'
+    orderState: 'Stav'
+    orderStateCREATED: 'Vytvořeno'
+    orderStateASSIGNED_TO_BRANCH: 'Přiřazeno pobočce'
+    orderStateREADY: 'Připraveno'
+    orderStateACCEPTED: 'Akceptováno'
+    orderStateDELIVERING: 'Doručování'
+    orderStateDELIVERED: 'Doručeno'
+    orderStateCOMPLETED: 'Dokončeno'
+    orderStateON_HOLD: 'Pozastaveno'
+    orderStateDAMAGED: 'Poškozeno'
+    orderStateNOT_TAKEN: 'Nepřevzato'
+    orderStateASSIGNED_TO_COURRIER: 'Přiřazeno kurýrovi'
+    
+user:
+    name: 'Jméno'
+    surname: 'Příjmení'
+    phoneNumber: 'Telefon'
+    email: 'Email'
+
+knowledge:
+    heading: 'Nadpis'
+    description: 'Popis'
+    createdAt: 'Datum vytvoření'
+
+courierLog:
+    createdAt: 'Čas události'
+    type: 'Typ události'
+    typeACCIDENT: 'Nehoda'
+
+product:
+    number: 'Číslo'
+    image: 'Obrázek'
+    name: 'Název'
+    visible: 'Viditelný'
+    catalogPriceVat: 'Cena s DPH'

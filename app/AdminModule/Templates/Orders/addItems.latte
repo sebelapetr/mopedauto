@@ -1,0 +1,146 @@
+{varType App\Model\OrderItem $orderItem}
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">{_app.orders.orderItems.add}</h1>
+    </div>
+      <div class="col-sm-6">
+        <a n:href="detail, $order->id" class="btn btn-success btn-sm float-right">Přejít na detail objednávky</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-11 m-auto">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">{_app.orders.orderItems.add}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" n:snippet="orderItems">
+                    <form id="addOrderItemForm">
+                        <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Název položky*</th>
+                                    <th>Popis</th>
+                                    <th>Váha</th>
+                                    <th>Rozměry</th>
+                                    <th>Cena s DPH*</th>
+                                    <th>DPH*</th>
+                                    <th>Počet (ks)*</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $order->orderItems as $orderItem}
+                                    <tr>
+                                        <td>{$orderItem->itemName}</td>
+                                        <td>{$orderItem->description}</td>
+                                        <td>{$orderItem->weight}</td>
+                                        <td>{$orderItem->resolution}</td>
+                                        <td>{$orderItem->brutto}</td>
+                                        <td>{$orderItem->vat}</td>
+                                        <td>{$orderItem->quantity}</td>
+                                        <td><a href="javascript:void(0)" class="btn btn-sm btn-danger remove-item" data-order-item-id="{$orderItem->id}"><i class="fa fa-trash"></a></td>
+                                    </tr>
+                                {/foreach}
+                                <tr>
+                                    <td><input class="form-control" type="text" name="itemName" required/></td>
+                                    <td><input class="form-control" type="text" name="description"/></td>
+                                    <td><input class="form-control" type="number" name="weight"/></td>
+                                    <td><input class="form-control" type="text" name="resolution"/></td>
+                                    <td><input class="form-control" type="text" name="brutto" required/></td>
+                                    <td><input class="form-control" type="number" name="vat" required/></td>
+                                    <td><input class="form-control" type="number" name="quantity" required/></td>
+                                    <td><a href="javascript:void(0)" class="btn btn-sm btn-success add-item"><i class="fa fa-plus"></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block js}
+    {snippet scripts}
+        <script>
+            $('.add-item').click(function () {
+                addOrderItem();
+            });
+
+            $('.remove-item').click(function () {
+                var orderItemId = $(this).data('order-item-id');
+                removeOrderItem(orderItemId);
+            });
+
+            function addOrderItem()
+            {
+                var formData = $('#addOrderItemForm').serialize();
+                if (checkData(formData)) {
+                    $.nette.ajax({
+                        url: {link addOrderItem!},
+                        method: 'POST',
+                        data: {
+                            data: formData
+                        },
+                        success: function (payload) {
+
+                        },
+                        error: function (xhr, ajaxOptions, thrownError)
+                        {
+
+                        }
+                    });
+                } else {
+
+                }
+            }
+
+            function removeOrderItem(orderItemId)
+            {
+                $.nette.ajax({
+                    url: {link removeOrderItem!},
+                    method: 'POST',
+                    data: {
+                        orderItemId: orderItemId
+                    },
+                    success: function (payload) {
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError)
+                    {
+
+                    }
+                });
+            }
+
+            function checkData(data)
+            {
+                data = data.split('&');
+                var response = {};
+                for (var k in data){
+                    var newData = data[k].split('=');
+
+                    var inputName = newData[0];
+                    var value = newData[1];
+
+                    var input = $("[name='"+inputName+"']");
+                    var required = input.prop('required');
+
+                    if (required && value === '' || value === ' ')
+                    {
+                        $(input).css('border', '1px solid red');
+                        window.alert('Vyplňte všechny povinné údaje.');
+                        return false
+                    } else {
+                        $(input).css('border', ' 1px solid #d1d3e2');
+                    }
+                }
+                return true;
+            }
+        </script>
+    {/snippet}
+{/block}
+

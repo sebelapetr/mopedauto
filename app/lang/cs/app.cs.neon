@@ -2,7 +2,8 @@
 # Date: 22. 9. 2020
 # Time: 00:39
 
-title: 'Interní systém Soused.Online'
+title: 'Interní systém Mopedauto®'
+name: 'Mopedauto®'
 
 dashboard:
     title: 'Dashboard'
@@ -14,20 +15,30 @@ dashboard:
         title: 'Aktuálně pracují'
     workersOnWay:
         title: 'Aktuálně na cestě'
+    actualOrders:
+        title: 'Aktuální objednávky'
 
 cms:
     title: 'Správa obsahu webu'
 
 couriers:
     title: 'Kurýři'
+    couriersList: 'Seznam kurýrů'
+    detail: 'Detail kurýra %name%'
+    basicInformations: 'Obecné informace'
 
 documents:
     title: 'Dokumenty'
     documentsList: 'Seznam dokumentů'
     add: 'Přidat dokument'
+    edit: 'Upravit dokument %name%'
 
 operators:
     title: 'Operátoři'
+    operatorsList: 'Seznam operátorů'
+    logs: 'Záznamy'
+    basicInformations: 'Obecné informace'
+    detail: 'Detail operátora %name%'
 
 partners:
     title: 'Partneři'
@@ -49,6 +60,12 @@ branches:
 orders:
     title: 'Objednávky'
     ordersList: 'Seznam objednávek'
+    basicInformations: 'Obecné informace'
+    deliveryInformations: 'Doručovací informace'
+    detail: 'Detail objednávky č. %name%'
+    add: 'Nová objednávka'
+    orderItems:
+        add: 'Přidat položky objednávky'
 
 support:
     title: 'Podpora'
@@ -58,12 +75,22 @@ vehicles:
     vehiclesList: 'Seznam vozidel'
     add: 'Přidat vozidlo'
     edit: 'Upravit vozidlo %name%'
+    detail: 'Detail vozidla %name%'
+    basicInformations: 'Obecné informace'
 
 systemSettings:
     title: 'Systémové nastavení'
+    edit: 'Upravit nastavení'
 
 users:
     title: 'Uživatelé'
+    role: 'Role'
+    list: 'Seznam uživatelů'
+    detail: 'Detail uživatele %name%'
+    basicInformations: 'Obecné informace'
+    usersList: 'Seznam uživatelů'
+    edit: 'Upravit uživatele %name%'
+    add: 'Přidat uživatele'
 
 cities:
     title: 'Města'
@@ -88,3 +115,38 @@ paymentTypes:
     add: 'Přidat možnost platby'
     paymentTypesList: 'Seznam možností plateb'
     edit: 'Upravit možnost platby %name%'
+
+vehicleLogs:
+    title: 'Záznamy vozidel'
+    add: 'Přidat záznam vozidla'
+    vehicleLogsList: 'Seznam záznamů vozidel'
+    edit: 'Upravit seznam záznamů vozidel'
+    
+rights:
+    title: 'Oprávnění'
+    role: 'Role'
+    edit: 'Upravit oprávnění role %name%'
+
+orderLogs:
+    title: 'Záznamy objednávek'
+    add: 'Přidat záznam objednávky'
+    orderLogsList: 'Seznam záznamů objednávek'
+    edit: 'Upravit seznam záznamů objednávek'
+
+knowledge:
+    title: 'Znalostní báze'
+    add: 'Přidat vlákno'
+    edit: 'Upravit vlákno'
+    date: 'Datum vytvoření: '
+
+authentication:
+    title: 'Přihlášení'
+
+categories:
+    title: 'Kategorie'
+
+products:
+    title: 'Produkty'
+
+contacts:
+    title: 'Adresář'

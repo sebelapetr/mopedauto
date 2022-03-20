@@ -1,11 +1,11 @@
 {
-	"description": "Internal system for Soused.Online",
+	"description": "Internal system for mopedauto.cz",
 	"type": "project",
 	"require": {
 		"php": ">= 7.4",
 		"nette/application": "^3.0",
 		"nette/bootstrap": "^3.0",
-		"nette/caching": "^3.0",
+		"nette/caching": "^3.1",
 		"nette/database": "^3.0",
 		"nette/di": "^3.0",
 		"nette/finder": "^2.5",
@@ -25,7 +25,8 @@
 		"contributte/console": "^0.8.0",
 		"contributte/translation": "^0.7.0",
 		"ublaboo/datagrid": "v6.2.21",
-		"contributte/comgate": "^0.2.0"
+		"contributte/comgate": "^0.2.0",
+		"ijvo/jquery-fileupload": "^2.1"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0",

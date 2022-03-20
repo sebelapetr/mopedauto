@@ -1,0 +1,30 @@
+<form n:name="form">
+    {foreach $form->getErrors() as $error}
+        <div class="card bg-danger text-white shadow mb-3">
+            <div class="card-body">
+                {$error}
+            </div>
+        </div>
+    {/foreach}
+    <div class="form">
+        <div class="form-group">
+            {label name} *
+            {input name}
+        </div>
+        <div class="form-group">
+            {label seoName}
+            {input seoName}
+        </div>
+        <div class="form-group">
+            {label description}
+            {input description}
+        </div>
+        <div class="form-group">
+            <input n:name="visible">
+            <label n:name="visible" />
+        </div>
+        <div class="form-group">
+            {input send}
+        </div>
+    </div>
+</form>

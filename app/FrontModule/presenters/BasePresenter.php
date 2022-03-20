@@ -7,6 +7,8 @@ use App\FrontModule\Forms\INewsletterFormFactory;
 use App\Model\Session\CartService;
 use Nette\Application\UI\Presenter;
 use App\Model\Orm;
+use Nette\Caching\Cache;
+use Nette\Caching\Storages\FileStorage;
 use Tracy\Debugger;
 
 abstract class BasePresenter extends Presenter{
@@ -22,6 +24,8 @@ abstract class BasePresenter extends Presenter{
 
     /** @inject */
     public IFindFormFactory $findFormFactory;
+
+    public Cache $cache;
 
     public const INITIAL_CATEGORY_SPARE_PARTS = "nahradni-dily";
     public const INITIAL_CATEGORY_CARS = "nabidka_mopedaut";
@@ -41,6 +45,8 @@ abstract class BasePresenter extends Presenter{
     public function startup()
     {
         parent::startup();
+        $storage = new FileStorage(TEMP_DIR);
+        $this->cache = new Cache($storage, 'categories');
     }
 
     public function beforeRender()

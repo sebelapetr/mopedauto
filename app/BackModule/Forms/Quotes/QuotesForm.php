@@ -1,6 +1,6 @@
 <?php
 
-namespace App\BackModule\Forms;
+namespace App\AdminModule\Forms;
 
 use App\Model\QuoteService;
 use Nette\Application\UI\Control;

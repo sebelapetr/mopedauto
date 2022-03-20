@@ -1,3 +1,99 @@
 .topbar {
     box-shadow:0 .15rem 0.75rem 0 rgba(58,59,69,.15)!important;
 }
+
+.list-group.list-group-root {
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e3e3e3;
+}
+
+.list-group.list-group-root .list-group {
+    margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+    border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+    padding-left: 40px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+    padding-left: 60px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group-item {
+    padding-left: 80px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+    padding-left: 100px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+    padding-left: 120px;
+}
+
+.list-group-item .fa {
+    margin-right: 5px;
+}
+
+.list-group-item:hover {
+    border-width: 1px 0 !important;
+    cursor: pointer;
+}
+
+.list-group-item a:hover {
+    text-decoration: underline;
+}
+
+.list-group-item i {
+    cursor: pointer;
+    color: #1c63b8;
+}
+
+.list-group-item-active {
+    background: #1c63b8;
+    color: white;
+}
+.list-group-item-active a {
+    color: white;
+}
+
+.list-group-item .fa-plus-square {
+    color: #1c63b842;
+}
+
+.list-group-item .fa-plus-square-selected {
+    color: #fff;
+}
+
+input[type=checkbox], input[type=radio] {
+    height: 1.2em !important;
+    width: 1.2em !important;
+    margin-right: 5px;
+    top: 4px;
+    display: inline-block;
+    position: relative;
+}
+
+.products-datagrid-img {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+}
+
+#snippet-productsDatagrid-table  th {
+    text-align: center !important;
+}
+
+#snippet-productsDatagrid-tbody td {
+    text-align: center !important;
+}

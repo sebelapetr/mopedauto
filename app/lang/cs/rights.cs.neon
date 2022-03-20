@@ -1,0 +1,87 @@
+orders:
+    title: 'Objednávky'
+    read: 'Přístup do sekce objednávek'
+    showbasicinfo: 'Zobrazit obecné informace'
+
+rights:
+    title: 'Oprávnění'
+    read: 'Přístup do sekce oprávnění'
+
+branches:
+    title: 'Pobočky'
+    read: 'Přístup do sekce poboček'
+    edit: 'Vytvářet / upravovat pobočky'
+
+partners:
+    title: 'Partneři'
+    read: 'Přístup do sekce partnerů'
+
+cities:
+    title: 'Města'
+    read: 'Přístup do sekce měst'
+
+cms:
+    title: 'CMS'
+    read: 'Přístup do sekce CMS'
+
+couriers:
+    title: 'Kurýři'
+    read: 'Přístup do sekce kurýřů'
+
+deliveryTypes:
+    title: 'Typy doručení'
+    read: 'Přístup do sekce typů doručení'
+
+dashboard:
+    title: 'Dashboard'
+    read: 'Přístup do sekce Dashboard'
+    showstatsturnover: 'Zobrazit statistiku - obrat'
+    showstatsorders: 'Zobrazit statistiku - objednávky'
+    showstatsorderitems: 'Zobrazit statistiku - objednané položky'
+    showactualorders: 'Zobrazit aktuální objednávky'
+    showactiveusers: 'Zobrazit aktivní pracovníky'
+    showcouriersonway: 'Zobrazit kurýry na cestě'
+
+documents:
+    title: 'Dokumenty'
+    read: 'Přístup do sekce dokumentů'
+
+operators:
+    title: 'Operátoři'
+    read: 'Přístup do sekce operátorů'
+
+paymentTypes:
+    title: 'Typy plateb'
+    read: 'Přístup do sekce typů plateb'
+
+vehicles:
+    title: 'Vozidla'
+    read: 'Přístup do sekce vozidel'
+
+zips:
+    title: 'PSČ'
+    read: 'Přístup do sekce správy psč'
+
+users:
+    title: 'Uživatelé'
+    read: 'Přístup do sekce uživatelů'
+
+support:
+    title: 'Podpora'
+    read: 'Přístup do sekce podpory'
+
+systemSettings:
+    title: 'Systémové nastavení'
+    read: 'Přístup do sekce systémového nastavení'
+
+vehiclelogs:
+    title: 'Záznamy vozidel'
+    read: 'Přístup do sekce záznamů vozidel'
+
+orderlogs:
+    title: 'Záznamy objednávek'
+    read: 'Přístup do sekce záznamů objednávek'
+
+knowledge:
+    title: 'Znalostní báze'
+    read: 'Přístup do sekce znalostní báze'

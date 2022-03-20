@@ -1,0 +1,20 @@
+{form form}
+    {foreach $form->getErrors() as $error}
+        <div class="card bg-danger text-white shadow mb-3">
+            <div class="card-body">
+                {$error}
+            </div>
+        </div>
+    {/foreach}
+
+    <div class="form">
+        {foreach $form->components as $component}
+            <div class="form-group">
+                <div class="form-check">
+                    {label $component}
+                    {input $component}
+                </div>
+            </div>
+        {/foreach}
+    </div>
+{/form}

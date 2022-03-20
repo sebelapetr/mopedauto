@@ -1,0 +1,26 @@
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">{_app.orders.add}</h1>
+    </div>
+    <div class="col-sm-6">
+        <a n:href="default" class="btn btn-success btn-sm float-right">Zpět na přehled</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-7 m-auto">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">{_app.orders.add}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {control orderForm}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

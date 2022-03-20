@@ -1,0 +1,74 @@
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">Kategorie</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">Seznam kategorií</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="list-group list-group-root well">
+
+                        {define categoryItem}
+                            {if isset($categoryParent['nodes']) && !empty($categoryParent['nodes'])}
+                                <span href="#item-{$categoryParent['id']}" class="list-group-item {if $categoryParent['state']['selected']}list-group-item-active{/if}" data-toggle="collapse">
+                                    <i  class="fa fa-chevron-right"></i>
+                                    <a href="{$categoryParent['href']}">{$categoryParent['text']}</a>
+                                    <a n:href="addCategory! $categoryParent['id']"><i class="fa fa-plus-square {if $categoryParent['state']['selected']}fa-plus-square-selected{/if}"></i></a>
+                                </span>
+                                <div class="list-group collapse {if $categoryParent['state']['expanded']}show{/if}" id="item-{$categoryParent['id']}">
+                                    {foreach $categoryParent['nodes'] as $node}
+                                        {include categoryItem 'categoryParent' => $node, 'parentId' => $categoryParent['id']}
+                                    {/foreach}
+                                </div>
+                            {else}
+                                <span class="list-group-item {if $categoryParent['state']['selected']}list-group-item-active{/if}">
+                                    <a href="{$categoryParent['href']}">
+                                        {$categoryParent['text']}
+                                    </a>
+                                    <a n:href="addCategory! $categoryParent['id']">
+                                        <i  class="fa fa-plus-square {if $categoryParent['state']['selected']}fa-plus-square-selected{/if}"></i>
+                                    </a>
+                                </span>
+                            {/if}
+                        {/define}
+
+                            {foreach $categoriesTree as $categoryParent}
+                            {include categoryItem 'categoryParent' => $categoryParent, 'parentId' => 0}
+                        {/foreach}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="m-0 font-weight-bold text-dark">Editace kategorie</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <a n:if="$actualCategory" n:href="delete! $actualCategory->id" onclick="return confirm('Opravdu chcete smazat kategorii?')" class="btn btn-danger btn-sm float-right"><i class="fa fa-trash"></i> Smazat</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {if $actualCategory}
+                        {control categoryForm}
+                    {else}
+                        <p>Pro zobrazení formuláře vyberte kategorii.</p>
+                    {/if}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

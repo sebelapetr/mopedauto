@@ -1,0 +1,65 @@
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">{_app.users.title}</h1>
+    </div>
+    <div class="col-sm-6">
+        <a n:href="edit" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i> {_app.users.add}</a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">{_app.users.role}</h6>
+            </div>
+            <ul class="list-group">
+                {foreach $roles as $roleEnt}
+                    <a n:href="this, $roleEnt->id"><li class="list-group-item">{_'roles.'.$roleEnt->intName}</li></a>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-dark">{_app.users.list}</h6>
+            </div>
+            <div class="card-body">
+                {if $users->countStored() > 0}
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Jméno</th>
+                                <th>Email</th>
+                                <th></th>
+                            </tr>
+                            {foreach $users as $userEnt}
+                                <tr>
+                                    <td>
+                                        {if $userEnt->active}
+                                            <b>{$userEnt->name} {$userEnt->surname}</b>
+                                        {else}
+                                            <strike>{$userEnt->name} {$userEnt->surname}</strike>
+                                        {/if}
+                                    </td>
+                                    <td>{$userEnt->email}</td>
+                                    <td>
+                                        <a n:href="detail, $userEnt->id">Detail</a> |
+                                        <a n:href="edit, $userEnt->id">Upravit</a>
+                                    </td>
+                                </tr>
+                            {/foreach}
+                        </table>
+                    </div>
+                {else}
+                    <div class="alert alert-warning">
+                        <p class="my-2">Nebyl nalezen žádný uživatele v roli {_'roles.'.$role->intName}</p>
+                    </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+</div>

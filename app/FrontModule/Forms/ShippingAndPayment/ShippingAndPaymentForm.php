@@ -7,6 +7,7 @@ use App\Model\OrdersItem;
 use App\Model\Orm;
 use App\Model\QuoteService;
 use App\Model\Session\CartService;
+use Contributte\Translation\Translator;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
@@ -25,10 +26,13 @@ class ShippingAndPaymentForm extends Control
 
     public Orm $orm;
 
-    public function __construct(CartService $cartService, Orm $orm)
+    public Translator $translator;
+
+    public function __construct(CartService $cartService, Orm $orm, Translator $translator)
     {
         $this->cartService = $cartService;
         $this->orm = $orm;
+        $this->translator = $translator;
     }
 
     protected function createComponentShippingAndPaymentForm()
@@ -82,7 +86,7 @@ class ShippingAndPaymentForm extends Control
 
         $order->typeDelivery = $values->shipping;
         $orderItemsShipping = new OrdersItem();
-        $orderItemsShipping->name = $values->shipping;
+        $orderItemsShipping->name = $this->translator->translate('entity.order.shipping_'.$values->shipping);
         $orderItemsShipping->type = OrdersItem::TYPE_SHIPPING;
         $orderItemsShipping->price = $order->getShippingPrice(false);
         $orderItemsShipping->priceVat = $order->getShippingPrice(true);
@@ -94,7 +98,7 @@ class ShippingAndPaymentForm extends Control
 
         $order->typePayment = $values->payment;
         $orderItemsPayment = new OrdersItem();
-        $orderItemsPayment->name = $values->payment;
+        $orderItemsPayment->name = $this->translator->translate('entity.order.payment_'.$values->payment);
         $orderItemsPayment->type = OrdersItem::TYPE_PAYMENT;
         $orderItemsPayment->price = $order->getPaymentPrice(false);
         $orderItemsPayment->priceVat = $order->getPaymentPrice(false);

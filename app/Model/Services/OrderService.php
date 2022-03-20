@@ -51,12 +51,22 @@ class OrderService
         $order->company = $values->company;
         $order->ico = $values->ico;
         $order->dic = $values->dic;
-        $order->deliveryName = $values->deliveryName;
-        $order->deliverySurname = $values->deliverySurname;
-        $order->deliveryCompany = $values->deliveryCompany;
-        $order->deliveryStreet = $values->deliveryStreet;
-        $order->deliveryCity = $values->deliveryCity;
-        $order->deliveryPsc = $values->deliveryPsc;
+
+        if ($values->otherAddress == true) {
+            $order->deliveryName = $values->deliveryName;
+            $order->deliverySurname = $values->deliverySurname;
+            $order->deliveryCompany = $values->deliveryCompany;
+            $order->deliveryStreet = $values->deliveryStreet;
+            $order->deliveryCity = $values->deliveryCity;
+            $order->deliveryPsc = $values->deliveryPsc;
+        } else {
+            $order->deliveryName = $order->name;
+            $order->deliverySurname = $order->surname;
+            $order->deliveryCompany = $order->company;
+            $order->deliveryStreet = $order->street;
+            $order->deliveryCity = $order->city;
+            $order->deliveryPsc = $order->psc;
+        }
         $order->newsletter = 1;
         $order->totalPrice = 0;
         $order->totalPriceVat = 0;
@@ -79,7 +89,7 @@ class OrderService
             ->addTo($order->email)
             ->addBcc(self::FROM_EMAIL)
             ->setSubject($title)
-            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/orderSent.latte', [
+            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../AdminModule/templates/Emails/orderSent.latte', [
                 'order' => $order,
                 'basePath' => __DIR__,
                 'hash' => $hash,
@@ -104,7 +114,7 @@ class OrderService
         $mail->setFrom(self::NO_REPLY_EMAIL)
             ->addTo(self::FROM_EMAIL)
             ->setSubject($subject)
-            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/newContact.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
+            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../AdminModule/templates/Emails/newContact.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
             ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo-l.png');
 
         $mailer = new SendmailMailer();
@@ -121,7 +131,7 @@ class OrderService
         $mail->setFrom(self::NO_REPLY_EMAIL)
             ->addTo(self::FROM_EMAIL)
             ->setSubject($subject)
-            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/newService.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
+            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../AdminModule/templates/Emails/newService.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
             ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo-l.png');
 
         $mailer = new SendmailMailer();
@@ -138,7 +148,7 @@ class OrderService
         $mail->setFrom(self::NO_REPLY_EMAIL)
             ->addTo(self::FROM_EMAIL)
             ->setSubject($subject)
-            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../BackModule/templates/Emails/newRedemption.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
+            ->setHtmlBody($latte->renderToString(__DIR__ . '/../../AdminModule/templates/Emails/newRedemption.latte', ['values' => $values, 'title' => $subject]), __DIR__."/../../../www/images/")
             ->addEmbeddedFile(__DIR__ . '/../../../www/images/logo-l.png');
 
         $mailer = new SendmailMailer();

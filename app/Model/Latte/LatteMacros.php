@@ -14,9 +14,12 @@ use Latte\Compiler;
 use Latte\Macros\MacroSet;
 
 class LatteMacros extends MacroSet {
-	
+
     public static function install(Compiler $compiler): void
     {
-		$set = new MacroSet($compiler);
+        $me = new static($compiler);
+        $set = new MacroSet($compiler);
+
+        $set->addMacro('ifIsAllowed', 'if ($presenter->getUser()->isAllowed(explode(":",%node.word)[0],explode(":",%node.word)[1])){', '}');
     }
 }

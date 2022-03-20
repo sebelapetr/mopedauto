@@ -687,11 +687,12 @@
 	 }
 
 	 //Jquery Spinner / Quantity Spinner
+	/*
 	if($('.quantity-spinner').length){
 		$("input.quantity-spinner").TouchSpin({
 		  verticalbuttons: true
 		});
-	}
+	}*/
 
 
 	//LightBox / Fancybox

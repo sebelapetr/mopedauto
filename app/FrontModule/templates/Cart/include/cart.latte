@@ -3,38 +3,39 @@
     <h3>Košík</h3>
 </div>
 <div class="col-sm-12">
-    <div class="row">
         {varType App\Model\Order $order}
         {if $order->ordersItems->countStored() !== 0}
             {varType App\Model\OrdersItem $orderItem}
             {foreach $order->ordersItems as $orderItem}
                 {if $orderItem}
-                        <div class="col-sm-4">
-                            <a href="{link removeProductFromCart! $orderItem->id}" n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT" style="position: absolute; top: 0; left: 5px; color: red"><i class="fas fa-times fa-xs"></i></a>
-
+                     <div class="row" style="border-bottom: 2px solid #efefef; padding: 7px 5px;">
+                        <div class="col-md-4">
                             {var $image = $orderItem->product ? $orderItem->product->getMainImage(App\Model\ProductImage::SIZE_S) : null}
                             {var $imagePath = $image ? $image->filePath : null}
                             <img src="{$basePath}{$imagePath}" alt="{$orderItem->name|noescape}" n:if="$imagePath" style="    padding: 10px 0;">
                         </div>
-                        <div class="col-sm-8 pull-right">
-                            <div style="color: #36404b; padding: 10px 0;">
+                        <div class="col-md-8 pull-right">
+                            <a href="{link removeProductFromCart! $orderItem->id}" n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT"
+                               style="position: absolute; top: 3px; right: 8px; color: #36404b"><i
+                                        class="fas fa-trash-alt"></i></a>
+                            <div style="color: #36404b; padding: 10px 10px 10px 0;">
                                 {$orderItem->name|noescape}
                             </div>
-                            <div n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT" style="font-size: 0.8rem;">
-                                <div style="background: #efefef; padding: 0 7px; display: inline-flex;">
+                            <div n:if="$orderItem->type == App\Model\OrdersItem::TYPE_PRODUCT" style="font-size: 0.8rem; background: #efefef; display: inline-block;">
+                                <div style="padding: 0 4px 0 8px; display: inline-flex; background: #efefef;">
                                     <a href="{link addProductQuantity! $orderItem->id}"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                 </div>
-                                <span style="color: #36404b">
-                                <a class="">{$orderItem->quantity} Ks</a>
-                                </span>
-                                <div style="background: #efefef; padding: 0 7px; display: inline-flex;">
+                                <input type="number" style="width: 40px; text-align: center; border: 1px solid #efefef;" placeholder="{$orderItem->quantity}">
+                                <div style="padding: 0 8px 0 4px; display: inline-flex; background: #efefef;">
                                 <a href="{link removeProductQuantity! $orderItem->id}" {if $orderItem->quantity===1}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}><i class="fa fa-minus" aria-hidden="true"></i></a>
                                 </div>
+
                             </div>
                             <div style="font-size: 1.1rem; color: #1c63b8; font-weight: 600;">
                                 <a class="pull-right" style="margin-bottom: 8px;">{$orderItem->priceVat} Kč</a>
                             </div>
                         </div>
+                    </div>
                 {/if}
             {/foreach}
         {else}
@@ -42,14 +43,13 @@
                 <a>Košík je prázdný</a>
             </div>
         {/if}
-    </div>
 </div>
-    <div class="text-center" style="color: white; background-color: #1c63b8; padding: 18px 0">
+    <div class="text-center" style="color: white; background-color: #1c63b8; padding: 18px 0; margin-top: -2px;">
         <h5>Celkem s DPH <br> {$order->totalPriceVat} Kč</h5>
     </div>
 </div>
 
-<div class="col-sm-12" style="padding: 25px 0 0">
+<div class="col-sm-12 xs-mob-y" style="padding: 25px 0 0">
     <a href="#" class="theme-btn btn-style-def pull-left">Zpět</a>
     <a href="#" class="theme-btn btn-style-def pull-right">Pokračovat v objednávce</a>
 </div>

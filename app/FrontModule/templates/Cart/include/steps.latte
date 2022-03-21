@@ -1,25 +1,29 @@
 {default $current = 1}
 <div class="row">
     <div class="col-sm-4">
-        <div class="steps-active">
+        <div class="{if $current == 1}steps-active{else}steps{/if}">
             <div style="font-size: 1.4rem;">1.</div>
             <div style="font-size: 0.8rem;">Doprava a platba</div>
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="steps">
+        <div class="{if $current == 2}steps-active{else}steps{/if}">
             <div style="font-size: 1.4rem;">2.</div>
             <div style="font-size: 0.8rem;">Osobní a doručovací údaje</div>
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="steps">
+        <div class="{if $current == 3}steps-active{else}steps{/if}">
             <div style="font-size: 1.4rem;">3.</div>
             <div style="font-size: 0.8rem;">Dokončená objednávka</div>
         </div>
     </div>
-    <div class="col-sm-12" style="padding:25px 15px">
-        <a href="#" class="theme-btn btn-style-def pull-left">Zpět</a>
-        <a href="#" class="theme-btn btn-style-def pull-right">Pokračovat v objednávce</a>
+    <div class="col-sm-12" style="padding:25px 15px" n:if="$current == 1">
+        <a n:href="SpareParts:default" class="theme-btn btn-style-def pull-left">Zpět</a>
+        <a href="javascript:void(0)" class="theme-btn btn-style-def pull-right submitShippingAndPaymentForm-btn">Pokračovat v objednávce</a>
+    </div>
+    <div class="col-sm-12" style="padding:25px 15px" n:if="$current == 2">
+        <a n:href="Cart:step1" class="theme-btn btn-style-def pull-left">Zpět</a>
+        <a href="javascript:void(0)" class="theme-btn btn-style-def pull-right submitPersonalDataForm-btn">Odeslat objednávku</a>
     </div>
 </div>

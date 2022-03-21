@@ -3,16 +3,11 @@
 <div class="col-sm-12">
     <a href="{link Homepage:default}"><i class="flaticon-home"></i></a>
     {foreach $parentCategories as $parentCategory}
-        <a>
-            <i class="flaticon-right-arrow"></i>
-        </a>
+        /
         <a href="{link SpareParts:default, 'seoName' => $parentCategory->url}">
             {$parentCategory->name}
         </a>
     {/foreach}
-{*    <a>*}
-{*        <i class="flaticon-right-arrow"></i>*}
-{*    </a>*}
     <a n:if="$product">
         {$product->productName}
     </a>

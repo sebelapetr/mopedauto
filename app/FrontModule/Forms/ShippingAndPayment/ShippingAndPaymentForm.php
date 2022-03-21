@@ -63,7 +63,8 @@ class ShippingAndPaymentForm extends Control
             ->setDefaultValue($this->cartService->getOrder()->typePayment)
             ->setRequired('Vyberte typ platby');
 
-        $form->addSubmit('submit', 'Pokračovat v objednávce');
+        $form->addSubmit('submit', 'Pokračovat v objednávce')
+            ->setHtmlAttribute("id", "submitShippingAndPaymentForm");
         $form->onSuccess[] = [$this, 'shippingAndPaymentFormSucceeded'];
 
         return $form;

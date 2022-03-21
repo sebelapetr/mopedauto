@@ -3,6 +3,7 @@
 namespace App\FrontModule\Presenters;
 
 use App\FrontModule\Forms\IAddProductFormFactory;
+use App\Model\AddProductService;
 use App\Model\Category;
 use App\Model\Product;
 use App\Model\Session\CartService;
@@ -37,6 +38,9 @@ class SparePartsPresenter extends BasePresenter
     public Category $actualCategory;
 
     public Product $actualProduct;
+
+    /** @inject */
+    public AddProductService $addProductService;
 
     public function startup()
     {
@@ -233,5 +237,14 @@ class SparePartsPresenter extends BasePresenter
     {
         $this->getPayload()->tree = json_encode($this->categoriesTree);
         $this->sendPayload();
+    }
+
+    public function handleAddProductToCart($id): void
+    {
+        $product = $this->orm->products->getById($id);
+        if ($product) {
+            $this->addProductService->addProduct($product->id, 1);
+        }
+        $this->redirect('this');
     }
 }

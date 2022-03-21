@@ -96,7 +96,8 @@ class PersonalDataForm extends Control{
         $form->addCheckbox('newsletter');
         $form->addCheckbox('terms')
             ->setRequired('Pro odeslání objednávky je potřeba odsouhlasit obchodní podmínky.');
-        $form->addSubmit('submit', 'Odeslat objednávku');
+        $form->addSubmit('submit', 'Odeslat objednávku')
+            ->setHtmlAttribute("id", "submitPersonalDataForm");
         $form->onSuccess[] = [$this, 'personalDataFormSucceeded'];
         return $form;
     }

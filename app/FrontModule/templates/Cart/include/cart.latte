@@ -1,3 +1,4 @@
+{default $current = 1}
 <div style="border: 2px solid #1c63b8">
 <div class="text-center" style="color: white; background-color: #1c63b8; padding: 18px 0">
     <h3>Košík</h3>
@@ -50,6 +51,8 @@
 </div>
 
 <div class="col-sm-12" style="padding: 25px 0 0">
-    <a href="#" class="theme-btn btn-style-def pull-left">Zpět</a>
-    <a href="#" class="theme-btn btn-style-def pull-right">Pokračovat v objednávce</a>
+    <a n:href="SpareParts:default" class="theme-btn btn-style-def pull-left" n:if="$current == 1">Zpět</a>
+    <a n:href="Cart:step1" class="theme-btn btn-style-def pull-left" n:if="$current == 2">Zpět</a>
+    <a href="javascript:void(0)" class="theme-btn btn-style-def pull-right submitShippingAndPaymentForm-btn" n:if="$current == 1">Pokračovat v objednávce</a>
+    <a href="javascript:void(0)" class="theme-btn btn-style-def pull-right submitPersonalDataForm-btn" n:if="$current == 2">Odeslat objednávku</a>
 </div>

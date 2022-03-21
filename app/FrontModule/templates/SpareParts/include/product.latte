@@ -1,4 +1,5 @@
 {varType App\Model\Product $product}
+{varType App\FrontModule\Presenters\SparePartsPresenter $presenter}
 <!-- Shop item -->
 <div class="shop-item col-lg-4 col-md-6 col-sm-12">
     <div class="feature-block">
@@ -22,5 +23,9 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-style-six btn-block">Do košíku</a>
+    {if $presenter->productInCart($product->id)}
+        <a class="btn btn-style-def rounded-0 btn-block" n:href="Cart:step1"><i class="fa fa-check"></i> Zboží čeká v košíku</a>
+    {else}
+        <a class="btn btn-style-six btn-block" n:href="addProductToCart!, id => $product->id">Vložit do košíku</a>
+    {/if}
 </div>

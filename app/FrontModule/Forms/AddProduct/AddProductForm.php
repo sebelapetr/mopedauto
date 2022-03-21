@@ -35,7 +35,7 @@ class AddProductForm extends Control
     }
     public function addProductFormSucceeded(Form $form, $values)
     {
-        $this->addProductService->addProduct($values);
+        $this->addProductService->addProduct($values->id, $values->quantity);
         $this->getPresenter()->flashMessage("Produkt byl přidán do košíku.");
     }
     public function render(){

@@ -72,15 +72,21 @@ class CartService
     public function addProductToCart(Product $product, int $quantity): bool
     {
         $order = $this->getOrder();
-        $orderItems = new OrdersItem();
-        $orderItems->name = $product->productName;
-        $orderItems->priceVat = $product->catalogPriceVat * $quantity;
-        $orderItems->price = $orderItems->priceVat / 1.21;
-        $orderItems->quantity = $quantity;
-        $orderItems->vat = 21;
-        $orderItems->type = OrdersItem::TYPE_PRODUCT;
-        $orderItems->product = $product;
-        $orderItems->order = $order;
+        $existingOrderItem = $order->ordersItems->toCollection()->getBy(['product' => $product]);
+        if ($existingOrderItem) {
+            $orderItems = $existingOrderItem;
+            $orderItems->quantity++;
+        } else {
+            $orderItems = new OrdersItem();
+            $orderItems->name = $product->productName;
+            $orderItems->priceVat = $product->catalogPriceVat * $quantity;
+            $orderItems->price = $orderItems->priceVat / 1.21;
+            $orderItems->quantity = $quantity;
+            $orderItems->vat = 21;
+            $orderItems->type = OrdersItem::TYPE_PRODUCT;
+            $orderItems->product = $product;
+            $orderItems->order = $order;
+        }
         try {
             $this->orm->persistAndFlush($orderItems);
         } catch (\Exception $e) {

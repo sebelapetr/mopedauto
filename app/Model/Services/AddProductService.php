@@ -17,9 +17,9 @@ class AddProductService
         $this->cartService = $cartService;
     }
 
-    public function addProduct($values)
+    public function addProduct($id, $quantity)
     {
-        $product = $this->orm->products->getById($values->id);
-        $this->cartService->addProductToCart($product, $values->quantity);
+        $product = $this->orm->products->getById($id);
+        $this->cartService->addProductToCart($product, $quantity);
     }
 }

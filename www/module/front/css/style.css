@@ -383,6 +383,23 @@ img{
 	border-style: solid;
 }
 
+.has-badge-mobile[data-count]:after {
+	position: absolute;
+	right: -8px;
+	top: -10px;
+	content: attr(data-count);
+	font-size: 70%;
+	padding: 0.6em;
+	border-radius: 999px;
+	line-height: .75em;
+	color: white;
+	text-align: center;
+	min-width: 2em;
+	font-weight: bold;
+	background: #1c63b8;
+	border-style: solid;
+}
+
 /***
 
 ====================================================================
@@ -8976,5 +8993,184 @@ button:focus{
 	position: absolute;
 	width: 100%;
 	height: 100%;
+}
+
+.lock-scroll {
+  overflow: hidden !important;
+  position: static; }
+
+@media (min-width: 1200px) {
+    .lock-scroll {
+      padding-right: 17px;
+   }
+}
+
+/* The side navigation menu */
+#side-main-nav {
+  height: 100%;
+  /* 100% Full-height */
+  width: 300px;
+  /* 0 width - change this with JavaScript */
+  max-width: 100%;
+  position: fixed;
+  /* Stay in place */
+  z-index: 12;
+  /* Stay on top */
+  top: 0;
+  /* Stay at the top */
+  right: -360px;
+  background-color: white;
+  /* Black*/
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  transition: 0.5s;
+  /* 0.5 second transition effect to slide in the sidenav */
+}
+@media (max-width: 659px) {
+  #side-main-nav {
+    right: -100%;
+  }
+}
+/* Position and style the close button (top right corner) */
+/*.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    font-size: 36px;
+    margin-left: 50px;
+    right: -60px; !*right: 25px;*!
+}*/
+#side-main-nav .side-main-nav-close {
+  height: 60px;
+  width: 60px;
+  position: fixed;
+  background-color: #DC0069;
+  /*right: 500px;*/
+  right: -60px;
+  top: 0;
+  transition: 0.5s;
+  color: white;
+  cursor: pointer;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+}
+#side-main-nav .side-main-nav-close-mobile {
+  font-size: 40px;
+  margin-top: -15px;
+  margin-right: 15px;
+  color: #002e5d;
+}
+@media (min-width: 660px) {
+  #side-main-nav .side-main-nav-close-mobile {
+    display: none;
+  }
+}
+/*!* Style page content - use this if you want to push the page content to the right when you open the side navigation *!
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}*/
+#side-main-nav-overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.main-nav-content {
+  margin-top: 20px;
+  padding: 0 15px;
+}
+.main-nav-content .item-in-main-nav {
+  padding: 10px 25px;
+}
+.main-nav-content .item-in-main-nav.active {
+  background: #F5F7F9;
+  color: #dc0069;
+}
+.main-nav-content a {
+  color: #002e5d;
+  transition: 0.3s;
+}
+.main-nav-content a:hover {
+  color: #dc0069;
+}
+.item-in-cart-info {
+  color: #9DA9B9;
+  font-size: 15px;
+}
+@media (max-width: 659px) {
+  .item-in-cart-info {
+    font-size: 14px;
+  }
+  .item-in-cart-info h6 {
+    font-size: 14px;
+  }
+}
+.close-btn {
+  font-size: 25px;
+  margin-top: -9px;
+  color: #9DA9B9;
+}
+.side-main-nav-cart-btns div {
+  margin-bottom: 10px;
+}
+.side-main-nav-cart-btns button {
+  width: 100%;
+  min-height: 45px;
+}
+
+@media only screen and (max-width: 767px) {
+	.main-menu .navbar-header .navbar-toggler .icon-bar {
+		background-color: #1c63b8 !important;
+	}
+
+	.main-menu .navbar-header .navbar-toggler {
+		border: 2px solid #1c63b8 !important;
+	}
+
+	.main-header .header-lower {
+		background-color: #ffffff !important;
+	}
+
+}
+
+.sidenav .nav-list .nav-list-item {
+	font-size: 12px;
+	text-decoration: none;
+	color: #002e5d;
+	list-style-type: none;
+	border-bottom: 1px solid #eeeeee;
+	padding: 10px 10px 10px 20px;
+	transition: all 0.3s;
+	background: #fff;
+	text-transform: uppercase;
+	display: block;
+	/* transition-property: border; */
+	/* transition-duration: 0.3s; */
+}
+
+
+@media (max-width: 768px) {
+	.side-main-nav-mobile {
+		display: inline;
+	}
+}
+
+@media (min-width: 768px) {
+	.side-main-nav-mobile {
+		display: none;
+	}
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	display: none !important;
 }
 

@@ -96,7 +96,15 @@
                 <!-- Main Menu -->
                 <nav class="main-menu navbar-expand-md">
                     <div class="navbar-header">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <div class="side-main-nav-mobile pull-left"><img src="/images/logo.svg" style="max-width: 150px; width: 100%;"></div>
+                        <a class="side-main-nav-mobile" n:href="Cart:step1" style="margin-right: 15px;}">
+                            <div style="display: inline-block; position: relative;">
+                                <span class="has-badge-mobile" data-count="{$productsInCartCount}">
+                                  <i style="font-size: 2rem;" class="flaticon-shopping-bag-1"></i>
+                                </span>
+                            </div>
+                        </a>
+                        <button class="navbar-toggler" type="button" onclick="openSideNav('side-main-nav')" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -160,7 +168,7 @@
                 <!-- Main Menu -->
                 <nav class="main-menu  navbar-expand-md">
                     <div class="navbar-header">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" onclick="openSideNav('side-main-nav')" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -190,6 +198,34 @@
         </div>
     </div>
     <!--End Sticky Header-->
+
+    <div id="side-main-nav" class="sidenav">
+        <div class="side-main-nav-container">
+            <div style="text-align: center;padding: 10px;/* background: #011428; */">
+                <img alt="Logo" src="/images/logo.svg" style="
+                width: 70%;
+    /* text-align: center; */
+    padding: 30px 0 30px;
+    display: block;
+    margin: 0 auto;" class="img-responsive">
+            </div>
+            <div class="main-nav-content" style="padding: 0; margin: 0">
+                <div class="nav-list">
+                    <a class="nav-list-item" style=" color: #1c63b8; background: #f5f5f5; border-top: 1px solid #2e363e;" onclick="getAndCloseSideNav()">
+                    <i class="fa fa-chevron-left" style="font-size: 7px; vertical-align: middle"></i>
+                        ZPĚT
+                    </a>
+                    <a class="nav-list-item" n:href="Homepage:default">Úvod</a>
+                    <a class="nav-list-item" n:href="SpareParts:default">Náhradní díly</a>
+                    <a class="nav-list-item" n:href="Pages:redemption">Výkup</a>
+                    <a class="nav-list-item" n:href="Pages:service">Servis</a>
+                    <a class="nav-list-item" n:href="Pages:about">O Mopedautech</a>
+                    <a class="nav-list-item" n:href="Pages:contact">Kontakt</a>
+                </div>
+            </div>
+
+            <div>
+            </div>
 </header>
 <!--End Main Header -->
 

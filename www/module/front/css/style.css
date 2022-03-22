@@ -9156,7 +9156,7 @@ button:focus{
 	/* transition-duration: 0.3s; */
 }
 
-@media (max-width: 992px) {
+@media (max-width: 576px) {
 	.xs-mob-y {
 		display: block;
 	}
@@ -9166,7 +9166,7 @@ button:focus{
 	}
 }
 
-@media (min-width: 992px) {
+@media (min-width: 576px) {
 	.xs-mob-y {
 	display: none;
 	}
@@ -9176,6 +9176,33 @@ button:focus{
 	}
 }
 
+@media (max-width: 992px) {
+	.xs-mob-y-cat {
+		display: block;
+	}
+
+	.xs-mob-n-cat {
+		display: none;
+	}
+
+	.detail_pad {
+		padding: 0 15px;
+	}
+}
+
+@media (min-width: 992px) {
+	.xs-mob-y-cat {
+		display: none;
+	}
+
+	.xs-mob-n-cat {
+		display: block;
+	}
+
+	.detail_pad {
+		padding: 0;
+	}
+}
 
 @media (max-width: 768px) {
 	.side-main-nav-mobile {
@@ -9186,6 +9213,10 @@ button:focus{
 @media (min-width: 768px) {
 	.side-main-nav-mobile {
 		display: none;
+	}
+
+	.pull-right-detail {
+		float: right;
 	}
 }
 
@@ -9205,5 +9236,17 @@ input[type=number]::-webkit-outer-spin-button {
 		margin-bottom: 20px;
 	}
 
+	.detail_full_center {
+		width: 100% !important;
+		text-align: center;
+	}
 
+	.pull-right-detail {
+		float: none;
+	}
+
+}
+
+.detail_pad button {
+	width: unset !important;
 }

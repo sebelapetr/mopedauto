@@ -1,6 +1,18 @@
-<form  n:name="addProductForm" id="main-contact-form" name="contact-form" method="post" class="cart-form-s checkout-form">
-    <div class="item-quantity">
-        <input class="quantity-spinner" type="number" value="1" min="1" n:name="quantity">
+<form n:name="addProductForm" id="main-contact-form" name="contact-form" method="post"
+                              class="cart-form-s checkout-form">
+
+    <div style="font-size: 0.8rem; background: #efefef; display: inline-block;">
+        <div style="padding: 0 14px 0 20px; display: inline-flex; background: #efefef;">
+            <a href=""><i class="fa fa-plus" aria-hidden="true"></i></a>
+        </div>
+        <input type="number"
+               style="width: 55px; text-align: center; border: 1px solid #efefef; display: inline; padding: 0"
+               placeholder="1" min="1" value="1" n:name="quantity">
+        <div style="padding: 0 20px 0 14px; display: inline-flex; background: #efefef;">
+            <a href=""><i class="fa fa-minus" aria-hidden="true"></i></a>
+        </div>
+
     </div>
-    <button type="submit" class="theme-btn btn-style-six" n:name="submit">Vložit do košíku</button>
+
+    <button type="submit" class="theme-btn btn-style-six" n:name="submit">Do košíku</button>
 </form>

@@ -10,6 +10,7 @@ use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
 use Nette\Security\Passwords;
 use Nette\Utils\ArrayHash;
+use Nextras\Dbal\Utils\DateTimeImmutable;
 use ondrs\Hi\Hi;
 use Tracy\Debugger;
 
@@ -67,11 +68,7 @@ class OrderService
             $order->deliveryCity = $order->city;
             $order->deliveryPsc = $order->psc;
         }
-        $order->newsletter = 1;
-        $order->totalPrice = 0;
-        $order->totalPriceVat = 0;
-        $order->createdAt = date("Y-m-d h:i:sa");
-        $this->orm->persistAndFlush($order);
+        $order->createdAt = new DateTimeImmutable();
 
         $this->orm->persistAndFlush($order);
 

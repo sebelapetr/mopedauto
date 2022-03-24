@@ -81,7 +81,7 @@ class ProductImagesForm extends Control{
     }
 
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/ProductImages/ProductImagesForm.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/ProductImages/ProductImagesForm.latte");
         $this->getTemplate()->render();
     }
 

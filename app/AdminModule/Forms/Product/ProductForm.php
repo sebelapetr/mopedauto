@@ -80,7 +80,7 @@ class ProductForm extends Control{
         $this->getPresenter()->redirect("Products:detail", ['id' => $product->id]);
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/Product/ProductForm.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/Product/ProductForm.latte");
         $this->getTemplate()->render();
     }
 

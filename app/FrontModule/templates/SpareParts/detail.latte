@@ -1,4 +1,5 @@
 {varType App\Model\Product $product}
+{varType App\Model\ProductImage $productImage}
 {block title}{$product->productName}{/block}
 {block content}
 
@@ -31,55 +32,34 @@
 
                                         <figure id="links" class="links">
                                             {if $product->getMainImage(App\Model\ProductImage::SIZE_MD) !== null}
-                                                <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}"
-                                                   title="Image Caption Here" data-gallery="">
-                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_MD)->filePath}" class='gallery-img' alt="">
+                                                <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_ORIGINAL)->filePath}"
+                                                   title="Image Caption Here" data-fancybox="gallery">
+                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}" class='gallery-img' alt="">
                                                 </a>
                                             {else}
                                                 <img src="{$basePath}/images/products/placeholder.jpg" class='gallery-img' alt="">
                                             {/if}
-                                            <div class="row">
-                                                <div class="col-3" style="margin-bottom: 15px">
-                                                    <a href="{$basePath}/images/products/placeholder.jpg"
-                                                       title="Image Caption Here" data-gallery="">
-                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-3" style="margin-bottom: 15px">
-                                                    <a href="{$basePath}/images/products/placeholder.jpg"
-                                                       title="Image Caption Here" data-gallery="">
-                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-3" style="margin-bottom: 15px">
-                                                    <a href="{$basePath}/images/products/placeholder.jpg"
-                                                       title="Image Caption Here" data-gallery="">
-                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-3" style="margin-bottom: 15px">
-                                                    <a href="{$basePath}/images/products/placeholder.jpg"
-                                                       title="Image Caption Here" data-gallery="">
-                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-3" style="margin-bottom: 15px">
-                                                    <a href="{$basePath}/images/products/placeholder.jpg"
-                                                       title="Image Caption Here" data-gallery="">
-                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-3" style="margin-bottom: 15px">
-                                                    <a href="{$basePath}/images/products/placeholder.jpg"
-                                                       title="Image Caption Here" data-gallery="">
-                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-3" style="margin-bottom: 15px">
-                                                    <a href="{$basePath}/images/products/placeholder.jpg"
-                                                       title="Image Caption Here" data-gallery="">
-                                                        <img src="{$basePath}/images/products/placeholder.jpg" class='' alt="">
-                                                    </a>
+                                            {var $otherImages = $product->getOtherImages(App\Model\ProductImage::SIZE_S)}
+                                            <div class="row" n:if="$otherImages->countStored() > 0">
+                                                <div class="col-sm-12">
+                                                    <!-- Slider main container -->
+                                                    <div class="swiper swiper-photos" style="overflow: hidden">
+                                                        <!-- Additional required wrapper -->
+                                                        <div class="swiper-wrapper">
+                                                            <!-- Slides -->
+                                                            <div class="swiper-slide" n:foreach="$otherImages as $productImage">
+                                                                {var $originImage = $product->getImageOtherSize($productImage, App\Model\ProductImage::SIZE_ORIGINAL)}
+                                                                {var $originSizePath = $originImage ? $originImage->filePath : $productImage->filePath}
+                                                                <a data-fancybox="gallery" href="{$basePath}{$originSizePath}"
+                                                                   title="Image Caption Here">
+                                                                    <img src="{$basePath}{$productImage->filePath}" alt="{$productImage->originalName}">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- If we need navigation buttons -->
+                                                        <div class="swiper-button-prev"></div>
+                                                        <div class="swiper-button-next"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </figure>

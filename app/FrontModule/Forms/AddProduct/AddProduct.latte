@@ -3,13 +3,15 @@
 
     <div style="font-size: 0.8rem; background: #efefef; display: inline-block;">
         <div style="padding: 0 14px 0 20px; display: inline-flex; background: #efefef;">
-            <a href=""><i class="fa fa-plus" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" onclick="$('#frm-addProductForm-addProductForm-quantity').val(+$('#frm-addProductForm-addProductForm-quantity').val() - 1)"><i class="fa fa-minus" aria-hidden="true"></i></a>
         </div>
         <input type="number"
                style="width: 55px; text-align: center; border: 1px solid #efefef; display: inline; padding: 0"
                placeholder="1" min="1" value="1" n:name="quantity">
         <div style="padding: 0 20px 0 14px; display: inline-flex; background: #efefef;">
-            <a href=""><i class="fa fa-minus" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" onclick="$('#frm-addProductForm-addProductForm-quantity').val(+$('#frm-addProductForm-addProductForm-quantity').val() + 1)">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
         </div>
 
     </div>

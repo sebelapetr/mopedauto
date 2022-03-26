@@ -9162,13 +9162,13 @@ button:focus{
 	}
 
 	.xs-mob-n {
-		display: none;
+		display: none !important;
 	}
 }
 
 @media (min-width: 576px) {
 	.xs-mob-y {
-	display: none;
+	display: none !important;
 	}
 
 	.xs-mob-n {

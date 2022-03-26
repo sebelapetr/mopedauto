@@ -1,5 +1,5 @@
 {default $current = 1}
-<div class="row">
+<div class="row" style="padding-bottom: 25px">
     <div class="col-sm-4">
         <div class="{if $current == 1}steps-active{else}steps{/if}">
             <div style="font-size: 1.4rem;">1.</div>
@@ -17,11 +17,5 @@
             <div style="font-size: 1.4rem;">3.</div>
             <div style="font-size: 0.8rem;">Dokončená objednávka</div>
         </div>
-    </div>
-    <div class="col-sm-12 xs-mob-n" style="padding:25px 15px">
-        <a n:href="SpareParts:default" class="theme-btn btn-style-def pull-left" n:if="$current == 1">Zpět</a>
-        <a n:href="Cart:step1" class="theme-btn btn-style-def pull-left" n:if="$current == 2">Zpět</a>
-        <a href="javascript:void(0)" class="theme-btn btn-style-def pull-right submitShippingAndPaymentForm-btn" n:if="$current == 1">Pokračovat v objednávce</a>
-        <a href="javascript:void(0)" class="theme-btn btn-style-def pull-right submitPersonalDataForm-btn" n:if="$current == 2">Odeslat objednávku</a>
     </div>
 </div>

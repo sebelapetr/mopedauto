@@ -65,7 +65,7 @@ class ComgatePresenter extends BasePresenter
 
 			if($redirectAfter) {
 				$this->flashMessage('Platba byla úspěšně ověřena.');
-				$this->redirect('Front:Cart:step3', base64_encode($order->id).'8452');
+				$this->redirect(':Front:Cart:step3', base64_encode(strval($order->id)).'8452');
 			}else{
 				$this->sendResponse(new VoidResponse());
 			}

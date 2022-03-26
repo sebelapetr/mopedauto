@@ -117,13 +117,10 @@ class PersonalDataForm extends Control{
             }
             $payment = $this->comgateService->createPayment($order);
 
-            Debugger::barDump($payment);
-            Debugger::barDump($payment->isOk());
             if(!$payment->isOk()){
                 Debugger::log($payment, 'comgate-error');
                 $this->presenter->flashMessage('Nepodařilo se vytvořit platbu kartou. Zkuste to prosím znovu nebo zvolte jinou platební metodu.');
                 $this->presenter->redirect('this');
-                return;
             }
 
             $paymentData = $payment->getData();

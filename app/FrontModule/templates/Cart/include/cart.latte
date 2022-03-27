@@ -65,6 +65,6 @@
         <span style="color: #1c63b8;
     font-weight: 600;">{$order->totalPriceVat} Kč</span>
     </div>
-    <a href="#" class="theme-btn btn-style-six pull-right" style="    position: absolute;
-    right: 6px;">Pokračovat</a>
+    <a href="javascript:void(0)" class="theme-btn btn-style-six pull-right submitShippingAndPaymentForm-btn" style="position: absolute;right: 6px;" n:if="$current === 1">Pokračovat</a>
+    <a href="javascript:void(0)" class="theme-btn btn-style-six pull-right submitPersonalDataForm-btn" style="position: absolute;right: 6px;" n:if="$current === 2">Pokračovat</a>
 </div>

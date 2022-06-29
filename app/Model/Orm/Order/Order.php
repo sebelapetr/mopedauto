@@ -54,9 +54,11 @@ Class Order extends Entity
     public const TYPE_PAYMENT_CASH_PRICE = 0;
 
     public const TYPE_DELIVERY_ADDRESS = "ADDRESS";
+    public const TYPE_DELIVERY_ADDRESS_BIG = "ADDRESS_BIG";
     public const TYPE_DELIVERY_PERSONAL = "PERSONAL";
 
     public const TYPE_DELIVERY_ADDRESS_PRICE = 161;
+    public const TYPE_DELIVERY_ADDRESS_PRICE_BIG = 237;
     public const TYPE_DELIVERY_PERSONAL_PRICE = 0;
 
     const ORDER_STATE_UNFINISHED = "UNFINISHED";
@@ -78,6 +80,9 @@ Class Order extends Entity
                 break;
             case self::TYPE_DELIVERY_ADDRESS:
                 $priceWithVat = self::TYPE_DELIVERY_ADDRESS_PRICE;
+                break;
+            case self::TYPE_DELIVERY_ADDRESS_BIG:
+                $priceWithVat = self::TYPE_DELIVERY_ADDRESS_PRICE_BIG;
                 break;
         }
         if (!$withVat) {

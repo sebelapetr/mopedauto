@@ -1,0 +1,70 @@
+{block title}{$categoryTitle}{/block}
+
+{block content}
+
+{default $imageUrl = "/module/front/images/slider.jpg"}
+<!--Page Title-->
+<section class="page-title" style="background-image:url({$imageUrl|noescape});">
+    <div class="auto-container">
+        <div class="inner-container clearfix">
+        </div>
+    </div>
+</section>
+<!--End Page Title-->
+<!--Sidebar Page Container-->
+<div class="sidebar-page-container">
+<a class="btn btn-style-six btn-block xs-mob-y-cat" style="position: sticky; top: 0" data-toggle="modal" data-target="#myMobileCat">Výběr kategorie <i class="fa fa-chevron-down"></i></a>
+    <div class="auto-container">
+        <div class="row clearfix">
+            <!--content side-->
+            <div class="content-side col-lg-12 col-md-12 col-sm-12">
+
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                      <h1 style="color: #36404b">{$phrase}</h1>
+                  </div>
+
+                    {if count($products) > 0}
+                        {foreach $products as $row}
+                             {var $product = $control->getProductFromRow($row)}
+                            {include './include/product.latte', product => $product}
+                        {/foreach}
+                    {else}
+                        <h4>Tato kategorie je prázdná.</h4>
+                    {/if}
+                </div>
+
+                {include './include/search-paginator.latte'}
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Subscribe Section -->
+<section class="subscribe-section">
+    <div class="auto-container">
+        <div class="inner-container clearfix">
+            <h3>Nabídka náhradních dílů pro Mopedauta</h3>
+            <a href="#" class="call-btn">E-SHOP</a>
+        </div>
+    </div>
+</section>
+{define scripts}
+    <script>
+        $(function() {
+
+            $('.list-group-item').on('click', function() {
+                console.log(this);
+                $('i[class^="fa"]', this)
+                    .toggleClass('fa-chevron-right')
+                    .toggleClass('fa-chevron-down');
+            });
+
+            $('.collapse').hasClass('show').children('i').addClass('fa-chevron-down');
+
+        });
+    </script>
+{/define}

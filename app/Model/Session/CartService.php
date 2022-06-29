@@ -149,4 +149,14 @@ class CartService
         $this->orm->persistAndFlush($order);
     }
 
+    public function hasHeavyProduct(): bool
+    {
+        foreach($this->getOrder()->ordersItems as $orderItem) {
+            if ($orderItem->product->isHeavy) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -112,6 +112,22 @@ class SparePartsPresenter extends BasePresenter
         $this->template->categoryTitle = $title;
     }
 
+    public function renderSearch($phrase, $page=1)
+    {
+        $this->limit = 12;
+        $offset = $page>0?($page-1)*$this->limit:$page; /* -OFFSET PRODUKTŮ- */
+        $totalProductsCount = count($this->orm->products->findProducts($phrase, 9999, 0));
+        $products = $this->orm->products->findProducts($phrase, $this->limit, $offset);
+        $productsCount = count($products);
+        $this->getTemplate()->products = $products;
+        $this->getTemplate()->pages = $this->getPages($page, $totalProductsCount);
+        $this->getTemplate()->actualPage = $page;
+        $this->lastPage = ceil($totalProductsCount/$this->limit);
+        $this->getTemplate()->lastPage = $this->lastPage;
+        $this->template->categoryTitle = $phrase;
+        $this->template->phrase = $phrase;
+    }
+
     private function getProducts(array $childrenCategories): Result
     {
         return $this->orm->productCategories->getProductsInCategories($childrenCategories);
@@ -246,5 +262,10 @@ class SparePartsPresenter extends BasePresenter
             $this->addProductService->addProduct($product->id, 1);
         }
         $this->redirect('this');
+    }
+
+    public function getProductFromRow($row)
+    {
+       return $this->orm->products->getById($row->id);
     }
 }

@@ -42,7 +42,8 @@ class ProductsMapper extends Mapper{
         return $builder;
     }
 
-    public function findProducts($p){
+    public function findProducts($phrase, $limit, $offset){
+        $p = $phrase;
         $find = explode(' ',$p);
         //$find = implode('%', $find);
         //$builder = $this->connection->query('SELECT * FROM products WHERE product_name LIKE %_like_', html_entity_decode($p));
@@ -56,7 +57,10 @@ class ProductsMapper extends Mapper{
             $y = $y.'%'.$item;
         }
         $builder->orWhere('product_name = %_like_', $y);
-        $builder->limitBy(1000);
+        $builder->andWhere('visible = %b', true);
+        $builder->andWhere('deleted = %b', false);
+
+        $builder->limitBy($limit, $offset);
         $result = $this->connection->queryArgs(
             $builder->getQuerySql(),
             $builder->getQueryParameters()

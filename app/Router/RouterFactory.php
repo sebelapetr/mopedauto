@@ -29,6 +29,8 @@ final class RouterFactory
         $routerFront[] = new Route('nahradni-dily/produkt/<seoName>', 'SpareParts:detail');
         $routerFront[] = new Route('nahradni-dily[/<seoName>][/<page>]', 'SpareParts:default');
 
+        $routerFront[] = new Route('vyhledat[/<phrase>][/<page>]', 'SpareParts:search');
+
         $routerFront[] = new Route('kosik/osobni-udaje', 'Cart:step1');
         $routerFront[] = new Route('kosik/doprava-a-platba', 'Cart:step2');
         $routerFront[] = new Route('dokoncena-objednavka/detail/<hash>', 'Cart:step3');

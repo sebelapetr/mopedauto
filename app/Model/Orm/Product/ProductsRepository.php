@@ -11,7 +11,7 @@ use Nextras\Orm\Repository\Repository;
  *
  * @method ICollection|Product[] insertProduct()
  * @method ICollection|Product[] insertStock()
- * @method ICollection|Product[] findProducts()
+ * @method ICollection|Product[] findProducts($phrase, $limit, $offset)
  * @method ICollection|Product[] updateAvailable()
  */
 

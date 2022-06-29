@@ -4,6 +4,7 @@ namespace App\FrontModule\Presenters;
 
 use App\FrontModule\Forms\IContactFormFactory;
 use App\Model\Orm;
+use Nette\Application\BadRequestException;
 use Nette\ComponentModel\IComponent;
 
 Class HomepagePresenter extends BasePresenter

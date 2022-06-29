@@ -50,6 +50,7 @@ order:
     state: 'Stav objednávky'
     totalPriceVat: 'Cena s DPH'
     shipping_ADDRESS: 'PPL malý balík'
+    shipping_ADDRESS_BIG: 'PPL velký balík'
     shipping_PERSONAL: 'Osobní odběr'
     payment_CASH_ON_DELIVERY: 'Platba dobírkou'
     payment_CARD: 'Platba kartou'

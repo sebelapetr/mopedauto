@@ -39,10 +39,16 @@ class ShippingAndPaymentForm extends Control
     {
         $form = new Form();
 
-        $form->addRadioList('shipping', 'Způsob doručení', [
-            Order::TYPE_DELIVERY_PERSONAL => 'Osobní odběr',
-            Order::TYPE_DELIVERY_ADDRESS => 'PPL malý balík'
-        ])
+        $deliveries = [];
+        $deliveries[Order::TYPE_DELIVERY_PERSONAL] = 'Osobní odběr';
+
+        if ($this->cartService->hasHeavyProduct()) {
+            $deliveries[Order::TYPE_DELIVERY_ADDRESS_BIG] = 'PPL velký balík';
+        } else {
+            $deliveries[Order::TYPE_DELIVERY_ADDRESS] = 'PPL malý balík';
+        }
+
+        $form->addRadioList('shipping', 'Způsob doručení', $deliveries)
             ->setDefaultValue($this->cartService->getOrder()->typeDelivery)
             ->setRequired('Vyberte typ dopravy')
             ->addCondition($form::FILLED, true)
@@ -113,6 +119,7 @@ class ShippingAndPaymentForm extends Control
     }
     public function render(){
         $this->getTemplate()->setFile(__DIR__  .  "/../../forms/ShippingAndPayment/ShippingAndPayment.latte");
+        $this->getTemplate()->hasHeavyProduct = $this->cartService->hasHeavyProduct();
         $this->getTemplate()->render();
     }
 

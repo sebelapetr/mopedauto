@@ -30,8 +30,7 @@ class FindForm extends Control{
         return $form;
     }
     public function findFormSucceeded(Form $form, $values){
-        $this->getPresenter()->redirect('Vyhledavani:default', $values->phrase);
-        //{link Vyhledavani:default 'Roboran'}"
+        $this->getPresenter()->redirect('SpareParts:search', ["phrase" => $values->phrase]);
     }
     public function render(){
         $this->getTemplate()->setFile(__DIR__  .  "/../../forms/Find/Find.latte");

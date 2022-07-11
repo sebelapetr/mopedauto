@@ -43,9 +43,9 @@ class ShippingAndPaymentForm extends Control
         $deliveries[Order::TYPE_DELIVERY_PERSONAL] = 'Osobní odběr';
 
         if ($this->cartService->hasHeavyProduct()) {
-            $deliveries[Order::TYPE_DELIVERY_ADDRESS_BIG] = 'PPL velký balík';
+            $deliveries[Order::TYPE_DELIVERY_ADDRESS_BIG] = 'TOPTRANS velký balík';
         } else {
-            $deliveries[Order::TYPE_DELIVERY_ADDRESS] = 'PPL malý balík';
+            $deliveries[Order::TYPE_DELIVERY_ADDRESS] = 'TOPTRANS malý balík';
         }
 
         $form->addRadioList('shipping', 'Způsob doručení', $deliveries)

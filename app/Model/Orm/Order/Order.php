@@ -57,8 +57,8 @@ Class Order extends Entity
     public const TYPE_DELIVERY_ADDRESS_BIG = "ADDRESS_BIG";
     public const TYPE_DELIVERY_PERSONAL = "PERSONAL";
 
-    public const TYPE_DELIVERY_ADDRESS_PRICE = 161;
-    public const TYPE_DELIVERY_ADDRESS_PRICE_BIG = 237;
+    public const TYPE_DELIVERY_ADDRESS_PRICE = 179;
+    public const TYPE_DELIVERY_ADDRESS_PRICE_BIG = 249;
     public const TYPE_DELIVERY_PERSONAL_PRICE = 0;
 
     const ORDER_STATE_UNFINISHED = "UNFINISHED";

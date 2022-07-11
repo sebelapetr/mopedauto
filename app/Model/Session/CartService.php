@@ -101,6 +101,11 @@ class CartService
         $order = $this->getOrder();
         $this->orm->remove($order->ordersItems->toCollection()->getById($orderItem->id));
         $this->orm->flush();
+        if ($order->ordersItems->toCollection()->findBy(["product!=" => null])->countStored() === 0) {
+            foreach ($order->ordersItems as $orderItem) {
+                $this->orm->removeAndFlush($orderItem);
+            }
+        }
         $this->recountOrder();
     }
 
@@ -152,7 +157,7 @@ class CartService
     public function hasHeavyProduct(): bool
     {
         foreach($this->getOrder()->ordersItems as $orderItem) {
-            if ($orderItem->product->isHeavy) {
+            if ($orderItem->product && $orderItem->product->isHeavy) {
                 return true;
             }
         }

@@ -16,6 +16,7 @@ use Nextras\Orm\Entity\Entity;
  * @property Product[]|NULL $productCategories {1:m ProductCategory::$category}
  * @property Category|NULL $parent {m:1 Category::$categories}
  * @property Category[]|NULL $categories {1:m Category::$parent}
+ * @property ProductParameterValue|NULL $productParameterValue {m:1 ProductParameterValue::$categories}
  */
 
 class Category extends Entity{

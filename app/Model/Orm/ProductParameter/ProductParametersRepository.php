@@ -7,15 +7,13 @@ use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Repository\Repository;
 
 /**
- * Class ProductCategoriesRepository
+ * Class ProductParametersRepository
  * @package App\Model
  *
- * @method Result getProductsInCategories(array $categories)
- * @method Result getFilteredProductsInCategories(array $categories, int $parameterValueId)
  *
  */
 
-class ProductCategoriesRepository extends Repository
+class ProductParametersRepository extends Repository
 {
 
     /**
@@ -24,6 +22,6 @@ class ProductCategoriesRepository extends Repository
      */
     public static function getEntityClassNames(): array
     {
-        return [ProductCategory::class];
+        return [ProductParameter::class];
     }
 }

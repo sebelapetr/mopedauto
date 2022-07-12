@@ -6,6 +6,7 @@ use App\FrontModule\Forms\IAddProductFormFactory;
 use App\Model\AddProductService;
 use App\Model\Category;
 use App\Model\Product;
+use App\Model\ProductParameter;
 use App\Model\Session\CartService;
 use Nette\Caching\Cache;
 use Nette\Utils\ArrayHash;
@@ -91,7 +92,11 @@ class SparePartsPresenter extends BasePresenter
         $this->limit = 12;
         $offset = $page>0?($page-1)*$this->limit:$page; /* -OFFSET PRODUKTŮ- */
 
-        $productsResult = $this->getProducts($childrenCategories->fetchPairs(null, "id"));
+        if ($this->actualCategory->productParameterValue !== null) {
+            $productsResult = $this->getFilteredProducts([$this->actualCategory->parent->id], $this->actualCategory->productParameterValue->id);
+        } else {
+            $productsResult = $this->getProducts($childrenCategories->fetchPairs(null, "id"));
+        }
         $ids = empty($productsResult) ? [] : $productsResult->fetchPairs(null, "product_id");
 
         $products = $this->orm->products->findBy([
@@ -131,6 +136,11 @@ class SparePartsPresenter extends BasePresenter
     private function getProducts(array $childrenCategories): Result
     {
         return $this->orm->productCategories->getProductsInCategories($childrenCategories);
+    }
+
+    private function getFilteredProducts(array $childrenCategories, int $parameterValueId): Result
+    {
+        return $this->orm->productCategories->getFilteredProductsInCategories($childrenCategories, $parameterValueId);
     }
 
     public $tree;

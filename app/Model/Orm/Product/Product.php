@@ -5,6 +5,7 @@ namespace App\Model;
 use Nette\Application\LinkGenerator;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Entity\Entity;
+use Nextras\Orm\Relationships\ManyHasMany;
 use Nextras\Orm\Relationships\OneHasMany;
 
 /**
@@ -48,6 +49,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property boolean $isHeavy {default false}
  * @property boolean $new {default false}
  * @property boolean $discount {default false}
+ * @property ManyHasMany|ProductParameterValue $parameterValues {m:m ProductParameterValue::$products, isMain=TRUE}
  */
 class Product extends Entity
 {

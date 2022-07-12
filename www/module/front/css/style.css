@@ -362,14 +362,14 @@ img{
 }
 
 .shop_cart_dark {
-	color: #181818;
+	color: inherit;
 	background: transparent;
 }
 
 .has-badge[data-count]:after {
 	position: absolute;
-	right: 3px;
-	top: 5px;
+	right: 1px;
+	top: 2px;
 	content: attr(data-count);
 	font-size: 70%;
 	padding: 0.6em;
@@ -380,7 +380,8 @@ img{
 	min-width: 2em;
 	font-weight: bold;
 	background: #1c63b8;
-	border-style: solid;
+	/*border-style: solid;*/
+	border: 1px solid white;
 }
 
 .has-badge-mobile[data-count]:after {
@@ -2645,7 +2646,7 @@ button:focus{
 	-moz-transform: skewX(-20deg);
 	-ms-transform: skewX(-20deg);
 	-o-transform: skewX(-20deg);
-	transform: skewX(-20deg);
+	transform: skewX(-11deg);
 	border-left: 7px solid #1c63b8;
 	border-right: 0;
 }
@@ -3723,10 +3724,10 @@ button:focus{
     width: 100%;
     font-size: 14px;
     line-height: 20px;
-    color: #999999;
+    color: #6a6a6a;
     font-weight: 400;
     padding: 14px 20px;
-    border: 1px solid #cccccc;
+    border: 1px solid #ddd;
     background-color: #ffffff;
     -webkit-transition: all 300ms ease;
     -ms-transition: all 300ms ease;
@@ -4147,10 +4148,10 @@ button:focus{
     width: 100%;
     font-size: 14px;
     line-height: 20px;
-    color: #bbbbbb;
+    color: #6a6a6a;
     font-weight: 400;
     padding: 19px 20px;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     -webkit-transition: all 300ms ease;
     -ms-transition: all 300ms ease;
     -o-transition: all 300ms ease;
@@ -5668,8 +5669,8 @@ button:focus{
 	width:100%;
 	line-height:26px;
 	padding:10px 15px;
-	color:#848484;
-	border:1px solid #dddddd;
+	color: #6a6a6a;
+	border:1px solid #ddd;
 	height:120px;
 	font-weight:300;
 	background:#ffffff;
@@ -6217,7 +6218,7 @@ button:focus{
 	line-height:22px;
 	padding:8px 15px;
 	color:#222222;
-	border:1px solid #e0e0e0;
+	border:1px solid #ddd;
 	height:150px;
 	resize:none;
 	transition:all 300ms ease;
@@ -9250,3 +9251,75 @@ input[type=number]::-webkit-outer-spin-button {
 .detail_pad button {
 	width: unset !important;
 }
+
+
+.pricing-feature {
+	position: relative;
+	display: block;
+	background-color: #ffffff;
+	margin-bottom: 40px;
+}
+
+.pricing-feature .table-outer {
+	position: relative;
+	width: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+	.pricing-feature .table-outer {
+		overflow: auto;
+	}
+}
+
+.pricing-feature .feature-table {
+	position: relative;
+	width: 100%;
+	min-width: 870px;
+}
+
+.pricing-feature .feature-table thead {
+	position: relative;
+	width: 100%;
+	background: #1c63b8;
+}
+
+.pricing-feature .feature-table thead tr td:first-child {
+	padding-left: 40px;
+}
+
+.pricing-feature .feature-table thead tr td {
+	position: relative;
+	font-size: 16px;
+	color: #ffffff;
+	font-weight: 500;
+	line-height: 30px;
+	padding: 15px 18px;
+	text-transform: capitalize;
+	font-family: "Rubik", sans-serif;
+}
+
+.pricing-feature .feature-table tbody {
+	border: 1px solid #e8e8e8;
+	border-top: 0;
+}
+
+.pricing-feature .table-outer tbody tr td:first-child {
+	padding-left: 40px;
+	font-weight: 700;
+}
+
+.pricing-feature .table-outer tbody tr td {
+	color: #333333;
+	font-size: 14px;
+	line-height: 30px;
+	font-weight: 400;
+	text-align: left;
+	padding: 15px 18px;
+}
+
+.pricing-feature .table-outer tbody tr:nth-child(2n + 2) {
+	background-color: #eeeeee;
+}
+
+
+

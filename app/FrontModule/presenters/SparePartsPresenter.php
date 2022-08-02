@@ -86,6 +86,23 @@ class SparePartsPresenter extends BasePresenter
 
         $this->template->categoriesTree = $this->categoriesTree;
         $this->template->childrenCategories = $childrenCategories;
+
+        $nextChildrenCategories = $nextChildrenCategories->fetchAll();
+        foreach ($nextChildrenCategories as $index => $nextChildrenCategory) {
+            if ($nextChildrenCategory->parValue !== null) {
+                $count = $this->connection->query("
+                SELECT count(product_categories.product_id) FROM product_categories 
+                LEFT JOIN products_x_product_parameter_values ON products_x_product_parameter_values.product_id = product_categories.product_id
+                 LEFT JOIN products ON products.id = product_categories.product_id                                           
+                 WHERE category_id = (%i) AND product_parameter_value_id = %i AND products.visible = %b
+            ", $this->actualCategory->id, $nextChildrenCategory->parValue, true)->fetchField(0);
+
+                if ($count == 0) {
+                    unset($nextChildrenCategories[$index]);
+                }
+            }
+        }
+
         $this->template->nextChildrenCategories = $nextChildrenCategories;
         $this->template->parentCategories = $parentCategories;
 

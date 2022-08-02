@@ -2,6 +2,11 @@
 <html xml:lang="cs" lang="cs" prefix="og: http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
     <head>
         <title>{ifset #title}{include title|striptags} | Moped Auto - Auto od 15 let{else}Moped Auto - Auto od 15 let{/ifset}</title>
+        <meta name="description" content="{ifset #description}{include description|striptags}{else}mopedauto.cz{/ifset}"/>
+        <meta property="og:description" content="{ifset #description}{include description|striptags}{else}mopedauto.cz - Moped Auto - Auto od 15 let.{/ifset}"/>
+        <meta name="robots" content="{ifset #robots}{include robots}{else}index,follow{/ifset}" />
+        <meta property="og:title" content="{ifset #title}{include title|striptags} | Moped Auto - Auto od 15 let{else}Moped Auto - Auto od 15 let{/ifset}"/>
+
         {include './include/head.latte'}
         {include './include/head-styles.latte'}
         {include './include/head-scripts.latte'}

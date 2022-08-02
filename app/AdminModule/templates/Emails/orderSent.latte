@@ -5,27 +5,83 @@
     <table>
         <tr>
             <td>
-                <h4>Dobrý den,</h4>
-                <p class="lead">
-                    děkujeme za Vaši objednávku.
+                <h4>Děkujeme za Vaši objednávku</h4>
+                <br>
+                {if $order->typeDelivery === App\Model\Order::TYPE_DELIVERY_ADDRESS || $order->typeDelivery === App\Model\Order::TYPE_DELIVERY_ADDRESS_BIG}
+                      <p class="lead">
+                        <b>Potvrzujeme přijetí Vaší objednávky.</b>
+                        <br>
+                        Zboží bude v co možné nekratší době připraveno a odesláno. Ihned jakmile bude zboží odesláno Vás budeme kontaktovat.
+                        <br>
+                        <br>
+                        <b>Číslo objednávky: č. {$order->id}</b>
+                        <br>
+                    </p>
+                {else}
+                    <p class="lead">
+                        <b>Potvrzujeme přijetí Vaší objednávky.</b>
+                        <br>
+                        Zboží bude v co možné nekratší době připraveno k vyzvednuti. Ihned jakmile bude zboží připraveno k vyzvednutí Vás budeme kontaktovat. Zboží bude po té připraveno k vyzvednutí každý pracovní den od 9:00 od 17:00 na adrese:
+                        <br>
+                        <br>
+                        MopedAuto.cz
+                        <br>
+                        Cejl 76
+                        <br>
+                        602 00 Brno
+                        <br>
+                        <br>
+                        <b>Číslo objednávky: č. {$order->id}</b>
+                        <br>
+                    </p>
+                {/if}
+                <h4>Objednané zboží</h4>
                     <br>
-                    Vaše objednávka <b>č. {$order->id}</b> bude zkontrolována a poté expedována našim pracovníkem.
-                    <br>
-                    Budeme Vás informovat o čase doručení.
-                    <br><br>
-                    <a href="{$orderDetailUrl}" class="btn" style="background: #e6e3e3;border-radius: 0;color:black">Sledovat stav objednávky</a>
-                </p>
                 <p>
                 <table class="table table-striped" style="margin: 10px;">
                     <thead>
-                    <tr><th></th><th>Název</th><th>Cena s DPH</th><th>Množství</th><th>Celková cena s DPH</th></tr>
+                        <tr>
+                            <th>Co si objednáváte</th>
+                            <th>Množství</th>
+                            <th>Cena s DPH</th>
+                            <th>Celková cena bez DPH</th>
+                            <th>Celková cena s DPH</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {varType App\Model\OrdersItem $item}
-                    {foreach $order->ordersItems as $item}
-                        <tr><td></td><td>{$item->name|noescape}</td><td>{$item->priceVat} Kč</td><td>{$item->quantity} ks</td><td>{$item->priceVat*$item->quantity} Kč</td></tr>
+                    {foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_PRODUCT]) as $item}
+                        <tr>
+                            <td>{$item->name|noescape}</td>
+                            <td>{$item->quantity} ks</td>
+                            <td>{$item->pricePieceVat|number:2, ",", " "} Kč</td>
+                            <td>{$item->price|number:2, ",", " "} Kč</td>
+                            <td>{$item->priceVat|number:2, ",", " "} Kč</td>
+                        </tr>
                     {/foreach}
-                    <tr><td></td><td  colspan="3" style="text-align: right"><b>Celkem s DPH: </b></td><td><b>{ceil($order->totalPriceVat)} Kč</b></td></tr>
+                      {foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_SHIPPING]) as $item}
+                        <tr>
+                            <td>{$item->name|noescape}</td>
+                            <td>{$item->quantity} ks</td>
+                            <td>{$item->pricePieceVat|number:2, ",", " "} Kč</td>
+                            <td>{$item->price|number:2, ",", " "} Kč</td>
+                            <td>{$item->priceVat|number:2, ",", " "} Kč</td>
+                        </tr>
+                    {/foreach}
+                      {foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_PAYMENT]) as $item}
+                        <tr>
+                            <td>{$item->name|noescape}</td>
+                            <td>{$item->quantity} ks</td>
+                            <td>{$item->pricePieceVat|number:2, ",", " "} Kč</td>
+                            <td>{$item->price|number:2, ",", " "} Kč</td>
+                            <td>{$item->priceVat|number:2, ",", " "} Kč</td>
+                        </tr>
+                    {/foreach}
+                    <tr>
+                        <td  colspan="3" style="text-align: left"><b>Celkem s DPH: </b></td>
+                        <td><b>{($order->totalPrice|number:2, ",", " ")} Kč</b></td>
+                        <td><b>{($order->totalPriceVat|number:2, ",", " ")} Kč</b></td>
+                    </tr>
                     </tbody>
                 </table>
                 </p>

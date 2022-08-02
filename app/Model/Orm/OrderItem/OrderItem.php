@@ -12,6 +12,8 @@ use Nextras\Orm\Entity\Entity;
  * @property int $id {primary}
  * @property string $type {enum self::TYPE_*}
  * @property string $name
+ * @property float $pricePiece
+ * @property float $pricePieceVat
  * @property float $price
  * @property float $priceVat
  * @property int $quantity

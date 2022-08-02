@@ -78,6 +78,8 @@ class ProductService{
         $product->isHeavy = $values->isHeavy;
         $product->visible = $values->visible;
         $product->description = $values->description;
+        $product->stockStatus = $values->stockStatus;
+        $product->condition = $values->condition;
         $this->orm->persistAndFlush($product);
         return $product;
     }

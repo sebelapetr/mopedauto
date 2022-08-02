@@ -5,10 +5,9 @@
 <div class="col-sm-12">
         {varType App\Model\Order $order}
         {if $order->ordersItems->countStored() !== 0}
-            {varType App\Model\OrdersItem $orderItem}
-            {foreach $order->ordersItems as $orderItem}
+            {define product}
                 {if $orderItem}
-                     <div class="row" style="border-bottom: 2px solid #efefef; padding: 7px 5px;">
+                    <div class="row" style="border-bottom: 2px solid #efefef; padding: 7px 5px;">
                         <div class="col-md-4">
                             {var $image = $orderItem->product ? $orderItem->product->getMainImage(App\Model\ProductImage::SIZE_S) : null}
                             {var $imagePath = $image ? $image->filePath : null}
@@ -27,7 +26,7 @@
                                 </div>
                                 <input type="number" style="width: 40px; text-align: center; border: 1px solid #efefef;" placeholder="{$orderItem->quantity}">
                                 <div style="padding: 0 8px 0 4px; display: inline-flex; background: #efefef;">
-                                <a href="{link removeProductQuantity! $orderItem->id}" {if $orderItem->quantity===1}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                    <a href="{link removeProductQuantity! $orderItem->id}" {if $orderItem->quantity===1}onclick="return confirm('Opravdu chcete produkt odstranit z košíku?')"{/if}><i class="fa fa-minus" aria-hidden="true"></i></a>
                                 </div>
 
                             </div>
@@ -37,6 +36,16 @@
                         </div>
                     </div>
                 {/if}
+            {/define}
+            {varType App\Model\OrdersItem $orderItem}
+            {foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_PRODUCT]) as $orderItem}
+                {include product}
+            {/foreach}
+            {foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_SHIPPING]) as $orderItem}
+                {include product}
+            {/foreach}
+            {foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_PAYMENT]) as $orderItem}
+                {include product}
             {/foreach}
         {else}
             <div class="col-sm-12">

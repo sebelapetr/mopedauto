@@ -141,31 +141,48 @@
         <tr>
             <th></th>
             <th style="min-width: 70px !important;">Název</th>
-            <th style="min-width: 99px !important;">Cena za kus s DPH</th>
             <th style="min-width: 70px !important;">Počet</th>
-            <th style="min-width: 140px !important;">Cena za produkt celkem s DPH </th>
+            <th style="min-width: 99px !important;">Cena s DPH</th>
+            <th style="min-width: 140px !important;">Celková cena s DPH </th>
+            <th style="min-width: 140px !important;">Celková cena bez DPH </th>
         </tr>
         </thead>
-        {var $totalOrderPrice = 0}
-        {var $totalOrderPriceVat = 0}
         <tbody>
-        {foreach $order->ordersItems as $items}
-            {var $totalPrice = $items->price*$items->quantity}
-            {var $totalPriceVat = $items->priceVat*$items->quantity}
-            {var $totalOrderPrice += $totalPrice}
-            {var $totalOrderPriceVat += $totalPriceVat}
+        {foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_PRODUCT]) as $items}
             <tr style="border-bottom: 2px solid #d6d6d6 !important">
                 <td>{ifset $items->product->image}<img src="{$basePath}/images/products/{$items->product->image}" alt="{$items->name|noescape}" height="100">{/ifset}</td>
                 <td>{$items->name|noescape}</td>
-                <td>{$items->priceVat} Kč</td>
                 <td>{$items->quantity} ks</td>
-                <td>{$totalPriceVat} Kč</td>
+                <td>{$items->pricePieceVat|number:2, ",", " "} Kč</td>
+                <td>{$items->priceVat|number:2, ",", " "} Kč</td>
+                <td>{$items->price|number:2, ",", " "} Kč</td>
             </tr>
         {/foreach}
+        {foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_SHIPPING]) as $items}
+            <tr style="border-bottom: 2px solid #d6d6d6 !important">
+                <td>{ifset $items->product->image}<img src="{$basePath}/images/products/{$items->product->image}" alt="{$items->name|noescape}" height="100">{/ifset}</td>
+                <td>{$items->name|noescape}</td>
+                <td>{$items->quantity} ks</td>
+                <td>{$items->pricePieceVat|number:2, ",", " "} Kč</td>
+                <td>{$items->priceVat|number:2, ",", " "} Kč</td>
+                <td>{$items->price|number:2, ",", " "} Kč</td>
+            </tr>
+        {/foreach}{foreach $order->ordersItems->toCollection()->findBy(["type" => App\Model\OrdersItem::TYPE_PAYMENT]) as $items}
+            <tr style="border-bottom: 2px solid #d6d6d6 !important">
+                <td>{ifset $items->product->image}<img src="{$basePath}/images/products/{$items->product->image}" alt="{$items->name|noescape}" height="100">{/ifset}</td>
+                <td>{$items->name|noescape}</td>
+                <td>{$items->quantity} ks</td>
+                <td>{$items->pricePieceVat|number:2, ",", " "} Kč</td>
+                <td>{$items->priceVat|number:2, ",", " "} Kč</td>
+                <td>{$items->price|number:2, ",", " "} Kč</td>
+            </tr>
+        {/foreach}
+
         <tr style="background: #1c63b8; color: white;">
-            <td colspan="3"></td>
-            <td style="font-size: 16px !important;"><b>Cena celkem s DPH</b></td>
-            <td style="font-size: 16px !important;"><b>{ceil($totalOrderPriceVat)} Kč</b></td>
+            <td style="font-size: 16px !important;;text-align: left"><b>Celkem: </b></td>
+            <td style="text-align: left" colspan="3"></td>
+            <td style="font-size: 16px !important;"><b>{($order->totalPrice|number:2, ",", " ")} Kč</b></td>
+            <td style="font-size: 16px !important;"><b>{($order->totalPriceVat|number:2, ",", " ")} Kč</b></td>
         </tr>
         </tbody>
     </table>

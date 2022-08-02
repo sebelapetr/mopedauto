@@ -79,8 +79,10 @@ class CartService
         } else {
             $orderItems = new OrdersItem();
             $orderItems->name = $product->productName;
-            $orderItems->priceVat = $product->catalogPriceVat * $quantity;
-            $orderItems->price = $orderItems->priceVat / 1.21;
+            $orderItems->pricePieceVat = $product->catalogPriceVat;
+            $orderItems->pricePiece = round($product->catalogPriceVat / 1.21, 2);
+            $orderItems->priceVat = $orderItems->pricePieceVat * $quantity;
+            $orderItems->price = $orderItems->pricePiece * $quantity;
             $orderItems->quantity = $quantity;
             $orderItems->vat = 21;
             $orderItems->type = OrdersItem::TYPE_PRODUCT;
@@ -114,8 +116,12 @@ class CartService
     {
         $product = $orderItem->product;
         $orderItem->quantity++;
-        $orderItem->price = $product->catalogPrice ? $product->catalogPrice * $orderItem->quantity : 0;
-        $orderItem->priceVat = $product->catalogPriceVat * $orderItem->quantity;
+        if ($product->catalogPriceVat) {
+            $orderItem->pricePieceVat = $product->catalogPriceVat;
+            $orderItem->pricePiece = round($product->catalogPriceVat / 1.21, 2);
+            $orderItem->priceVat = $orderItem->pricePieceVat * $orderItem->quantity;
+            $orderItem->price = $orderItem->pricePiece * $orderItem->quantity;
+        }
         $this->orm->persistAndFlush($orderItem);
         $this->recountOrder();
     }
@@ -124,8 +130,12 @@ class CartService
     {
         $product = $orderItem->product;
         $orderItem->quantity--;
-        $orderItem->price = $product->catalogPrice ? $product->catalogPrice * $orderItem->quantity : 0;
-        $orderItem->priceVat = $product->catalogPriceVat * $orderItem->quantity;
+        if ($product->catalogPriceVat) {
+            $orderItem->pricePieceVat = $product->catalogPriceVat;
+            $orderItem->pricePiece = round($product->catalogPriceVat / 1.21, 2);
+            $orderItem->priceVat = $orderItem->pricePieceVat * $orderItem->quantity;
+            $orderItem->price = $orderItem->pricePiece * $orderItem->quantity;
+        }
         if ($orderItem->quantity <= 0) {
             $this->removeProductFromCart($orderItem);
         }

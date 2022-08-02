@@ -18,8 +18,10 @@
                 </div>
             </div>
             <div class="lower-content">
-                <span class="price">{$product->catalogPriceVat} Kč</span>
                 <h5><a href="{link SpareParts:detail, seoName => $product->url}">{$product->productName|noescape}</a></h5>
+                <span class="price">{$product->catalogPriceVat|number:2:", ", " "} Kč s DPH</span>
+                <span class="price-notax">{$product->catalogPriceVat/1.21|number:2:", ", " "} bez DPH</span>
+                <span class="stock-status stock-status-{$product->stockStatus}">{_"entity.product.stockStatus".$product->stockStatus}</span>
             </div>
         </div>
     </div>

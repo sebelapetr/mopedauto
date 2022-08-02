@@ -5539,7 +5539,30 @@ button:focus{
 	font-weight: 600;
 	color: #1c63b8;
 	line-height: 25px;
-	margin-bottom: 15px;
+	margin-bottom: 3px;
+}
+.shop-item .lower-content .price-notax{
+	position: relative;
+	display: block;
+	font-size: 16px;
+	font-weight: normal;
+	color: #7780a3;
+	line-height: 25px;
+	margin-bottom: 10px;
+}
+.shop-item .lower-content .stockstatus{
+	position: relative;
+	display: block;
+	font-size: 16px;
+	font-weight: normal;
+	color: #7780a3;
+	line-height: 25px;
+	margin-bottom: 10px;
+}
+
+.stock-status-ONSTOCK{
+	font-weight: bold;
+	color: #24b81c;
 }
 
 .shop-item .lower-content .rating {
@@ -5892,7 +5915,18 @@ button:focus{
 
 .product-details .basic-details .item-price{
 	position: relative;
-	font-size:18px;
+	font-size:16px;
+	font-weight:400;
+	color:#36404b;
+	line-height:24px;
+	letter-spacing:	1px;
+	display: block;
+	margin-bottom: 10px;
+}
+
+.product-details .basic-details .item-stockstatus{
+	position: relative;
+	font-size:16px;
 	font-weight:400;
 	color:#36404b;
 	line-height:24px;

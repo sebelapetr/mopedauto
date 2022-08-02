@@ -51,17 +51,17 @@ class CategoriesMapper extends Mapper
     {
         $builder = $this->connection->query("
             WITH RECURSIVE parents AS (
-              SELECT id, category_name, parent_id, seo_name, 0 AS level
+              SELECT id, category_name, parent_id, seo_name, 0 AS level, product_parameter_value_id
               FROM categories
               WHERE id = %i
             
               UNION ALL
             
-              SELECT cat.id, cat.category_name, cat.parent_id, cat.seo_name, p.level - 1
+              SELECT cat.id, cat.category_name, cat.parent_id, cat.seo_name, p.level - 1, cat.product_parameter_value_id
               FROM categories cat, parents p
               WHERE p.id = cat.parent_id
             )
-            SELECT id, category_name as name, parent_id as parent, level, CONCAT_WS('-', id, seo_name) AS url FROM parents
+            SELECT id, category_name as name, parent_id as parent, level, CONCAT_WS('-', id, seo_name) AS url, product_parameter_value_id as parValue FROM parents
             WHERE level = %i;
         ", $categoryId, $level);
         return $builder;

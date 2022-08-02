@@ -1,0 +1,8 @@
+idtree,idtreeParent,level,path,sort,last,modul,public,alias,name,nameTitle,nameAnchor,publicFrom,publicTo,annotation,content,description,keywords,eventFrom,eventTo,hideFirstImage,price,priceEur,showRent,crossroad,showHP,links,tips
+32,1,1,1|,2,0,products,1,nahradni-dily,Náhradní díly pro mopedauta,Náhradní díly,Náhradní díly,2000-01-01,2100-01-01,"Pokud nenaleznete Vámi požadovaný díl, nezoufejte. Kontaktujte nás, uděláme maximum pro Vaši spokojenost.
+Ceny dílů se mohou v závislosti kurzu měnit. Při změně ceny dílu Vás před odesláním ihned kontaktovat.
+Upozorňujeme, že cena přepravy do Slovenské republiky je dražší, než je uvedeno v e-shopu.","","","",0000-00-00 00:00:00,0000-00-00 00:00:00,0,0.00,0.00,0,0,0,|,"Firma mopedauto dokáže zajistit veškerý sortiment na značku Aixam, Microcar, Ligier
+Nenašli jste náhradní díl? Kontaktujte nás, rádi Vám pomůžeme
+"
+863,32,2,1|32|,1,0,products,1,nahradni-dily-aixam,AIXAM,Náhradní díly AIXAM,AIXAM,2013-03-24,2100-01-01,"","","","",0000-00-00 00:00:00,0000-00-00 00:00:00,1,0.00,0.00,0,0,0,|,""
+865,863,3,1|32|863|,15,1,products,1,city,City,City,City,2013-03-24,2100-01-01,"","","","",0000-00-00 00:00:00,0000-00-00 00:00:00,0,0.00,0.00,0,0,0,"",""

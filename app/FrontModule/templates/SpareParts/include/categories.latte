@@ -1,6 +1,6 @@
 <div class="col-sm-12 sub_cat-o-pc" style="padding: 15px">
     <div class="features_items">
-        {foreach $nextChildrenCategories as $childrenCategory}
+        {foreach $nextChildrenCategories as $index => $childrenCategory}
             <a n:href="SpareParts:default, seoName => $childrenCategory->url" style="color: #36404b;">
                 <div class="col-sm-4 float-left">
                     <span>{$childrenCategory->name} <i class="flaticon-right-arrow pull-right"></i></span>

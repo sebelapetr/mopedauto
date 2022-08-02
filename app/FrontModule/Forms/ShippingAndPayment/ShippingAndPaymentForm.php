@@ -95,8 +95,10 @@ class ShippingAndPaymentForm extends Control
         $orderItemsShipping = new OrdersItem();
         $orderItemsShipping->name = $this->translator->translate('entity.order.shipping_'.$values->shipping);
         $orderItemsShipping->type = OrdersItem::TYPE_SHIPPING;
-        $orderItemsShipping->price = $order->getShippingPrice(false);
-        $orderItemsShipping->priceVat = $order->getShippingPrice(true);
+        $orderItemsShipping->pricePiece = floatval($order->getShippingPrice(false));
+        $orderItemsShipping->pricePieceVat = floatval($order->getShippingPrice(true));
+        $orderItemsShipping->price = floatval($order->getShippingPrice(false));
+        $orderItemsShipping->priceVat = floatval($order->getShippingPrice(true));
         $orderItemsShipping->quantity = 1;
         $orderItemsShipping->vat = 21;
         $orderItemsShipping->order = $order;
@@ -107,8 +109,10 @@ class ShippingAndPaymentForm extends Control
         $orderItemsPayment = new OrdersItem();
         $orderItemsPayment->name = $this->translator->translate('entity.order.payment_'.$values->payment);
         $orderItemsPayment->type = OrdersItem::TYPE_PAYMENT;
-        $orderItemsPayment->price = $order->getPaymentPrice(false);
-        $orderItemsPayment->priceVat = $order->getPaymentPrice(false);
+        $orderItemsPayment->pricePiece = floatval($order->getPaymentPrice(false));
+        $orderItemsPayment->pricePieceVat = floatval($order->getPaymentPrice(true));
+        $orderItemsPayment->price = floatval($order->getPaymentPrice(false));
+        $orderItemsPayment->priceVat = floatval($order->getPaymentPrice(true));
         $orderItemsPayment->quantity = 1;
         $orderItemsPayment->vat = 21;
         $orderItemsPayment->order = $order;

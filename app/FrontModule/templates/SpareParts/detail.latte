@@ -71,6 +71,9 @@
                                                 <div class="item-price" style="padding: 0 15px;">
                                                     Obj č.: {$product->number}
                                                 </div>
+                                                <div class="item-stockstatus" style="padding: 0 15px;">
+                                                    Dostupnost: <span class="stock-status-{$product->stockStatus}">{_"entity.product.stockStatus".$product->stockStatus}</span>
+                                                </div>
 
 
                                                 <div style="background: #efefef; padding: 15px 15px; height: 80px;">
@@ -79,8 +82,8 @@
                                                         <span style="font-size: 0.9rem">Cena bez DPH </span>
                                                     </div>
                                                     <div class="item-price pull-right">
-                                                        <span class="font-weight-bold" style="font-size: 1.4rem; color: #1c63b8;">{$product->catalogPriceVat} Kč </span><br>
-                                                        <span style="font-size: 0.9rem">{$product->catalogPriceVat / 1.21|number:0, '', ''} Kč </span>
+                                                        <span class="font-weight-bold" style="font-size: 1.4rem; color: #1c63b8;">{$product->catalogPriceVat|number:2, ',', ''} Kč </span><br>
+                                                        <span style="font-size: 0.9rem">{$product->catalogPriceVat / 1.21|number:2, ',', ''} Kč </span>
                                                     </div>
 
                                                 </div>

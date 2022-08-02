@@ -1,0 +1,92 @@
+{varType App\Model\Order $order}
+{include './include/header.latte', title => $title}
+
+<div class="content">
+    <table>
+        <tr>
+            <td>
+                <h4>Informace o změně stavu objednávky č. {$order->id}</h4>
+                <br>
+                {if $order->typeDelivery === App\Model\Order::TYPE_DELIVERY_ADDRESS || $order->typeDelivery === App\Model\Order::TYPE_DELIVERY_ADDRESS_BIG}
+                      <p class="lead">
+                           Dobrý den,
+                           <br>
+                           <br>
+                            Vaše objednávka byla právě odeslána.
+                           <br>
+                           <br>
+                             Vaši zakázku můžete sledovat na <a href="https://www.toptrans.cz/preprava/cs/sledovani-zasilky">https://www.toptrans.cz/preprava/cs/sledovani-zasilky</a> pomocí čísla {$order->toptransCode}.
+                           <br>
+                           <br>
+                           S přátelským pozdravem
+                           <br>
+                           tým MopedAuto.cz
+                       </p>
+                {else}
+                    <p class="lead">
+                        Dobrý den,
+                        <br>
+                        <br>
+                        Vaše zboží je připraveno k vyzvednutí na adrese:
+                        <br>
+                        <br>
+                        MopedAuto.cz
+                        <br>
+                        Cejl 76
+                        <br>
+                        602 00 Brno
+                        <br>
+                        <br>
+                        S přátelským pozdravem
+                        <br>
+                        tým MopedAuto.cz
+                    </p>
+                {/if}
+
+                <br/>
+
+                <!-- social & contact -->
+                <table class="social" width="100%">
+                    <tr>
+                        <td>
+
+                            <!--- column 1 -->
+                            <table align="left" class="column">
+                                <tr>
+                                    <td>
+
+                                        <h5 class="">Spojte se s námi!</h5>
+                                        <p class="">
+                                            <a href="https://www.facebook.com/mopedautocz" class="soc-btn fb">Facebook</a>
+                                        </p>
+
+
+                                    </td>
+                                </tr>
+                            </table><!-- /column 1 -->
+
+                            <!--- column 2 -->
+                            <table align="left" class="column">
+                                <tr>
+                                    <td>
+
+                                        <h5 class="">Kontakt:</h5>
+                                        <p>Telefon: <strong>+420 723 049 353</strong><br/>
+                                            Email: <strong><a href="emailto:info@mopedauto.cz">info@mopedauto.cz</a></strong></p>
+
+                                    </td>
+                                </tr>
+                            </table><!-- /column 2 -->
+
+                            <span class="clear"></span>
+
+                        </td>
+                    </tr>
+                </table><!-- /social & contact -->
+
+
+            </td>
+        </tr>
+    </table>
+</div>
+{include './include/footer.latte'}

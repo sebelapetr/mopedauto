@@ -49,6 +49,17 @@ class ProductForm extends Control{
 
         $form->addTextArea("description");
 
+        $form->addSelect("condition", "", [
+            Product::CONDITION_NEW => "Nové",
+            Product::CONDITION_USED => "Použité",
+        ]);
+
+        $form->addSelect("stockStatus", "", [
+            Product::STOCK_STATUS_ONSTOCK => "Skladem",
+            Product::STOCK_STATUS_TOWEEK => "Do týdne v e-shopu",
+            Product::STOCK_STATUS_WEEK => "Více než týden",
+        ]);
+
         $form->addSubmit("submit", $this->product ? 'Upravit produkt' : 'Přidat produkt');
 
         if ($this->product) {
@@ -62,7 +73,6 @@ class ProductForm extends Control{
     }
     public function editProductFormSucceeded(Form $form, $values)
     {
-        Debugger::barDump('a');
         $product = $this->productService->editProduct($this->product, $values);
 
         /*

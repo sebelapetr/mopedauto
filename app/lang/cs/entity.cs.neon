@@ -151,3 +151,8 @@ product:
     name: 'Název'
     visible: 'Viditelný'
     catalogPriceVat: 'Cena s DPH'
+    stockStatusONSTOCK: 'Skladem'
+    stockStatusTOWEEK: 'Do týdne v e-shopu'
+    stockStatusWEEK: 'Více než týden'
+    conditionNEW: 'Nové'
+    contitionUSED: 'Použité'

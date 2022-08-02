@@ -50,9 +50,18 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property boolean $new {default false}
  * @property boolean $discount {default false}
  * @property ManyHasMany|ProductParameterValue $parameterValues {m:m ProductParameterValue::$products, isMain=TRUE}
+ * @property string $condition {enum self::CONDITION_*} {default self::CONDITION_USED}
+ * @property string $stockStatus {enum self::STOCK_STATUS_*} {default self::STOCK_STATUS_WEEK}
  */
 class Product extends Entity
 {
+
+    public const CONDITION_NEW = "NEW";
+    public const CONDITION_USED = "USED";
+
+    public const STOCK_STATUS_ONSTOCK = "ONSTOCK";
+    public const STOCK_STATUS_TOWEEK = "TOWEEK";
+    public const STOCK_STATUS_WEEK = "WEEK";
 
     public function getMainImage(string $size): ?ProductImage
     {

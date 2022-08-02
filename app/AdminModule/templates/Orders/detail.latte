@@ -94,11 +94,13 @@
                         </tr>
                         <tr>
                             <th>Typ doručení:</th>
-                            <td>{$item->getShippingOrderItem()->name}</td>
+                            {var $shipping = $item->getShippingOrderItem()}
+                            <td>{$shipping ? $shipping->name : ""}</td>
                         </tr>
                         <tr>
                             <th>Typ platby:</th>
-                            <td>{$item->getPaymentOrderItem()->name}</td>
+                            {var $payment = $item->getPaymentOrderItem()}
+                            <td>{$payment ? $payment->name : ""}</td>
                         </tr>
                     </table>
                 </div>
@@ -120,9 +122,9 @@
                                 <th scope="col">ID položky</th>
                                 <th scope="col">Název</th>
                                 <th scope="col">Počet</th>
+                                <th scope="col">Cena</th>
                                 <th scope="col">Cena s DPH</th>
                                 <th scope="col">Cena bez DPH</th>
-                                <th scope="col">DPH</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,17 +133,18 @@
                                     <th scope="row">{$orderItem->id}</th>
                                     <td>{$orderItem->name}</td>
                                     <td>{$orderItem->quantity} ks</td>
-                                    <td>{$orderItem->priceVat} Kč</td>
-                                    <td>{$orderItem->price} Kč</td>
-                                    <td>{$orderItem->vat} %</td>
+                                    <td>{$orderItem->pricePieceVat|number:2, ",", " "} Kč</td>
+                                    <td>{$orderItem->priceVat|number:2, ",", " "} Kč</td>
+                                    <td>{$orderItem->price|number:2, ",", " "} Kč</td>
                                 </tr>
                             {/foreach}
                             <tr>
                                 <th scope="row">Celkem</th>
                                 <td></td>
                                 <td></td>
-                                <td class="font-weight-bold">{$item->totalPriceVat} Kč</td>
-                                <td class="font-weight-bold">{$item->totalPrice} Kč</td>
+                                <td></td>
+                                <td class="font-weight-bold">{$item->totalPriceVat|number:2, ",", " "} Kč</td>
+                                <td class="font-weight-bold">{$item->totalPrice|number:2, ",", " "} Kč</td>
                                 <td></td>
                             </tr>
                         </tbody>

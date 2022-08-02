@@ -9,6 +9,7 @@ use Nette\Application\UI\Presenter;
 use App\Model\Orm;
 use Nette\Caching\Cache;
 use Nette\Caching\Storages\FileStorage;
+use Nextras\Dbal\Connection;
 use Tracy\Debugger;
 
 abstract class BasePresenter extends Presenter{
@@ -25,15 +26,18 @@ abstract class BasePresenter extends Presenter{
     /** @inject */
     public IFindFormFactory $findFormFactory;
 
+    public Connection $connection;
+
     public Cache $cache;
 
     public const INITIAL_CATEGORY_SPARE_PARTS = "nahradni-dily";
     public const INITIAL_CATEGORY_CARS = "nabidka_mopedaut";
 
-    public function __construct(Orm $orm)
+    public function __construct(Orm $orm, connection $connection)
     {
         parent::__construct();
         $this->orm = $orm;
+        $this->connection = $connection;
     }
 
     public function handleLogOut(){

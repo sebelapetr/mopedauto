@@ -33,6 +33,7 @@ use Nextras\Orm\Relationships\OneHasOne;
  * @property int|NULL $newsletter
  * @property float $totalPrice {default 0}
  * @property float $totalPriceVat {default 0}
+ * @property string|NULL $toptransCode
  * @property DateTimeImmutable|null $createdAt {default now}
  * @property string|NULL $state {enum self::ORDER_STATE_*} {default self::ORDER_STATE_UNFINISHED}
  * @property int|NULL $variableSymbol
@@ -42,6 +43,8 @@ use Nextras\Orm\Relationships\OneHasOne;
  * @property string|NULL $typeDelivery {enum self::TYPE_DELIVERY_*}
  * @property string|NULL $paymentState {enum self::PAYMENT_STATE_*} {default self::PAYMENT_STATE_NOT_PAID}
  * @property OneHasOne|ComgatePayment|NULL $comgatePayment {1:1 ComgatePayment::$order, isMain=true}
+ * @property int|NULL $userId
+ * @property DateTimeImmutable|NULL $sentAt
  */
 Class Order extends Entity
 {

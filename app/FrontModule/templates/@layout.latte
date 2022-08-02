@@ -26,9 +26,45 @@
         {include './include/footer.latte'}
 
     </div>
+    <div class="modal fade" id="newPopup" tabindex="-1" role="dialog" aria-labelledby="newPopupLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="newPopupLabel">Vítejte na novém webu mopedauto.cz</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <p>
+                         Jedná se o pilotní provoz, berte prosím ohledy na možné chyby, které v průběhu ladíme.
+                    </p>
+                    <p>
+                        <b>Nabídka mopedaut a přihlášení k Vašemu účtu s objednávkami bude doplněno.</b>
+                    </p>
+                    <p>
+                        V případě jakéhokoliv problému nás kontaktujte na <a href="tel:+420723049353">+420 723 049 353</a> nebo <a href="mailto:info@mopedauto.cz">info@mopedauto.cz</a>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="forgetMe">Rozumím</button>
+                </div>
+            </div>
+        </div>
+    </div>
         {include './include/footer-scripts.latte'}
         {ifset #scripts}
             {include #scripts}
         {/ifset}
+        <script>
+            if(localStorage.getItem("DontShow")) {
+                $('#newPopup').modal("hide");
+            } else {
+                $('#newPopup').modal("show");
+            }
+            $(document).on("click", "#newPopup", function() {
+                localStorage.setItem("DontShow", "true");
+            });
+        </script>
     </body>
 </html>

@@ -47,7 +47,7 @@ Class ImportsPresenter extends Presenter
     public function renderOrders(){
 
         $row = 0;
-        if (($handle = fopen("orders2.csv", "r")) !== FALSE) {
+        if (($handle = fopen("ssss.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
                 $row++;
                 $id = $data[0];
@@ -116,7 +116,7 @@ Class ImportsPresenter extends Presenter
     public function renderOrderItems(){
 
         $row = 0;
-        if (($handle = fopen("orders_items.csv", "r")) !== FALSE) {
+        if (($handle = fopen("rrs.csv", "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
                 $row++;
 

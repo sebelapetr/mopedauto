@@ -1,251 +1,24 @@
+{block title}Nabídka mopedaut{/block}
+{block description}{/block}
 {block content}
 
-{include './include/title.latte'}
-
-<!--Sidebar Page Container-->
 <div class="sidebar-page-container">
+    <a class="btn btn-style-six btn-block xs-mob-y-cat" style="position: sticky; top: 0" data-toggle="modal" data-target="#myMobileCat">Výběr kategorie <i class="fa fa-chevron-down"></i></a>
     <div class="auto-container">
         <div class="row clearfix">
 
             <!--content side-->
-            <div class="content-side col-lg-12 col-md-12 col-sm-12">
+            <div class="content-side col-lg-45 col-md-12 col-sm-12">
 
                 <div class="row clearfix">
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1800l.jpg" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">AIXAM MEGA Van</a></h3>
-                                    <span class="price">199 000 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1803l.jpg" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">MINAUTO ACCESS</a></h3>
-                                    <span class="price">265 000 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {include './include/path.latte'}
 
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1885l.png" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">MINAUTO GT</a></h3>
-                                    <span class="price">299 900 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {include './include/title.latte'}
 
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1912l.jpg" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">MINAUTO CROSS</a></h3>
-                                    <span class="price">325 900 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1710l.jpg" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">AIXAM COUPÉ GTi Emotion</a></h3>
-                                    <span class="price">529 000 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1455l.jpg" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">AIXAM COUPÉ GTi Emotion</a></h3>
-                                    <span class="price">523 690 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1490l.jpg" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">AIXAM COUPÉ GTi Sensation</a></h3>
-                                    <span class="price">515 000 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1490l.jpg" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">AIXAM CITY GTO Sensation</a></h3>
-                                    <span class="price">385 900 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--                        images/resource/products/9.jpg-->
-
-                    <!-- Shop item -->
-                    <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                        <div class="feature-block">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <img src="{$basePath}/images/auta/1490l.jpg" alt="">
-                                    <div class="overlay-box">
-                                        <div class="icon-box">
-                                            <a href="detail.php" class="cart-btn"><i class="fa fa-search"></i>
-                                                Zobrazit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lower-content">
-                                    <h3><a href="shop-single.html">AIXAM CITY PACK Sensation</a></h3>
-                                    <span class="price">309 900 Kč</span>
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span><span class="fa fa-star"></span><span
-                                                class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {foreach $cars as $car}
+                        {include './include/car.latte', car => $car}
+                    {/foreach}
                 </div>
             </div>
 
@@ -254,4 +27,82 @@
     </div>
 </div>
 
-{include './include/parts.latte'}
+
+<!-- Subscribe Section -->
+<section class="subscribe-section">
+    <div class="auto-container">
+        <div class="inner-container clearfix">
+            <h3>Nabídka náhradních dílů pro Mopedauta</h3>
+            <a href="#" class="call-btn">E-SHOP</a>
+        </div>
+    </div>
+</section>
+
+{define scripts}
+    <!-- Modal -->
+    <div class="modal fade" id="quoteModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quoteModalLabel">Nezávazná poptávka</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section class="contact-section">
+                        <div class="auto-container">
+                            <div class="contact-form">
+                                {control contactForm}
+                            </div>
+                            <div class="contact-info">
+                                <div class="row clearfix justify-content-center">
+                                    <div class="content-column pt-0">
+                                        <div class="text mb-5">
+                                            Obraťte se na nás, rádi Vám s čímkoliv pomůžeme a poradíme. Jsme tu pro Vás!
+                                        </div>
+                                    </div>
+                                    <div class="info-column">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <span class="icon flaticon-placeholder"></span>
+                                                <p><strong>Moped Auto s.r.o.</strong>
+                                                    <br>Cejl 29/76, 602 00 Brno<br>
+                                                    <b>IČ:</b> 04811747 <b>DIČ:</b> CZ04811747 <br>
+                                                    KS Brno oddíl C, vložka 92059
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <span class="icon flaticon-phone"></span>
+                                                <p><strong>Mobil:</strong> +420 723 049 353</p>
+                                                <p><strong>Email:</strong> info@mopedauto.cz</p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <span class="icon flaticon-stopwatch"></span>
+                                                <p><strong>Otevírací doba :</strong><br>  Po - Pá: 9:00 - 17:00 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="image-column col-lg-12 col-md-12 col-sm-12 mt-4">
+                                        <figure><a href="https://goo.gl/maps/aqPorYxKXDKWQSyP9" target="_blank"><img src="{$basePath}/module/front/images/moped_map.jpg" alt=""></a></figure>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $('.send-quote').on('click', function() {
+            var detailModal = $('#quoteModal');
+            detailModal.modal('toggle');
+        });
+    </script>
+{/define}

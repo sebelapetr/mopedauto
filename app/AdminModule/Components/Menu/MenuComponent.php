@@ -35,6 +35,11 @@ class MenuComponent extends BaseComponent {
                     'icon' => 'fas fa-shopping-cart'
                 ],
                 [
+                    'presenter' => 'Cars',
+                    'presenterClean' => StringUtils::clean('Cars'),
+                    'icon' => 'fas fa-car',
+                ],
+                [
                     'presenter' => 'Products',
                     'presenterClean' => StringUtils::clean('Products'),
                     'icon' => 'fas fa-barcode',

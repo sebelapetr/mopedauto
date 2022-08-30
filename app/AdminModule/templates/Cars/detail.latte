@@ -1,0 +1,78 @@
+{varType App\Model\Vehicle $item}
+{block content}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-sm-6">
+        <h1 class="h3 mb-0 text-gray-800">Detail auta {$item->name}</h1>
+    </div>
+    <div class="col-sm-6">
+        <a n:href="default" class="btn btn-success btn-sm float-right">Zpět na přehled aut</a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="m-0 font-weight-bold text-dark">{_app.partners.basicInformations}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <a n:href="delete!, $item->id" class="btn btn-sm btn-danger ml-2 float-right">Smazat</a>
+                        <a n:href="edit, $item->id" class="btn btn-sm btn-success float-right">Upravit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <tr>
+                            <th>Název:</th>
+                            <td>{$item->name}</td>
+                        </tr>
+                        <tr>
+                            <th>Cena (Kč):</th>
+                            <td>{$item->priceCzk}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Cena (€):</th>
+                            <td>{$item->priceEur}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Najeto:</th>
+                            <td>{$item->kilometers}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Povolený věk:</th>
+                            <td>{$item->allowedAge}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rok výroby:</th>
+                            <td>{$item->manufactureYear}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Možnost odpočtu DPH:</th>
+                            <td>{$item->vatDeduction ? "Ano" : "Ne"}</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-12">
+        {control carImagesForm}
+    </div>
+</div>
+{/block}
+

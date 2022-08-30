@@ -13,11 +13,11 @@ services:
     - App\AdminModule\Components\OrdersDatagridFactory
     - App\AdminModule\Components\DocumentsDatagridFactory
     - App\AdminModule\Components\CouriersDatagridFactory
+    - App\AdminModule\Components\CarsDatagridFactory
 
     #FORMS
     - App\AdminModule\Forms\ICategoryFormFactory
     - App\AdminModule\Forms\IProductFormFactory
-    - App\AdminModule\Forms\IVehicleFormFactory
     - App\AdminModule\Forms\ICityFormFactory
     - App\AdminModule\Forms\IZipFormFactory
     - App\AdminModule\Forms\IPartnerBranchFormFactory
@@ -35,3 +35,5 @@ services:
     - App\AdminModule\Forms\IAssignCourierFormFactory
     - App\AdminModule\Forms\IOrderFormFactory
     - App\AdminModule\Forms\IProductImagesFormFactory
+    - App\AdminModule\Forms\IVehicleImagesFormFactory
+    - App\AdminModule\Forms\ICarFormFactory

@@ -156,3 +156,8 @@ product:
     stockStatusWEEK: 'Více než týden'
     conditionNEW: 'Nové'
     contitionUSED: 'Použité'
+
+car:
+    name: Název
+    priceCzk: "Cena (Kč)"
+    priceEur: "Cena (€)"

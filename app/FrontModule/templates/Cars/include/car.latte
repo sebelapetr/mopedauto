@@ -1,0 +1,46 @@
+{varType App\Model\Vehicle $car}
+{varType App\FrontModule\Presenters\CarsPresenter $presenter}
+<!-- Shop item -->
+<div class="shop-item col-lg-4 col-md-6 col-sm-12">
+    <div class="feature-block">
+        <div class="inner-box">
+            <div class="image-box">
+                {if $car->getMainImage(App\Model\ProductImage::SIZE_LG) !== null}
+                    <img src="{$basePath}{$car->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}" alt="">
+                {else}
+                    <img src="{$basePath}/images/products/placeholder.jpg" alt="">
+                {/if}
+                <div class="overlay-box">
+                    <div class="icon-box">
+                        <a href="javascript::void(0)" class="cart-btn send-quote">Nezávázně poptat</a>
+                    </div>
+                </div>
+            </div>
+            <div class="lower-content">
+                <h5><a href="javascript::void(0) " class="send-quote">{$car->name}</a></h5>
+                <span class="price">{$car->priceCzk|number:0, ",", " "} Kč</span>
+                <span class="price">{$car->priceEur|number:0, ",", " "} €</span>
+                <table style="text-align: left;width: 100%;margin: 20px">
+                    <tr>
+                        <td>Možnost odpočtu DPH:</td>
+                        <td>{$car->vatDeduction ? "Ano" : "Ne"}</td>
+                    </tr>
+                    <tr>
+                        <td>Povolený věk:</td>
+                        <td>{$car->allowedAge} let</td>
+                    </tr>
+                    <tr>
+                        <td>Rok výroby:</td>
+                        <td>{$car->manufactureYear}</td>
+                    </tr>
+                    <tr>
+                        <td>Najeto:</td>
+                        <td>{$car->kilometers}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-style-six btn-block send-quote" href="javascript::void(0)">Nezávázně poptat</a>
+</div>
+

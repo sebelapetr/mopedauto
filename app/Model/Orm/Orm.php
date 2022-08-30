@@ -19,6 +19,8 @@ use Nextras\Orm\Model\Model;
  * @property-read RightsRepository $rights
  * @property-read ProductParametersRepository $productParameters
  * @property-read ProductParameterValuesRepository $productParameterValues
+ * @property-read VehiclesRepository $vehicles
+ * @property-read VehicleImagesRepository $vehicleImages
  */
 class Orm extends Model
 {

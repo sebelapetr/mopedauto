@@ -40,6 +40,7 @@ di:
 services:
 	router: App\Router\RouterFactory::createRouter
 	- App\Model\Upload\UploadService
+	- App\Model\Upload\UploadCarService
 	- App\Model\UserRegistrationService
 	- App\Model\CategoryService
 	- App\Model\ProductService

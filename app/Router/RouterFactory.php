@@ -44,7 +44,7 @@ final class RouterFactory
         $routerFront[] = new Route('ochrana-osobnich-udaju', 'Pages:personalData');
         $routerFront[] = new Route('doprava-a-platba', 'Pages:shippingAndPayment');
 
-        $routerFront[] = new Route('order/payment-result/<id>', 'Comgate:paymentResult');
+        $routerFront[] = new Route('comgate/payment-result/<id>', 'Comgate:paymentResult');
 
         $routerFront[] = new Route('<presenter>/<action>', 'Homepage:default');
 

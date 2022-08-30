@@ -91,7 +91,7 @@ class OrderStateForm extends Nette\Application\UI\Control
         $title = 'Informace o změně stavu objednávky č. ' . $order->id . ' | mopedauto.cz';
         $mail->setFrom(OrderService::FROM_EMAIL)
             ->addTo($order->email)
-            ->addBcc(OrderService::FROM_EMAIL)
+           // ->addBcc(OrderService::FROM_EMAIL)
             ->setSubject($title)
             ->setHtmlBody($latte->renderToString(__DIR__ . '/../../templates/Emails/orderDone.latte', [
                 'order' => $order,

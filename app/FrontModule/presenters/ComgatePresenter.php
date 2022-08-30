@@ -9,6 +9,7 @@ use App\Model\OrderService;
 use App\Model\Orm;
 use App\Model\Services\ComgateService;
 use App\Presenters\BasePresenter;
+use Nextras\Dbal\Utils\DateTimeImmutable;
 use Tracy\Debugger;
 
 class ComgatePresenter extends BasePresenter
@@ -48,8 +49,9 @@ class ComgatePresenter extends BasePresenter
 			$comgatePayment = $this->orm->comgatePayments->getByTransId($id);
 			$order = $comgatePayment->order;
 
-			if($order->state === Order::ORDER_STATE_CREATED){
+			if($order->state === Order::ORDER_STATE_UNFINISHED){
 				$order->state = Order::ORDER_STATE_RECEIVED;
+                $order->createdAt = new DateTimeImmutable();
 				$this->orm->persistAndFlush($order);
 
                 $orderSent = $this->orderService->sendMails($order);

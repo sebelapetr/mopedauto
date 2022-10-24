@@ -23,7 +23,6 @@ class DashboardPresenter extends BaseAppPresenter
         $now = new \DateTimeImmutable();
         $this->template->turnover = $this->orm->orders->getDayTurnover($now);
         $this->template->ordersQuantity = $this->orm->orders->getDayOrdersSold($now);
-        $this->template->productsQuantity = $this->orm->orders->getDayProductsSold($now);
 
         $this->template->activeUsers = $this->orm->users->findBy(['workingNow' => true]);
         $this->template->couriersOnWay = [];//$this->getCouriersOnWay();

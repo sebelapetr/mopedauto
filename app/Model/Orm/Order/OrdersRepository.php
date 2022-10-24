@@ -30,7 +30,7 @@ class OrdersRepository extends Repository{
     public function getDayTurnover(\DateTimeImmutable $date): float
     {
         $turnover = 0;
-        $orders = $this->findBy(['createdAt>=' => $date->setTime(0,0,0), 'createdAt<=' => $date->setTime(23,59,59)]);
+        $orders = $this->findBy(['createdAt>=' => $date->setTime(0,0,0), 'createdAt<=' => $date->setTime(23,59,59), "state!=" => Order::ORDER_STATE_UNFINISHED]);
         /** @var Order $order */
         foreach ($orders as $order)
         {
@@ -41,7 +41,7 @@ class OrdersRepository extends Repository{
 
     public function getDayOrdersSold(\DateTimeImmutable $date): int
     {
-        return $this->findBy(['createdAt>=' => $date->setTime(0,0,0), 'createdAt<=' => $date->setTime(23,59,59)])->count();
+        return $this->findBy(['createdAt>=' => $date->setTime(0,0,0), 'createdAt<=' => $date->setTime(23,59,59), "state!=" => Order::ORDER_STATE_UNFINISHED])->countStored();
     }
 
     public function getDayProductsSold(\DateTimeImmutable $date): int

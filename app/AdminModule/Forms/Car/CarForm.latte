@@ -1,7 +1,16 @@
+{varType App\AdminModule\Forms\CarForm $form}
 <form n:name="editCarForm" class="form" style="width: 100%">
     <div class="form-group">
         <label n:name="name">Název *</label>
         <input n:name="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label n:name="annotation">Anotace</label>
+        <textarea n:name="annotation" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label n:name="description">Popis</label>
+        <textarea n:name="description" class="form-control cars-wysiwyg"></textarea>
     </div>
     <div class="form-group">
         <label n:name="priceCzk">Cena (Kč) *</label>
@@ -10,6 +19,14 @@
     <div class="form-group">
         <label n:name="priceEur">Cena (€) *</label>
         <input n:name="priceEur" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label n:name="fuel">Palivo</label>
+        <input n:name="fuel" class="form-control">
+    </div>
+    <div class="form-group">
+        <label n:name="color">Barva</label>
+        <input n:name="color" class="form-control">
     </div>
     <div class="form-group">
         <label n:name="allowedAge">Povolený věk</label>
@@ -26,6 +43,10 @@
     <div class="form-group">
         <label n:name="vatDeduction">Možnost odpočtu DPH</label>
         <input n:name="vatDeduction" class="form-control">
+    </div>
+    <div class="form-group" n:foreach="$form->getComponents() as $component" n:if="substr( $component->getName(), 0, 5 ) === 'param'">
+        <label n:name="$component">{_"carparams.".$component->getName()}</label>
+        <input n:name="$component" class="form-control">
     </div>
     <div class="form-group">
         <input class="form-control btn btn-primary" n:name="submit">

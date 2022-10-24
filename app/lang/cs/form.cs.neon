@@ -1,0 +1,24 @@
+userRegistration:
+	email: Váš e-mail
+	phone: Váš telefon
+	name: Jméno
+	surname: Příjmení
+	street: Ulice a č.p.
+	city: Město
+	zip: PSČ
+	mailNotifications: Souhlasím se zasíláním informačních e-mailů.
+	phoneNotifications: Souhlasím se telefonním kontaktem pro zasílání informací.
+	password: Heslo
+	passwordCheck: Heslo znovu
+	privacyPolicy: "Souhlasím se zásadami <a href=\"%link%\" target=\"_blank\">Ochrany osobních údajů</a>"
+	termsOfConditions: "Souhlasím se <a href=\"%link%\" target=\"_blank\">Všeobecnými obchodními podmínkami</a>"
+	emailRequired: Pole email je vyžadované
+	phoneRequired: Pole telefon je vyžadované
+	nameRequired: Pole jméno je vyžadované
+	surnameRequired: Pole příjmení je vyžadované
+	passwordRequired: Pole heslo je vyžadované
+	passwordCheckRequired: Pole heslo znovu je vyžadované
+	cookiesRequired: Souhlas s ochranou osobních údajů je vyžadovaný
+	termsOfConditionsRequired: Souhlas se všeobecnými obchodními podmínkami je vyžadovaný
+	success: Registrace byla úspěšná. Nyní potvrďte svůj účet odkazem v emailu.
+	passwordsNoMatch: Hesla se neshodují

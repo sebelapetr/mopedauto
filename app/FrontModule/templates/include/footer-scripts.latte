@@ -36,6 +36,7 @@
 </script>
 <script type="text/plain" src="//c.imedia.cz/js/retargeting.js" data-cookiecategory="targeting"></script>
 <div id="fb-root"></div>
+
 <script type="text/plain" data-cookiecategory="targeting">(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
@@ -51,4 +52,8 @@
     $('.submitPersonalDataForm-btn').click(function() {
         $("#submitPersonalDataForm").click();
     })
+
+    $(function () {
+        $.nette.init();
+    });
 </script>

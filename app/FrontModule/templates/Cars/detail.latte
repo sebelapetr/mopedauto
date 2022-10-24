@@ -1,6 +1,20 @@
+{varType App\Model\Vehicle $car}
+{varType App\Model\VehicleImage $carImage}
+{block title}{$car->name}{/block}
+{block description}{$car->annotation}{/block}
 {block content}
 
 <section class="detail">
+
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+        <div class="slides"></div>
+        <!--                        <h3 class="title"></h3>-->
+        <a class="prev"></a>
+        <a class="next"></a>
+        <a class="close"></a>
+        <a class="play-pause"></a>
+        <!--                        <ol class="indicator"></ol>-->
+    </div>
 
     <section class="detail-section">
 
@@ -9,112 +23,181 @@
             <div class="auto-container">
                 <div class="row clearfix">
                     <div class="content-column col-lg-12 col-md-12 col-sm-12">
-                        <div class="product-details">
+                        {include './include/path.latte', car => $car}
+                        <div class="product-details" style="padding: 25px 0;margin-bottom: 5rem;">
 
-                            <!--Basic Details-->
-                            <div class="basic-details">
-                                <div class="row clearfix">
-                                    <div class="image-column col-lg-5 col-md-12 col-sm-12">
-                                        <figure class="image-box">
-                                            <a href="images/resource/products/product-single.jpg" class="lightbox-image"
-                                               title="Image Caption Here">
-                                                <img src="images/resource/products/product-single.jpg" alt="">
-                                            </a>
-                                        </figure>
-                                    </div>
-                                    <div class="info-column col-lg-7 col-md-12 col-sm-12">
-                                        <div class="inner-column">
-                                            <div class="details-header">
-                                                <h4>AIXAM COUPÉ GTI SENSATION</h4>
-                                                <div class="item-price">
-                                                    <del>650 000 Kč</del>
-                                                    515 000 Kč
+                                <!--Basic Details-->
+                                <div class="basic-details">
+                                    <div class="row clearfix">
+                                        <div class="image-column col-lg-6 col-md-12 col-sm-12">
+
+                                            <figure id="links" class="links">
+                                                {if $car->getMainImage(App\Model\VehicleImage::SIZE_ORIGINAL) !== null}
+                                                    <a href="{$basePath}{$car->getMainImage(App\Model\VehicleImage::SIZE_ORIGINAL)->filePath}"
+                                                       title="Image Caption Here" data-fancybox="gallery">
+                                                        <img src="{$basePath}{$car->getMainImage(App\Model\VehicleImage::SIZE_ORIGINAL)->filePath}" class='gallery-img' alt="">
+                                                    </a>
+                                                {else}
+                                                    <img src="{$basePath}/images/products/placeholder.jpg" class='gallery-img' alt="">
+                                                {/if}
+                                            {var $otherImages = $car->getOtherImages(App\Model\VehicleImage::SIZE_ORIGINAL)}
+                                                <div class="row" n:if="$otherImages->countStored() > 0">
+                                                    <div class="col-sm-12">
+                                                        <!-- Slider main container -->
+                                                        <div class="swiper swiper-photos" style="overflow: hidden">
+                                                            <!-- Additional required wrapper -->
+                                                            <div class="swiper-wrapper">
+                                                                <!-- Slides -->
+                                                                <div class="swiper-slide" n:foreach="$otherImages as $carImage">
+                                                                    {var $originImage = $car->getImageOtherSize($carImage, App\Model\VehicleImage::SIZE_ORIGINAL)}
+                                                                {var $originSizePath = $originImage ? $originImage->filePath : $carImage->filePath}
+                                                                    <a data-fancybox="gallery" href="{$basePath}{$originSizePath}"
+                                                                       title="Image Caption Here">
+                                                                        <img src="{$basePath}{$carImage->filePath}" alt="{$carImage->originalName}">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <!-- If we need navigation buttons -->
+                                                            <div class="swiper-button-prev"></div>
+                                                            <div class="swiper-button-next"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="rating">
-                                                    <span class="fa fa-star"></span><span
-                                                            class="fa fa-star"></span><span
-                                                            class="fa fa-star"></span><span
-                                                            class="fa fa-star"></span><span
-                                                            class="fa fa-star"></span>
+                                            </figure>
+                                        </div>
+                                        <div class="info-column col-lg-6 col-md-12 col-sm-12" style="padding: 0">
+                                            <div class="inner-column">
+                                                <div class="details-header" style="margin-bottom: 15px;">
+                                                    <h4>{$car->name|noescape}</h4>
+                                                    <div class="car-annotation" style="margin-bottom:10px">
+                                                        <p>
+                                                            {$car->annotation}
+                                                        </p>
+                                                    </div>
+                                                    <div style="background: #efefef; padding: 15px 15px; height: 80px;">
+                                                        <div class="item-price pull-left">
+                                                            <span class="font-weight-bold">Cena</span> <br>
+                                                            <span style="font-size: 0.9rem">Cena €</span>
+                                                        </div>
+                                                        <div class="item-price pull-right">
+                                                            <span class="font-weight-bold" style="font-size: 1.4rem; color: #1c63b8;">{$car->priceCzk|number:0, ",", " "} Kč </span><br>
+                                                            <span style="font-size: 0.9rem">{$car->priceEur|number:0, ",", " "} € </span>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <span class="review"></span>
                                                 </div>
-                                                <span class="review"></span>
-                                            </div>
-                                            <div class="text">Leverage agile frameworks to provide a robust synopsis for
-                                                high level over views. Iterative approaches to corporate strategy foster
-                                                collaborative thinking to further the overall value proposition.
-                                                Organically
-                                                grow the holistic world view of disruptive innovation via workplace
-                                                diversity and empowerment.
-                                            </div>
-                                            <div class="clearfix">
-                                                <div class="item-quantity"><input class="quantity-spinner" type="number"
-                                                                                  value="2" name="quantity"></div>
-                                                <button type="button" class="theme-btn btn-style-two">DO KOŠÍKU</button>
+                                                <div class="clearfix detail_pad" style="margin-bottom:10px">
+                                                    <div>
+                                                        <a href="javascript::void(0)" class="theme-btn btn-style-six detail_full_center send-quote">Nezávazně poptat</a>
+                                                    </div>
+                                                </div>
+                                                <div class="car-technical-description">
+                                                    <ul>
+                                                        <li n:if="$car->vatDeduction !== null"><b>Možnost odpočtu DPH:</b> {$car->vatDeduction ? "Ano" : "Ne"}</li>
+                                                        <li n:if="$car->color !== null"><b>Dostupné barvy karoserie:</b> {$car->color}</li>
+                                                        <li n:if="$car->allowedAge !== null"><b>Povolený věk:</b> {$car->allowedAge}</li>
+                                                        <li n:if="$car->manufactureYear !== null"><b>Rok výroby:</b> {$car->manufactureYear}</li>
+                                                        <li n:if="$car->fuel !== null"><b>Palivo:</b> {$car->fuel}</li>
+                                                    </ul>
+                                                    <hr>
+                                                    <h4>Výbava:</h4>
+                                                    <ul class="car-parameters">
+                                                        {for $i = 1; $i <= 16; $i++}
+                                                            {var $param = "param".$i}
+                                                            <li n:if="$car->$param === true">
+                                                                <b>{_"carparams.".$param}</b>
+                                                            </li>
+                                                        {/for}
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--Basic Details-->
+                                <!--Basic Details-->
 
-                            <!--Product Info Tabs-->
-                            <div class="product-info-tabs">
-
-                                <!--Product Tabs-->
-                                <div class="prod-tabs tabs-box" id="product-tabs">
-
-                                    <!--Tab Btns-->
-                                    <ul class="tab-btns tab-buttons clearfix">
-                                        <li data-tab="#prod-description" class="tab-btn active-btn">Popis produktu</li>
-                                        <li data-tab="#prod-tech" class="tab-btn">Technická specifikace</li>
-                                        <li data-tab="#prod-souvis" class="tab-btn">Související produkty</li>
-                                    </ul>
-
-                                    <!--Tabs Content-->
-                                    <div class="tabs-container tabs-content">
-
-                                        <!--Tab / Active Tab-->
-                                        <div class="tab active-tab" id="prod-description">
-
-                                            <div class="content">
-                                                <p>One of the best hardware options available to the mining community,
-                                                    this
-                                                    product is quiet and efficient. It’s a true powerhouse, offering
-                                                    excellent performance with a reasonable price tag and comparatively
-                                                    low
-                                                    power consumption. If you need a reliable option for your mining
-                                                    rig,
-                                                    look no further. Can be set up to mine a number of currencies
-                                                    (bitcoin,
-                                                    bitcoin gold, monero, etc.), although take care to configure it
-                                                    properly
-                                                    as different cryptocurrencies require different settings.</p>
-                                            </div>
-                                        </div>
-
-                                        <!--Tab-->
-                                        <div class="tab" id="prod-tech">
-                                            <div class="content">
-                                                Technická specifikace
-                                            </div>
-                                        </div>
-                                        <!--Tab-->
-                                        <div class="tab" id="prod-souvis">
-                                            <div class="content">
-                                                Související produkty
-                                            </div>
-                                        </div>
-                                    </div>
+                                <!--Car Info Tabs-->
+                                <div class="car-description">
+                                  {$car->description|noescape}
                                 </div>
-                            </div><!-- End product info tabs -->
-
-                        </div>
                     </div>
-
+                    {include '../include/parts.latte'}
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--End Shop Single-->
+            <!--End Shop Single-->
     </section>
 
 </section>
+
+
+{define scripts}
+    <!-- Modal -->
+    <div class="modal fade" id="quoteModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quoteModalLabel">Nezávazná poptávka</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section class="contact-section">
+                        <div class="auto-container">
+                            <div class="contact-form">
+                                {control contactForm}
+                            </div>
+                            <div class="contact-info">
+                                <div class="row clearfix justify-content-center">
+                                    <div class="content-column pt-0">
+                                        <div class="text mb-5">
+                                            Obraťte se na nás, rádi Vám s čímkoliv pomůžeme a poradíme. Jsme tu pro Vás!
+                                        </div>
+                                    </div>
+                                    <div class="info-column">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <span class="icon flaticon-placeholder"></span>
+                                                <p><strong>Moped Auto s.r.o.</strong>
+                                                    <br>Cejl 29/76, 602 00 Brno<br>
+                                                    <b>IČ:</b> 04811747 <b>DIČ:</b> CZ04811747 <br>
+                                                    KS Brno oddíl C, vložka 92059
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <span class="icon flaticon-phone"></span>
+                                                <p><strong>Mobil:</strong> +420 723 049 353</p>
+                                                <p><strong>Email:</strong> info@mopedauto.cz</p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <span class="icon flaticon-stopwatch"></span>
+                                                <p><strong>Otevírací doba :</strong><br>  Po - Pá: 9:00 - 17:00 </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="image-column col-lg-12 col-md-12 col-sm-12 mt-4">
+                                        <figure><a href="https://goo.gl/maps/aqPorYxKXDKWQSyP9" target="_blank"><img src="{$basePath}/module/front/images/moped_map.jpg" alt=""></a></figure>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $('.send-quote').on('click', function() {
+            var detailModal = $('#quoteModal');
+            detailModal.modal('toggle');
+        });
+    </script>
+{/define}

@@ -1,0 +1,143 @@
+{import '../include/formBlocks.latte'}
+{varType Nextras\Orm\Relationships\HasMany $productsInCart}
+{varType Taran\Model\Order $order}
+
+<div class="header-container">
+    <div class="bg-primary">
+        <div class="container header-bar">
+            <div class="row align-items-center justify-content-between">
+                <ul class="col-auto main-menu" id="js-menu">
+                    {foreach $menu as $key => $item}
+                        {var $hasSubMenu = isset($item->subMenu)}
+                        {var $className = isset($item->className) ? $item->className : ''}
+                        {var $isActive = isset($item->activeLink) ? $presenter->isLinkCurrent($item->activeLink) : false}
+                        <li n:class="$isActive ? 'active', $hasSubMenu ? 'has-subMenu', $className">
+                            {if $hasSubMenu}
+                                <a href="#js-submenu-{$key}" data-toggle="collapse" class="menu-item">
+                                    <span>{$item->name}</span>
+                                    <i class="icon icon-arrow-sm-down"></i>
+                                </a>
+                                <ul class="collapse js-submenu" id="js-submenu-{$key}" data-parent="#js-menu">
+                                    <li n:foreach="$item->subMenu as $subitem">
+                                        <a href="{$subitem->link}">{$subitem->name}</a>
+                                    </li>
+                                </ul>
+                            {else}
+                                <a href="{$item->link}" class="menu-item">{$item->name}</a>
+                            {/if}
+                        </li>
+                    {/foreach}
+                    <li>
+                        <a href="https://skori.cz/" target="_blank" class="menu-item menu-item--highlighted">
+                            <span>SKORI.CZ</span>
+                        </a>
+                    </li>
+                    <li class="separator d-lg-none">&nbsp;</li>
+                    {if $isLogged && $user->user->customer !== null}
+                        <li class="d-lg-none">
+                            <a n:href=":Front:Login:" class="dropdown-item bg-primary text-white">{$user->user->customer->name}{if $user->user->customer->company} - <small>{$user->user->customer->company->name}</small>{/if}</a>
+                        </li>
+                        <li class="d-lg-none" n:foreach="$userMenu as $item">
+                            <a class="dropdown-item" href="{$item->link|noescape}">
+                                {$item->name}
+                            </a>
+                        </li>
+                        <li class="d-lg-none">
+                            <a n:href="logout!">Odhlásit se</a>
+                        </li>
+                    {else}
+                        <li class="d-lg-none">
+                            <a n:href=":Front:Login:" class="menu-item">Přihlásit se</a>
+                        </li>
+                        <li class="d-lg-none">
+                            <a n:href=":Front:Registration:" class="menu-item">Registrovat se</a>
+                        </li>
+                    {/if}
+                </ul>
+                {if $isLogged && $user->user->customer !== null}
+
+                    <div class="col-auto d-none d-lg-block dropdown">
+                        <button class="btn btn-white btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="js-loggedUser-button">
+                            <i class="fas fa-user-circle"></i>
+                            <span>{$user->user->customer->name}{if $user->user->customer->company} - <small>{$user->user->customer->company->name}</small>{/if}</span>
+                        </button>
+                        <div class="menu-user-section dropdown-menu dropdown-menu-right" aria-labelledby="js-loggedUser-button">
+                            <a n:foreach="$userMenu as $item" class="dropdown-item" href="{$item->link|noescape}">
+                                {$item->name}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-primary" n:href="logout!">
+                                Odhlásit se
+                            </a>
+                        </div>
+                    </div>
+                {else}
+                    <div class="col-auto d-none d-lg-block dropdown">
+                        <button class="btn btn-white btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="js-login-button">
+                            <i class="fas fa-user-circle"></i>
+                            <span>Přihlásit se</span>
+                        </button>
+                        <div class="menu-user-section py-4 px-4 dropdown-menu dropdown-menu-right" aria-labelledby="js-login-button">
+                            {control loginForm}
+                            <p class="text-center mt-2 fs-sm"><a n:href="Login:lostPassword">Zapomněl(a) jsem heslo</a></p>
+                            <hr />
+                            <p class="mt-3">
+                                <a n:href="Registration:" class="btn btn-secondary btn-block btn-sm">Registrovat se</a>
+                            </p>
+                        </div>
+                    </div>
+                {/if}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header row justify-content-between">
+            <div class="logo col col-lg-3 align-self-center">
+                <a n:href=":Front:Default:" class="d-block">
+                    <img src="{$basePath}/module/front/image/logo.png" alt="" class="img-fluid"/>
+                </a>
+            </div>
+            <div class="col-auto d-flex col-lg-9 justify-content-end">
+                <p class="col-auto d-lg-none align-self-center">
+                    <button href="#js-menu" class="btn btn-icon btn-primary" id="js-menu-toggle" data-toggle="collapse">
+                        <i class="icon-menu"></i>
+                    </button>
+                </p>
+                <div class="branch mr-2 d-none d-lg-block">
+                    <button class="btn btn-light rounded-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-map-marker-alt text-primary fs-xl"></i>
+                        <span style="line-height: 1.3">{$activeBranch->name}<br /><small>{$activeBranch->street}</small></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a n:foreach="$branches as $branch" n:class="'dropdown-item', $branch->id === $activeBranch->id ? active" n:href="changeBranch! $branch->id">
+                            {$branch->name}, {$branch->street}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-none d-xl-flex flex-grow-1 px-3 justify-content-center align-items-center">
+                    <div n:foreach="$headerContactData as $item" class="px-3 contact-data">
+                        <i class="{$item['icon']|implode:' '}"></i>
+                        <div>
+                            <p><a href="{$item['link']|noescape}" target="_blank">{$item['value']}</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div n:snippet="cartInfo">
+                    <a n:href=":Front:Order:cart" class="btn-basket-container px-3 px-md-5">
+                        <span class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="n">{$order->countProducts()}</span>
+                        </span>
+                        <span class="content">
+                            <span><strong>{$order->countProducts()}</strong> položky</span>
+                            <span><strong>{$order->productOrderItemsTotalPriceWithVat|money}</strong></span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

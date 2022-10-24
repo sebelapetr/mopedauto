@@ -59,6 +59,10 @@
                             <th>DIČ:</th>
                             <td>{$item->dic}</td>
                         </tr>
+                        <tr>
+                            <th>Poznámka:</th>
+                            <td>{$item->note}</td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -119,7 +123,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">ID položky</th>
+                                <th scope="col">Číslo</th>
                                 <th scope="col">Název</th>
                                 <th scope="col">Počet</th>
                                 <th scope="col">Cena</th>
@@ -130,7 +134,7 @@
                         <tbody>
                             {foreach $item->ordersItems as $orderItem}
                                 <tr>
-                                    <th scope="row">{$orderItem->id}</th>
+                                    <th scope="row">{$orderItem->number}</th>
                                     <td>{$orderItem->name}</td>
                                     <td>{$orderItem->quantity} ks</td>
                                     <td>{$orderItem->pricePieceVat|number:2, ",", " "} Kč</td>

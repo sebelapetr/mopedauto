@@ -1,0 +1,97 @@
+{varType array $settings}
+{var $fColClasses = "col-lg-3"}
+{var $i = 0}
+{define fTitle}
+    {ifset $toggleId}
+        <h4 class="h4 pb-lg-3 text-white title-collapse" data-toggle="collapse" data-target="#{$toggleId}" aria-expanded="false">
+            <span>{$title|noescape}</span>
+            <i class="icon-arrow-down d-lg-none" data-arrow></i>
+        </h4>
+    {else}
+        <h4 class="h4 pb-3 text-white">{$title|noescape}</h4>
+    {/ifset}
+{/define}
+
+
+<div n:class="'footer-container', 'bg-dark'">
+    <div class="container">
+        <div class="row multi-row mb-5">
+                <div n:class="$fColClasses">
+                    {var $id = "js-footer-menu-{$i}"}
+                    {var $i = $i + 1}
+                    {capture $servicesTitle}{_front.footer.services.title}{/capture}
+                    {include fTitle title => $servicesTitle, toggleId => $id}
+
+                    <ul class="footer-menu-list collapse d-lg-block pt-2 pt-lg-0" id="{$id}">
+                        <li n:foreach="$serviceList as $key => $item">
+                            <a href="{$item['link']|noescape}">{_front.footer.services.$key}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div n:class="$fColClasses">
+                    {var $id = "js-footer-menu-{$i}"}
+                    {var $i = $i + 1}
+                    {include fTitle title => "Pobočky", toggleId => $id}
+
+                    <ul class="footer-menu-list collapse d-lg-block pt-2 pt-lg-0" id="{$id}">
+                        <li n:foreach="$branches as $branch">
+                            <a n:href=":Front:Branch:detail, $branch->id, $branch->webName">{$branch->name}</a>
+                        </li>
+                    </ul>
+
+                    <div n:if="$settings[Taran\Model\Enum\SettingsEnum::OPTION_COMPANY_PRICE_LIST_PDF] !== ''" class="pt-4">
+                        {var $id = "js-footer-menu-{$i}"}
+                        {var $i = $i + 1}
+                        {include fTitle title => "Ke stažení", toggleId => $id}
+
+                        <ul class="footer-menu-list collapse d-lg-block pt-2 pt-lg-0" id="{$id}">
+                            <li>
+                                <a n:href="Download:priceList" target="_blank">Ceník všech služeb</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div n:class="$fColClasses">
+                    {var $id = "js-footer-menu-{$i}"}
+                    {var $i = $i + 1}
+                    {include fTitle title => "Informace", toggleId => $id}
+
+                    <ul class="footer-menu-list collapse d-lg-block pt-2 pt-lg-0" id="{$id}">
+                        <li n:foreach="$footerLinksInfo as $item">
+                            <a href="{$item['link']|noescape}">{$item['name']}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div n:class="$fColClasses">
+                    {include fTitle title => "Sledujte nás"}
+
+                    <ul class="footer-menu-social-list row row-sm">
+                        <li class="col-auto">
+                            <a href="https://www.facebook.com/skoricopyji" target="_blank">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="col-auto">
+                            <a href="https://instagram.com/skoricopy" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        <div class="footer d-lg-flex text-center text-lg-left">
+            <div class="pr-lg-5 pb-3 pb-lg-0 flex-shrink-0">
+                <a n:href=":Front:Default:" class="d-block">
+                    <img src="{$basePath}/module/front/image/logo-footer.png" width="151" height="41" alt="" class="img-fluid"/>
+                </a>
+            </div>
+            <div class="flex-grow-1">
+                <p><em>{_front.footer.text}</em></p>
+            </div>
+        </div>
+    </div>
+</div>

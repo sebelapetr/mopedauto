@@ -1,0 +1,159 @@
+{define field}
+    <div class="form-group">
+        <label class="form-label" for="">{$label|noescape}</label>
+        {$field|noescape}
+    </div>
+{/define}
+
+{define checkbox}
+    {default $checked = false}
+    {default $id = "frm-$name-$value"}
+    {default $classNames = ""}
+    {default $controlClassNames = ""}
+    <div class="custom-control custom-checkbox {$controlClassNames}">
+        <input type="checkbox" id="{$id}" name="{$name}[{$value}]" class="custom-control-input {$classNames}" value="1" {if $checked}checked{/if} />
+        <label class="custom-control-label" for="{$id}">{$label|noescape}</label>
+    </div>
+{/define}
+
+{define checkboxForm}
+    {default $checked = false}
+    {default $id = "frm-$name-$value"}
+    {default $classNames = ""}
+    {default $controlClassNames = ""}
+    <div class="custom-control custom-checkbox {$controlClassNames}">
+        <input type="checkbox" id="{$id}" name="{$name}{$value}" class="custom-control-input {$classNames}" value="1" {if $checked}checked{/if} />
+        <label class="custom-control-label" for="{$id}">{$label|noescape}</label>
+    </div>
+{/define}
+
+{define checkboxSingle}
+    {default $checked = false}
+    {default $id = "frm-$name"}
+    {default $classNames = ""}
+    {default $controlClassNames = ""}
+    <div class="custom-control custom-checkbox {$controlClassNames}">
+        <input type="checkbox" id="{$id}" name="{$name}" class="custom-control-input {$classNames}" value="1" {if $checked}checked{/if} {ifset $onClick}onclick="{$onClick|noescape}"{/ifset} />
+        <label class="custom-control-label" for="{$id}">{$label|noescape}</label>
+    </div>
+{/define}
+
+{define checkboxSingleForm}
+    {default $checked = false}
+    {default $id = "frm-$name"}
+    {default $classNames = ""}
+    {default $controlClassNames = ""}
+    <div class="custom-control custom-checkbox {$controlClassNames}">
+        <input type="checkbox" id="{$id}" n:name="$name" class="custom-control-input {$classNames}" value="1" {if $checked}checked{/if} />
+        <label class="custom-control-label" for="{$id}">{$label|noescape}</label>
+    </div>
+{/define}
+
+{define radio}
+    {default $checked = false}
+    {default $id = "frm-$name-$value"}
+    {default $controlClassNames = ""}
+    {default $classNames = ""}
+    <div class="custom-control custom-radio {$controlClassNames}">
+        <input type="radio" id="{$id}" name="{$name}" class="custom-control-input {$classNames}" value="{$value}" {if $checked}checked{/if} {ifset $onChange}onchange="{$onChange|noescape}"{/ifset} {ifset $onClick}onclick="{$onClick|noescape}"{/ifset} />
+        <label class="custom-control-label" for="{$id}">{$label|noescape}</label>
+        {ifset $extraContent}{$extraContent|noescape}{/ifset}
+    </div>
+{/define}
+
+{define formRadio}
+    {default $id = "frm-$name-$value"}
+    {default $controlClassNames = ""}
+    {default $classNames = ""}
+    {default $checked = false}
+    <div class="custom-control custom-radio {$controlClassNames}">
+        <input type="radio" n:name="$name:$value" class="custom-control-input {$classNames}" {ifset $onChange}onchange="{$onChange|noescape}"{/ifset} {ifset $onClick}onclick="{$onClick|noescape}"{/ifset} {if $checked}checked{/if} />
+        <label class="custom-control-label" n:name="$name:$value">{$label|noescape}</label>
+        {ifset $extraContent}{$extraContent|noescape}{/ifset}
+    </div>
+{/define}
+
+{define formRadioLayout}
+    {default $id = "frm-$name-$value"}
+    {default $controlClassNames = ""}
+    {default $classNames = ""}
+    {default $checked = false}
+    <div class="custom-control custom-radio {$controlClassNames}">
+        <input type="radio" n:name="$name:$value" class="custom-control-input {$classNames}" {ifset $onChange}onchange="{$onChange|noescape}"{/ifset} {ifset $onClick}onclick="{$onClick|noescape}"{/ifset} {if $checked}checked{/if}/>
+        <label class="custom-control-label" n:name="$name:$value">{$label|noescape}</label>
+        {ifset $extraContent}{$extraContent|noescape}{/ifset}
+    </div>
+{/define}
+
+{define radioMaterial}
+{*    {default $imgSrc = ""}*}
+{*    {default $smallImgSrc = ""}*}
+{*    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">*}
+{*        <p class="mb-2">*}
+{*            <img src="{$smallImgSrc}" alt="{$label|noescape|striptags}" class="img-fluid" />*}
+{*        </p>*}
+{*        {include radio name => "material"}*}
+{*    </div>*}
+    <div class="col-auto">
+        {include radio name => "material", label => $label . "<br /> <small>" . $weight . " / m<sup>2</sup></small>"}
+    </div>
+{/define}
+
+{define radioTemplate}
+    {default $imgSrc = ""}
+    {default $smallImgSrc = ""}
+    {default $classNames = 'col-sm-6 col-md-4 col-lg-6 col-xl-4'}
+    <div class="{$classNames}">
+        <p class="mb-2">
+            <a href="{$basePath}/{$imgSrc}" data-fancybox="template" data-caption="{$label|noescape|striptags}" class="image-zoom rounded">
+                <img src="{$basePath}/{$smallImgSrc}" alt="{$label|noescape|striptags}" class="img-fluid" />
+            </a>
+        </p>
+        {include radio name => $name}
+    </div>
+{/define}
+
+{define radioImage}
+    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+        <p class="mb-2">
+            <a href="https://via.placeholder.com/450x372/ddd.png" data-fancybox="material" data-caption="{$label|noescape|striptags}" class="image-zoom rounded">
+                <img src="https://via.placeholder.com/300x180/ddd.png" alt="{$label|noescape|striptags}" class="img-fluid" />
+            </a>
+        </p>
+        {include radio}
+    </div>
+{/define}
+
+{define radioPayment}
+    {capture $_label}
+        <div class="d-flex align-items-center">
+            <p class="flex-grow-1 align-self-start">{$label|noescape}</p>
+            <i class="{$icon} ml-3 flex-shrink-0"></i>
+        </div>
+    {/capture}
+    <div class="col-sm-6">
+        <div>{include formRadio name => "paymentMethod", controlClassNames => "has-border", label => $_label}</div>
+        <p n:ifset="$note" class="fs-xxs pl-4 mt-2 text-muted">{$note|noescape}</p>
+    </div>
+{/define}
+
+{define radioSize}
+{*    {default $imgSrc = ""}*}
+{*    {default $smallImgSrc = ""}*}
+{*    <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">*}
+{*        <p n:if="$smallImgSrc !== ''" class="mb-2">*}
+{*            <img src="{$smallImgSrc}" alt="{$label|noescape|striptags}" class="img-fluid" />*}
+{*        </p>*}
+{*        {include radio name => "size"}*}
+{*    </div>*}
+
+    <div class="col-auto">
+        {include radio name => "size", label => $label . "<br /> <small>" . $width . " mm &times; " . $height . " mm</small>"}
+    </div>
+{/define}
+
+{define radioBinding}
+    <div class="col-auto">
+        {include radio name => "binding"}
+    </div>
+{/define}

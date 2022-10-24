@@ -8,3 +8,9 @@ services:
     - App\FrontModule\Forms\IContactFormFactory
     - App\FrontModule\Forms\IRedemptionFormFactory
     - App\FrontModule\Forms\IServiceFormFactory
+    - App\FrontModule\Forms\ILoginEmailFormFactory
+    - App\FrontModule\Forms\ILoginPasswordFormFactory
+    - App\FrontModule\Forms\IRegistrationFormFactory
+
+    - App\Model\Emails\CustomerEmailService
+    - App\Model\Services\CustomerRegistrationService

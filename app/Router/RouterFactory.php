@@ -22,9 +22,13 @@ final class RouterFactory
         $router[] = $routerAdmin = new RouteList("Admin");
         $routerAdmin[] = new Route('admin/<presenter>/<action>[/<id>]', 'Authentication:default');
 
+        $router[] = $routerCustomer = new RouteList("Customer");
+        $routerCustomer[] = new Route('uzivatelsky-ucet/<presenter>/<action>[/<id>]', 'Dashboard:default');
+
         $router[] = $routerFront = new RouteList("Front");
 
         $routerFront[] = new Route('nabidka-mopedaut', 'Cars:default');
+        $routerFront[] = new Route('nabidka-mopedaut[/<seoName>]', 'Cars:detail');
 
         $routerFront[] = new Route('nahradni-dily/produkt/<seoName>', 'SpareParts:detail');
         $routerFront[] = new Route('nahradni-dily[/<seoName>][/<page>]', 'SpareParts:default');

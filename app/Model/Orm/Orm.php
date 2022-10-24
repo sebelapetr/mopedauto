@@ -21,6 +21,7 @@ use Nextras\Orm\Model\Model;
  * @property-read ProductParameterValuesRepository $productParameterValues
  * @property-read VehiclesRepository $vehicles
  * @property-read VehicleImagesRepository $vehicleImages
+ * @property-read CustomersRepository $customers
  */
 class Orm extends Model
 {

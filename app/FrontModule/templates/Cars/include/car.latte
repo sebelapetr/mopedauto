@@ -5,19 +5,25 @@
     <div class="feature-block">
         <div class="inner-box">
             <div class="image-box">
-                {if $car->getMainImage(App\Model\ProductImage::SIZE_LG) !== null}
-                    <img src="{$basePath}{$car->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}" alt="">
+                {if $car->getMainImage(App\Model\ProductImage::SIZE_ORIGINAL) !== null}
+                    <img src="{$basePath}{$car->getMainImage(App\Model\ProductImage::SIZE_ORIGINAL)->filePath}" alt="">
                 {else}
                     <img src="{$basePath}/images/products/placeholder.jpg" alt="">
                 {/if}
                 <div class="overlay-box">
                     <div class="icon-box">
-                        <a href="javascript::void(0)" class="cart-btn send-quote">Nezávázně poptat</a>
+                        <a n:href="detail, $car->seoName" class="cart-btn"><i class="fa fa-search"></i>
+                            Zobrazit</a>
+                    </div>
+                </div>
+                <div class="overlay-box">
+                    <div class="icon-box">
+                        <a n:href="detail, $car->seoName" class="cart-btn">Zobrazit detail</a>
                     </div>
                 </div>
             </div>
             <div class="lower-content">
-                <h5><a href="javascript::void(0) " class="send-quote">{$car->name}</a></h5>
+                <h5><a n:href="detail, $car->seoName" class="">{$car->name}</a></h5>
                 <span class="price">{$car->priceCzk|number:0, ",", " "} Kč</span>
                 <span class="price">{$car->priceEur|number:0, ",", " "} €</span>
                 <table style="text-align: left;width: 100%;margin: 20px">
@@ -41,6 +47,6 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-style-six btn-block send-quote" href="javascript::void(0)">Nezávázně poptat</a>
+    <a class="btn btn-style-six btn-block" n:href="detail, $car->seoName">Zobrazit detail</a>
 </div>
 

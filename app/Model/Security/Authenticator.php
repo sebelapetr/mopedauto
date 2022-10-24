@@ -9,6 +9,7 @@ use Nette\Security\IAuthenticator;
 use Nette\Security\Identity;
 use Nette\Security\IIdentity;
 use Nette\Security\Passwords;
+use Tracy\Debugger;
 
 class Authenticator implements IAuthenticator
 {

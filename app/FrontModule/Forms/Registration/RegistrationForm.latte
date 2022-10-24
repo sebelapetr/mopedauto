@@ -1,0 +1,98 @@
+<form n:name="form" class="js-form-required">
+    {foreach $form->getErrors() as $error}
+        <div class="alert alert-danger">
+        {_$error}
+        </div>
+    {/foreach}
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                {label email, class => 'form-label'}
+                {input email}
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                {label phone, class => 'form-label'}
+                {input phone}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                {label name, class => 'form-label'}
+                {input name}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                {label surname, class => 'form-label'}
+                {input surname}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                {label street, class => 'form-label'}
+                {input street}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                {label city, class => 'form-label'}
+                {input city}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                {label zip, class => 'form-label'}
+                {input zip}
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                {label password, class => 'form-label'}
+                {input password}
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                {label passwordCheck, class => 'form-label'}
+                {input passwordCheck}
+            </div>
+        </div>
+        <div class="col-12">
+
+        </div>
+    </div>
+    <hr />
+    {* todo - checkbox inputy *}
+   <div class="form-group">
+        <label n:name="mailNotifications" class="form-label">
+            <input n:name="mailNotifications">
+            {$presenter->translator->translate('form.userRegistration.mailNotifications')}
+        </label>
+    </div>
+    <div class="form-group">
+        <label n:name="phoneNotifications" class="form-label">
+            <input n:name="phoneNotifications">
+            {$presenter->translator->translate('form.userRegistration.phoneNotifications')}
+        </label>
+    </div>
+    <div class="form-group">
+        <label n:name="privacyPolicy" class="form-label">
+            <input n:name="privacyPolicy">
+            {$presenter->translator->translate('form.userRegistration.privacyPolicy', ['link' => $presenter->link(':Front:Pages:gdpr'), 'link2' => $presenter->link(':Front:Pages:gdpr')])|noescape}
+        </label>
+    </div>
+    <div class="form-group">
+        <label n:name="termsOfConditions" class="form-label">
+            <input n:name="termsOfConditions">
+            {$presenter->translator->translate('form.userRegistration.termsOfConditions', ['link' => $presenter->link(':Front:Pages:termsOfConditions'), 'link2' => $presenter->link(':Front:Pages:gdpr')])|noescape}
+        </label>
+    </div>
+    <p class="mt-5 text-center">
+        {input save}
+    </p>
+</form>

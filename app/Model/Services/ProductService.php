@@ -79,6 +79,7 @@ class ProductService{
         $product->visible = $values->visible;
         $product->description = $values->description;
         $product->stockStatus = $values->stockStatus;
+        $product->catalogPriceVat = $values->catalogPriceVat;
         $product->condition = $values->condition;
         $this->orm->persistAndFlush($product);
         return $product;

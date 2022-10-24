@@ -1,0 +1,7 @@
+<ul class="nav-menu">
+    <li n:foreach="$userMenu as $item">
+        <a {if $item->isCurrent}class="active"{/if} href="{$item->link|noescape}">
+            {$item->name}
+        </a>
+    </li>
+</ul>

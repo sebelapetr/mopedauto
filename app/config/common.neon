@@ -53,7 +53,10 @@ services:
 	- App\Model\InvoiceService
 	- App\Model\Session\CartService(@session::getSection('products'))
 	- App\Model\Services\ComgateService
-	- App\Model\Security\Authenticator
+	authenticator: App\Model\Security\Authenticator
+	customerAuthenticator:
+	    class: App\Model\Security\CustomerAuthenticator
+	    autowired: false
 	- App\Model\Authorizator
 	user:
 	    class: App\Model\Security\User

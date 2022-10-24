@@ -21,6 +21,27 @@
 
         {include './include/menu.latte'}
 
+        <div n:snippet="flashes">
+            {foreach $flashes as $flashMessage}
+                {varType string $alertType}
+                {switch $flashMessage->type}
+                    {case "error"}
+                    {var $alertType = "danger"}
+                    {case "info"}
+                    {var $alertType = "primary"}
+                    {case "warning"}
+                    {var $alertType = "warning"}
+                    {case "success"}
+                    {var $alertType = "success"}
+                    {default }
+                    {var $alertType = "primary"}
+                {/switch}
+                <div class="alert alert-{$alertType}" role="alert">
+                    {_$flashMessage->message}
+                </div>
+            {/foreach}
+        </div>
+
         {include #content}
 
         {include './include/footer.latte'}

@@ -134,7 +134,7 @@
                         <tbody>
                             {foreach $item->ordersItems as $orderItem}
                                 <tr>
-                                    <th scope="row">{$orderItem->number}</th>
+                                    <th scope="row">{$orderItem->product?->number}</th>
                                     <td>{$orderItem->name}</td>
                                     <td>{$orderItem->quantity} ks</td>
                                     <td>{$orderItem->pricePieceVat|number:2, ",", " "} Kč</td>

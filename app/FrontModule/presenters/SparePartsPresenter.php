@@ -8,6 +8,7 @@ use App\Model\Category;
 use App\Model\Product;
 use App\Model\ProductParameter;
 use App\Model\Session\CartService;
+use Nette\Application\UI\Form;
 use Nette\Caching\Cache;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\DateTime;
@@ -294,5 +295,27 @@ class SparePartsPresenter extends BasePresenter
     public function getProductFromRow($row)
     {
        return $this->orm->products->getById($row->id);
+    }
+
+    public function createComponentFilterForm(): Form
+    {
+        $form = new Form();
+        $form->addCheckboxList("stockStatus", "stockStatus", [
+            Product::STOCK_STATUS_ONSTOCK => "skladem",
+            Product::STOCK_STATUS_TOWEEK => "více než týden",
+            Product::STOCK_STATUS_WEEK => "do týdne v e-shopu",
+        ]);
+
+        $form->addCheckboxList("condition", "condition", [
+            Product::CONDITION_NEW => "nové",
+            Product::CONDITION_USED => "použité",
+        ]);
+
+        $form->addHidden("priceMin")
+            ->setHtmlAttribute("id", "priceMin-inp");
+        $form->addHidden("priceMax")
+            ->setHtmlAttribute("id", "priceMax-inp");
+
+        return $form;
     }
 }

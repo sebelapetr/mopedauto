@@ -7,6 +7,7 @@
 
 <div class="sidebar-page-container">
 <a class="btn btn-style-six btn-block xs-mob-y-cat" style="position: sticky; top: 0" data-toggle="modal" data-target="#myMobileCat">Výběr kategorie <i class="fa fa-chevron-down"></i></a>
+<a class="btn btn-style-six btn-block xs-mob-y-cat" style="position: sticky; top: 0" data-toggle="modal" data-target="#myMobileCat2">Výběr filtrů <i class="fa fa-chevron-down"></i></a>
     <div class="auto-container">
         <div class="row clearfix">
             <!--Sidebar Side-->
@@ -14,6 +15,28 @@
                 <aside class="sidebar default-sidebar">
 
                     <div class="sidebar-widget categories xs-mob-n-cat">
+
+                        <div style="background:#f9f9f9;padding:15px;border:1px solid rgba(0,0,0,.125)">
+                            <div class="sidebar-title mb-4"><h2>Filtry</h2></div>
+                            <form n:name="filterForm" class="ajax">
+                                <div class="list-group list-group-root well">
+                                    <h4 style="color:black; font-size: 16px;font-weight: normal;margin-bottom:0.75rem">Dostupnost:</h4>
+                                    {foreach $form[stockStatus]->items as $key => $label}
+                                        <label n:name="stockStatus:$key"><input n:name="stockStatus:$key"> {$label}</label>
+                                    {/foreach}
+                                    <h4 style="color:black; font-size: 16px;font-weight: normal;margin-bottom:0.75rem">Nové / Použité:</h4>
+                                    {foreach $form[condition]->items as $key => $label}
+                                        <label n:name="condition:$key"><input n:name="condition:$key"> {$label}</label>
+                                    {/foreach}
+                                    <br>
+                                    <div id="slider"></div>
+                                    {input priceMin}
+                                    {input priceMax}
+
+                                </div>
+                            </form>
+                        </div>
+
 
                         <div class="sidebar-title mb-4"><h2>Kategorie</h2></div>
 
@@ -91,6 +114,30 @@
                                     </div>
                                   </div>
 
+                    <div class="modal fade" id="myMobileCat">
+                        <div class="modal-dialog modal-lg" style="margin: 0 auto">
+                            <div class="modal-content" style="border-radius: 0; border: 0">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header" style="position: absolute; right: 6px; top: -3px; z-index: 2; border-bottom: none;">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body" style="padding: 0; margin: 0">
+                                    <div style="background: #ecf0f3; color: #1c63b8; font-size: 12px; font-weight: 600; padding: 13px; width: 100%; cursor: auto; text-align: center !important; "> FILTRY </div>
+                                    
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-style-six btn-block" data-dismiss="modal">Zavřít</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
 
                 </aside>
             </div>
@@ -146,6 +193,24 @@
 
             $('.collapse').hasClass('show').children('i').addClass('fa-chevron-down');
 
+        });
+        var slider = document.getElementById('slider');
+
+        noUiSlider.create(slider, {
+            start: [20, 80],
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 100
+            }
+        });
+
+        $("#priceMin-inp").val(slider.noUiSlider.get()[0]);
+        $("#priceMax-inp").val(slider.noUiSlider.get()[1]);
+
+        slider.noUiSlider.on("change", function() {
+            $("#priceMin-inp").val(slider.noUiSlider.get()[0]);
+            $("#priceMax-inp").val(slider.noUiSlider.get()[1]);
         });
     </script>
 {/define}

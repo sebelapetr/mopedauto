@@ -13,7 +13,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @package App\Model
  * @property int $id {primary}
  * @property string $name
- * @property string $seoName
+ * @property string|null $seoName
  * @property string $annotation
  * @property string $description
  * @property boolean $deleted {default false}

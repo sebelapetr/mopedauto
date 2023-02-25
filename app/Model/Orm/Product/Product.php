@@ -52,6 +52,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property ManyHasMany|ProductParameterValue $parameterValues {m:m ProductParameterValue::$products, isMain=TRUE}
  * @property string $condition {enum self::CONDITION_*} {default self::CONDITION_USED}
  * @property string $stockStatus {enum self::STOCK_STATUS_*} {default self::STOCK_STATUS_WEEK}
+ * @property bool $allowedGoogleFeed {default false}
  */
 class Product extends Entity
 {

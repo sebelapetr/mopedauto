@@ -13,9 +13,9 @@ class CategoryForm extends Nette\Application\UI\Control
 {
     private Orm $orm;
 
-    public Category $category;
+    public ?Category $category;
 
-    public function __construct(Orm $orm, Category $category)
+    public function __construct(?Category $category,Orm $orm)
     {
         $this->orm = $orm;
         $this->category = $category;

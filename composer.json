@@ -24,9 +24,10 @@
 		"phpoffice/phpspreadsheet": "^1.14",
 		"contributte/console": "^0.8.0",
 		"contributte/translation": "^0.7.0",
-		"ublaboo/datagrid": "v6.2.21",
+		"ublaboo/datagrid": "^6",
 		"contributte/comgate": "^0.2.0",
-		"ijvo/jquery-fileupload": "^2.1"
+		"ijvo/jquery-fileupload": "^2.1",
+		"vitalybaev/google-merchant-feed": "^2.6"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0",
@@ -41,6 +42,9 @@
 		"secure-http": true,
 		"platform": {
 			"php": "7.4"
+		},
+		"allow-plugins": {
+			"symfony/thanks": true
 		}
 	},
 	"minimum-stability": "stable"

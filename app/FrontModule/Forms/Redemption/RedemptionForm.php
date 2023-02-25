@@ -60,7 +60,7 @@ class RedemptionForm extends Control{
        // $this->getPresenter()->redirect('this');
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/Redemption/Redemption.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/Redemption/Redemption.latte");
         $this->getTemplate()->render();
     }
 

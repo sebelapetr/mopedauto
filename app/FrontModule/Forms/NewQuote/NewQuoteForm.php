@@ -49,7 +49,7 @@ class NewQuoteForm extends Control{
         //$this->getPresenter()->redirect("Homepage:default");
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/NewQuote/NewQuote.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/NewQuote/NewQuote.latte");
         $this->getTemplate()->render();
     }
 

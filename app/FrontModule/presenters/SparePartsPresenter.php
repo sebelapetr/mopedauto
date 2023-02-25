@@ -59,7 +59,11 @@ class SparePartsPresenter extends BasePresenter
             $categoryId = explode("-", $seoName);
             if ($categoryId) {
                 $categoryId = isset($categoryId[0]) ? $categoryId[0] : null;
-                $this->actualCategory = $this->orm->categories->getById($categoryId);
+                $category = $this->orm->categories->getById($categoryId);;
+                if ($category == null) {
+                    $this->redirect(":Front:Homepage:default");
+                }
+                $this->actualCategory = $category;
                 if (!$this->actualCategory) {
                     $this->redirect("this", ["page" => 1, "seoName" => null]);
                 }
@@ -245,7 +249,11 @@ class SparePartsPresenter extends BasePresenter
         $productId = explode("-", $seoName);
         if ($productId) {
             $productId = isset($productId[0]) ? $productId[0] : null;
-            $this->actualProduct = $this->orm->products->getById($productId);
+            $product = $this->orm->products->getById($productId);
+            if ($product == null) {
+                $this->redirect(":Front:Homepage:default");
+            }
+            $this->actualProduct = $product;
             if (!$this->actualProduct) {
                 $this->redirect("SpareParts:default", ["page" => 1, "seoName" => null]);
             }

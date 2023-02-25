@@ -146,7 +146,7 @@ class PersonalDataForm extends Control{
         }
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__ . "/../../forms/PersonalData/PersonalData.latte");
+        $this->getTemplate()->setFile(__DIR__ . "/../../Forms/PersonalData/PersonalData.latte");
         $this->getTemplate()->render();
     }
 

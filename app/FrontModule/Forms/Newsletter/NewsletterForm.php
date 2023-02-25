@@ -40,7 +40,7 @@ class NewsletterForm extends Control{
         //$this->getPresenter()->redirect("Homepage:default");
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/Newsletter/Newsletter.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/Newsletter/Newsletter.latte");
         $this->getTemplate()->render();
     }
 

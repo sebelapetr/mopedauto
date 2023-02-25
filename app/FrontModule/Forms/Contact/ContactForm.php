@@ -44,7 +44,7 @@ class ContactForm extends Control{
         //$this->getPresenter()->redirect('this');
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/Contact/Contact.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/Contact/Contact.latte");
         $this->getTemplate()->render();
     }
 

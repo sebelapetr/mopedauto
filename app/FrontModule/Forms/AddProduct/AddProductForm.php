@@ -39,7 +39,7 @@ class AddProductForm extends Control
         $this->getPresenter()->flashMessage("Produkt byl přidán do košíku.");
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/AddProduct/AddProduct.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/AddProduct/AddProduct.latte");
         $this->getTemplate()->render();
     }
 

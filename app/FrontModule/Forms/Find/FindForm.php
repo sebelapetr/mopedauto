@@ -33,7 +33,7 @@ class FindForm extends Control{
         $this->getPresenter()->redirect('SpareParts:search', ["phrase" => $values->phrase]);
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/Find/Find.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/Find/Find.latte");
         $this->getTemplate()->render();
     }
 

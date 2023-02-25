@@ -122,7 +122,7 @@ class ShippingAndPaymentForm extends Control
         $this->getPresenter()->redirect('step2');
     }
     public function render(){
-        $this->getTemplate()->setFile(__DIR__  .  "/../../forms/ShippingAndPayment/ShippingAndPayment.latte");
+        $this->getTemplate()->setFile(__DIR__  .  "/../../Forms/ShippingAndPayment/ShippingAndPayment.latte");
         $this->getTemplate()->hasHeavyProduct = $this->cartService->hasHeavyProduct();
         $this->getTemplate()->render();
     }

@@ -47,5 +47,24 @@
 <script>
     $('.toast').toast('show')
 </script>
+    <script src="{$basePath}/module/back/wysiwyg/summernote.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.input-wysiwyg').summernote({
+                tabsize: 2,
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear','strikethrough', 'superscript', 'subscript']],
+                    ['color', ['color']],
+                    ['fontsize', ['fontsize']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link']],
+                    ['height', ['height']]
+                ]
+            });
+        });
+    </script>
 </body>
 </html>

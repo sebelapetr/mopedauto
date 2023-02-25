@@ -81,6 +81,10 @@ class ProductService{
         $product->stockStatus = $values->stockStatus;
         $product->catalogPriceVat = $values->catalogPriceVat;
         $product->condition = $values->condition;
+        $product->color = $values->color;
+        $product->manufacturer = $values->manufacturer;
+        $product->material = $values->material;
+        $product->gtin = $values->gtin;
         $this->orm->persistAndFlush($product);
         return $product;
     }

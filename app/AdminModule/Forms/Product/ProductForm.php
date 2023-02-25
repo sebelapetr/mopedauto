@@ -33,11 +33,20 @@ class ProductForm extends Control{
         $form = new Form();
 
         $form->addText("productName")
-            ->setRequired();
+            ->setRequired("Pole název je povinné.");
 
         $form->addText("number");
 
+        $form->addText("gtin");
+
         $form->addText("seoName");
+
+        $form->addText("manufacturer")
+            ->setRequired("Pole výrobce je povinné.");
+
+        $form->addText("color");
+
+        $form->addText("material");
 
         $form->addCheckbox('new');
         $form->addCheckbox('discount');
@@ -45,7 +54,7 @@ class ProductForm extends Control{
 
         $form->addCheckbox('visible');
 
-        $form->addInteger('catalogPriceVat');
+        $form->addText('catalogPriceVat');
 
         $form->addTextArea("description");
 

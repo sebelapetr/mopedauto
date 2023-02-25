@@ -35,10 +35,12 @@
                                             {if $product->getMainImage(App\Model\ProductImage::SIZE_MD) !== null}
                                                 <a href="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_ORIGINAL)->filePath}"
                                                    title="Image Caption Here" data-fancybox="gallery">
-                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}" class='gallery-img' alt="">
+                                                    <img src="{$basePath}{$product->getMainImage(App\Model\ProductImage::SIZE_LG)->filePath}"
+                                                         class='gallery-img' alt="">
                                                 </a>
                                             {else}
-                                                <img src="{$basePath}/images/products/placeholder.jpg" class='gallery-img' alt="">
+                                                <img src="{$basePath}/images/products/placeholder.jpg"
+                                                     class='gallery-img' alt="">
                                             {/if}
                                             {var $otherImages = $product->getOtherImages(App\Model\ProductImage::SIZE_S)}
                                             <div class="row" n:if="$otherImages->countStored() > 0">
@@ -51,9 +53,11 @@
                                                             <div class="swiper-slide" n:foreach="$otherImages as $productImage">
                                                                 {var $originImage = $product->getImageOtherSize($productImage, App\Model\ProductImage::SIZE_ORIGINAL)}
                                                                 {var $originSizePath = $originImage ? $originImage->filePath : $productImage->filePath}
-                                                                <a data-fancybox="gallery" href="{$basePath}{$originSizePath}"
+                                                                <a data-fancybox="gallery"
+                                                                   href="{$basePath}{$originSizePath}"
                                                                    title="Image Caption Here">
-                                                                    <img src="{$basePath}{$productImage->filePath}" alt="{$productImage->originalName}">
+                                                                    <img src="{$basePath}{$productImage->filePath}"
+                                                                         alt="{$productImage->originalName}">
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -73,7 +77,11 @@
                                                     Obj č.: {$product->number}
                                                 </div>
                                                 <div class="item-stockstatus" style="padding: 0 15px;">
-                                                    Dostupnost: <span class="stock-status-{$product->stockStatus}">{_"entity.product.stockStatus".$product->stockStatus}</span>
+                                                    Dostupnost:
+                                                    <span class="stock-status-{$product->stockStatus}">
+                                                        {_"entity.product.stockStatus" . $product->stockStatus}
+                                                        {if $product->stockStatus == App\Model\Product::STOCK_STATUS_TOWEEK}(do {="now+7 days"|date:"d. m. Y"}){/if}
+                                                    </span>
                                                 </div>
 
 
@@ -83,7 +91,8 @@
                                                         <span style="font-size: 0.9rem">Cena bez DPH </span>
                                                     </div>
                                                     <div class="item-price pull-right">
-                                                        <span class="font-weight-bold" style="font-size: 1.4rem; color: #1c63b8;">{$product->catalogPriceVat|number:2, ',', ''} Kč </span><br>
+                                                        <span class="font-weight-bold"
+                                                              style="font-size: 1.4rem; color: #1c63b8;">{$product->catalogPriceVat|number:2, ',', ''} Kč </span><br>
                                                         <span style="font-size: 0.9rem">{$product->catalogPriceVat / 1.21|number:2, ',', ''} Kč </span>
                                                     </div>
 
@@ -94,13 +103,17 @@
                                             <div class="clearfix detail_pad">
                                                 {if !$productInCart}
                                                     <div class="pull-right">
-                                                    {control addProductForm}
+                                                        {control addProductForm}
                                                     </div>
                                                 {else}
-                                                <div class="pull-right-detail">
-                                                    <p class="alert alert-success detail_full_center" style="float: left; margin-right: 15px; border-radius: 0; height: 54px; line-height: 2.1"><i class="fa fa-check"></i> Zboží čeká v košíku</p>
-                                                    <a href="{link Cart:step1}" class="theme-btn btn-style-six detail_full_center">Pokračovat do košíku</a>
-                                                </div>
+                                                    <div class="pull-right-detail">
+                                                        <p class="alert alert-success detail_full_center"
+                                                           style="float: left; margin-right: 15px; border-radius: 0; height: 54px; line-height: 2.1">
+                                                            <i class="fa fa-check"></i> Zboží čeká v košíku</p>
+                                                        <a href="{link Cart:step1}"
+                                                           class="theme-btn btn-style-six detail_full_center">Pokračovat
+                                                            do košíku</a>
+                                                    </div>
                                                 {/if}
                                             </div>
                                         </div>
@@ -110,16 +123,14 @@
                             <!--Basic Details-->
 
                             <!--Product Info Tabs-->
-                            <div class="product-info-tabs">
-
-                                {*
+                            <div class="product-info-tabs" n:if="$product->description">
                                 <!--Product Tabs-->
                                 <div class="prod-tabs tabs-box" id="product-tabs">
 
                                     <!--Tab Btns-->
                                     <ul class="tab-btns tab-buttons clearfix">
                                         <li data-tab="#prod-description" class="tab-btn active-btn">Popis produktu</li>
-                                        <li data-tab="#prod-tech" class="tab-btn">Technická specifikace</li>
+                                        {**<li data-tab="#prod-tech" class="tab-btn">Technická specifikace</li>*}
                                     </ul>
 
                                     <!--Tabs Content-->
@@ -128,19 +139,8 @@
                                         <!--Tab / Active Tab-->
                                         <div class="tab active-tab" id="prod-description">
 
-                                            <div class="content">
-                                                <p>One of the best hardware options available to the mining community,
-                                                    this
-                                                    product is quiet and efficient. It’s a true powerhouse, offering
-                                                    excellent performance with a reasonable price tag and comparatively
-                                                    low
-                                                    power consumption. If you need a reliable option for your mining
-                                                    rig,
-                                                    look no further. Can be set up to mine a number of currencies
-                                                    (bitcoin,
-                                                    bitcoin gold, monero, etc.), although take care to configure it
-                                                    properly
-                                                    as different cryptocurrencies require different settings.</p>
+                                            <div class="content text-dark">
+                                                {$product->description|noescape}
                                             </div>
                                         </div>
 
@@ -152,13 +152,15 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- End product info tabs -->*}
-
+                            </div><!-- End product info tabs -->
                         </div>
                     </div>
-                    {include '../include/parts.latte'}
+
                 </div>
             </div>
+            {include '../include/parts.latte'}
+        </div>
+        </div>
         </div>
         <!--End Shop Single-->
     </section>

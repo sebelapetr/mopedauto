@@ -1,3 +1,4 @@
+{varType App\Model\Product $item}
 {block content}
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col-sm-6">
@@ -35,8 +36,28 @@
                             <td>{$item->seoName}</td>
                         </tr>
                         <tr>
+                            <th>Cena vč. DPH:</th>
+                            <td>{$item->catalogPriceVat|number:0,","," "} Kč</td>
+                        </tr>
+                        <tr>
                             <th>Číslo:</th>
                             <td>{$item->number}</td>
+                        </tr>
+                        <tr>
+                            <th>GTIN:</th>
+                            <td>{$item->gtin}</td>
+                        </tr>
+                        <tr>
+                            <th>Výrobce:</th>
+                            <td>{$item->manufacturer}</td>
+                        </tr>
+                        <tr>
+                            <th>Barva:</th>
+                            <td>{$item->color}</td>
+                        </tr>
+                        <tr>
+                            <th>Materiál:</th>
+                            <td>{$item->material}</td>
                         </tr>
                         <tr>
                             <th>Novinka:</th>

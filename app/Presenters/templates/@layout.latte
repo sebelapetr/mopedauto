@@ -2,9 +2,9 @@
 <html xml:lang="cs" lang="cs" prefix="og: http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
     <head>
         <title>{ifset #title}{include title|striptags} | Moped Auto - Auto od 15 let{else}Moped Auto - Auto od 15 let{/ifset}</title>
-        {include './include/head.latte'}
-        {include './include/head-styles.latte'}
-        {include './include/head-scripts.latte'}
+        {include '../../FrontModule/templates/include/head.latte'}
+        {include '../../FrontModule/templates/include/head-styles.latte'}
+        {include '../../FrontModule/templates/include/head-scripts.latte'}
     </head>
     <body>
     <div class="page-wrapper">
@@ -12,14 +12,14 @@
         <!-- Preloader -->
         {*<div class="preloader"></div>*}
 
-        {include './include/menu.latte'}
+        {include '../../FrontModule/templates/include/menu.latte'}
 
         {include #content}
 
-        {include './include/footer.latte'}
+        {include '../../FrontModule/templates/include/footer.latte'}
 
     </div>
-        {include './include/footer-scripts.latte'}
+        {include '../../FrontModule/templates/include/footer-scripts.latte'}
         {ifset #scripts}
             {include #scripts}
         {/ifset}

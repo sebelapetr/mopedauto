@@ -25,10 +25,8 @@ class ErrorPresenter extends BasePresenter
 	public function run(Nette\Application\Request $request): Nette\Application\IResponse
 	{
 		$exception = $request->getParameter('exception');
-        Debugger::log($exception, 'test');
 
 		if ($exception instanceof Nette\Application\BadRequestException) {
-            Debugger::log($exception, 'test');
 			[$module, , $sep] = Nette\Application\Helpers::splitName($request->getPresenterName());
 			return new Responses\ForwardResponse($request->setPresenterName($module . $sep . 'Error4xx'));
 		}

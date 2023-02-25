@@ -27,7 +27,7 @@ class Bootstrap
         $debugIps = require __DIR__ . '/../debug-ips.php';
         $configurator->setDebugMode($debugIps);
 		$configurator->enableTracy(__DIR__ . '/../log');
-        Debugger::$errorTemplate = __DIR__.'/presenters/Error/500.latte';
+        Debugger::$errorTemplate = __DIR__.'/presenters/templates/Error/500.latte';
 
 
         $configurator->setTimeZone('Europe/Prague');

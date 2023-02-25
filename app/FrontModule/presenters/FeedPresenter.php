@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FrontModule\presenters;
+namespace App\FrontModule\Presenters;
 
 use App\FrontModule\Forms\IContactFormFactory;
 use App\Model\Orm;

@@ -26,7 +26,7 @@ class GoogleFeedService
     public function generate(): Feed
     {
         // Create feed object
-        $feed = new Feed("mopedauto.cz", $_SERVER["SERVER_NAME"]."/feed/google.xml", "");
+        $feed = new Feed("mopedauto.cz", $_SERVER['HTTP_HOST']."/feed/google.xml", "");
 
         foreach ($this->orm->products->findBy(["allowedGoogleFeed" => true, "deleted" => false, "description!=" => null]) as $product) {
 
@@ -39,8 +39,8 @@ class GoogleFeedService
             $item->setId($product->id);
             $item->setTitle($product->productName);
             $item->setDescription($product->description ? $product->description : "");
-            $item->setLink($_SERVER["SERVER_NAME"]."/nahradni-dily/produkt/".$product->url);
-            $item->setImage($_SERVER["SERVER_NAME"].$product->getMainImage(ProductImage::SIZE_LG)->filePath);
+            $item->setLink($_SERVER['HTTP_HOST']."/nahradni-dily/produkt/".$product->url);
+            $item->setImage($_SERVER['HTTP_HOST'].$product->getMainImage(ProductImage::SIZE_LG)->filePath);
             if ($product->stockStatus === \App\Model\Product::STOCK_STATUS_ONSTOCK) {
                 $item->setAvailability(Availability::IN_STOCK);
             } elseif ($product->stockStatus === \App\Model\Product::STOCK_STATUS_TOWEEK) {

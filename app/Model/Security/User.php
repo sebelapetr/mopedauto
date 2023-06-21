@@ -15,11 +15,9 @@ use Nette\Security\IUserStorage;
  */
 class User extends \Nette\Security\User
 {
-    /** @var Orm */
-    private $orm;
+    private \App\Model\Orm $orm;
 
-    /** @var User */
-    private $user;
+    private ?\Nextras\Orm\Entity\IEntity $user = null;
 
     public function __construct(Orm $orm, IUserStorage $storage, IAuthenticator $authenticator = null, IAuthorizator $authorizator = null)
     {

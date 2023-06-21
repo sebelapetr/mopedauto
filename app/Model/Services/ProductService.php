@@ -10,8 +10,7 @@ use Nette\SmartObject;
 
 class ProductService{
 
-    /** @var Orm */
-    private $orm;
+    private \App\Model\Orm $orm;
 
     public function __construct(Orm $orm)
     {

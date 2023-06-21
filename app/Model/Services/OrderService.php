@@ -17,8 +17,7 @@ use Tracy\Debugger;
 class OrderService
 {
 
-    /** @var Orm */
-    private $orm;
+    private \App\Model\Orm $orm;
 
     /** @var InvoiceService */
     public $invoiceService;

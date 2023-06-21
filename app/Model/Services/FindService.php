@@ -8,8 +8,7 @@ use Tracy\Debugger;
 class FindService
 {
 
-    /** @var Orm */
-    private $orm;
+    private \App\Model\Orm $orm;
 
     public function __construct(Orm $orm)
     {

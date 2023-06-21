@@ -14,8 +14,7 @@ class ErrorPresenter extends BasePresenter
 {
 	use Nette\SmartObject;
 
-	/** @var ILogger */
-	private $logger;
+	private \Tracy\ILogger $logger;
 
 	public function __construct(ILogger $logger)
 	{

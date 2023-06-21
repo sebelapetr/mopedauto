@@ -11,11 +11,16 @@ use Nette\SmartObject;
 class InvoiceService
 {
 
-    /** @var Orm */
-    private $orm;
+    private \App\Model\Orm $orm;
 
+    /**
+     * @var string
+     */
     public $apiKey;
 
+    /**
+     * @var string
+     */
     public $email;
 
     public function __construct(Orm $orm)

@@ -15,8 +15,7 @@ use Vitalybaev\GoogleMerchant\Product\Availability\Availability;
 class GoogleFeedService
 {
 
-    /** @var Orm */
-    private $orm;
+    private \App\Model\Orm $orm;
 
     public function __construct(Orm $orm)
     {
